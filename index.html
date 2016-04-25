@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>oMDB API test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="main.js"></script>
+</head>
+
+
+
+<body>
+    <div class="container">
+        <form>
+            <h3>Search for a Movie OR a Series!</h3>
+            <div class="row">
+                <div class="col-sm-8">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Search Title" required>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="text" class="form-control" name="year" id="year" placeholder="Title Year">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <label for="type">Type</label>
+                    <select name="type" id="type" class="form-control">
+                        <option value=null>Select type</option>
+                        <option value="movie">Movie</option>
+                        <option value="series">Series</option>
+                    </select>
+                </div>
+                <hr>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div id="content">
+            <h2><span class="title"></span>(<span class="year"></span>)</h2>
+            <h4>Plot</h4>
+            <p class="plot"></p>
+            <p>IMDb rating: <span class="imdb"></span></p>
+            <p>Rotten tomatoes rating: <span class="rotten"></span></p>
+            <h2><span class="glyphicon glyphicon-ok-circle" id="add"></span></h2>
+        </div>
+        <div id="error">
+            <div class="alert">
+                <h2 class="message"></h2>
+            </div>
+        </div>
+    </div>
+
+
+    </div>
+</body>
+
+</html>
