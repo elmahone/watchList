@@ -93,7 +93,11 @@ var SampleApp = function() {
      *  Create the routing table entries + handlers for the application.
      */
     self.createRoutes = function() {
-        self.routes = { };
+        self.routes = {};
+        
+        self.routes['/getMyList'] = function(req, res) {
+            res.send('getMyList');
+        }
 
         self.routes['/asciimo'] = function(req, res) {
             var link = "http://i.imgur.com/kmbjB.png";
