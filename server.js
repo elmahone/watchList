@@ -95,15 +95,21 @@ var SampleApp = function() {
     self.createRoutes = function() {
         self.routes = {};
         
-        self.routes['/getMyList'] = function(req, res) {
+        self.routes['/miika/getMyList'] = function(req, res) {
             res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({ name: 'getMyList' }, null, 3));
-        }
-        
+            res.send(JSON.stringify({ 
+                name: 'getMyList',
+                desc: 'Gets own list of movies and TV Shows by id/username'
+            }, null, 3));
+        };
+
         self.routes['/getTopSearches'] = function(req, res) {
             res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({ name: 'getTopSearches' }, null, 3));
-        }
+            res.send(JSON.stringify({ 
+                name: 'getTopSearches',
+                desc: 'Gets top 10 searches currently'
+            }, null, 3));
+        };
 
         self.routes['/asciimo'] = function(req, res) {
             var link = "http://i.imgur.com/kmbjB.png";
