@@ -96,7 +96,13 @@ var SampleApp = function() {
         self.routes = {};
         
         self.routes['/getMyList'] = function(req, res) {
-            res.send('getMyList');
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify({ name: 'getMyList' }, null, 3));
+        }
+        
+        self.routes['/getTopSearches'] = function(req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            res.send(JSON.stringify({ name: 'getTopSearches' }, null, 3));
         }
 
         self.routes['/asciimo'] = function(req, res) {
