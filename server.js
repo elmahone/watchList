@@ -106,13 +106,6 @@ var SampleApp = function () {
     //load the Client interface
     var MongoClient = require('mongodb').MongoClient;
 
-
-    //        db.books.insert({
-    //            title: 'MongoDB in the Wild',
-    //            description: "Tales of NoSQL Adventures"
-    //        });
-
-
     /*  ================================================================  */
     /*  App server functions (main app logic here).                       */
     /*  ================================================================  */
@@ -138,16 +131,27 @@ var SampleApp = function () {
                 desc: 'Gets top 10 searches currently'
             }, null, 3));
         };
+
         self.routes['/getBook'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             // the client db connection scope is wrapped in a callback:
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 if (err) throw err;
                 var collection = db.collection('books').find().limit(10).toArray(function (err, docs) {
-                    res.send(JSON.stringify(docs, null, 3));
+                    res.send(docs);
                     db.close();
                 });
             });
+        };
+
+        self.routes['/addBook'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.books.insert({
+                    title: 'Added Book',
+                    description: "Tales of added book"
+                });
+            });
+            res.send("<html><body><p>Added A Book!</p></body></html>");
         };
 
         self.routes['/asciimo'] = function (req, res) {
