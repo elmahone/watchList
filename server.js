@@ -93,25 +93,25 @@ var SampleApp = function () {
         });
     };
     // default to a 'localhost' configuration:
-        var connection_string = '127.0.0.1:27017/watchlist';
-        // if OPENSHIFT env variables are present, use the available connection info:
-        if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-            connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-                process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-                process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-                process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-                process.env.OPENSHIFT_APP_NAME;
-        }
+    var connection_string = '127.0.0.1:27017/watchlist';
+    // if OPENSHIFT env variables are present, use the available connection info:
+    if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+        connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+            process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+            process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+            process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+            process.env.OPENSHIFT_APP_NAME;
+    }
 
-        var mongojs = require('mongojs');
-        var db = mongojs(connection_string, ['books']);
-        var books = db.collection('books');
+    var mongojs = require('mongojs');
+    var db = mongojs(connection_string, ['books']);
+    var books = db.collection('books');
 
-        db.books.insert({
-            title: 'MongoDB in the Wild',
-            description: "Tales of NoSQL Adventures"
-        });
-    
+    db.books.insert({
+        title: 'MongoDB in the Wild',
+        description: "Tales of NoSQL Adventures"
+    });
+
 
     /*  ================================================================  */
     /*  App server functions (main app logic here).                       */
@@ -140,14 +140,12 @@ var SampleApp = function () {
         };
         self.routes['/getBook'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
-            var library = [];
             db.books.find({}).limit(10).forEach(function (err, doc) {
                 if (err) throw err;
                 if (doc) {
-                    library.push(doc);
+                    res.send(JSON.stringify(doc, null, 3));
                 }
             });
-            res.send(JSON.stringify(library, null, 3));
         };
 
         self.routes['/asciimo'] = function (req, res) {
