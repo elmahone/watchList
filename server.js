@@ -140,7 +140,7 @@ var SampleApp = function () {
         };
         self.routes['/getBook'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
-            var library = {};
+            var library = [];
             db.books.find({}).limit(10).forEach(function (err, doc) {
                 if (err) throw err;
                 if (doc) {
