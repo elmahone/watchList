@@ -152,6 +152,15 @@ var SampleApp = function () {
                 desc: 'Gets top 10 searches currently'
             }, null, 3));
         };
+        self.routes['/getBook'] = function (req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            db.books.find({}).limit(10).forEach(function (err, doc) {
+                if (err) throw err;
+                if (doc) {
+                    res.send(JSON.stringify(doc, null, 3));
+                }
+            });            
+        };
 
         self.routes['/asciimo'] = function (req, res) {
             var link = "http://i.imgur.com/kmbjB.png";
