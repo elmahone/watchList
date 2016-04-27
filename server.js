@@ -146,7 +146,7 @@ var SampleApp = function () {
 
         self.routes['/addBook'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.books.insert({
+                db.collection('books').insert({
                     title: 'Added Book',
                     description: "Tales of added book"
                 });
