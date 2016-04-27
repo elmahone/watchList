@@ -93,25 +93,25 @@ var SampleApp = function () {
         });
     };
     // default to a 'localhost' configuration:
-        var connection_string = '127.0.0.1:27017/watchlist';
-        // if OPENSHIFT env variables are present, use the available connection info:
-        if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
-            connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
-                process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
-                process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
-                process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
-                process.env.OPENSHIFT_APP_NAME;
-        }
+    var connection_string = '127.0.0.1:27017/watchlist';
+    // if OPENSHIFT env variables are present, use the available connection info:
+    if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+        connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+            process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+            process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+            process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+            process.env.OPENSHIFT_APP_NAME;
+    }
 
-        var mongojs = require('mongojs');
-        var db = mongojs(connection_string, ['books']);
-        var books = db.collection('books');
+    //load the Client interface
+    var MongoClient = require('mongodb').MongoClient;
 
-        db.books.insert({
-            title: 'MongoDB in the Wild',
-            description: "Tales of NoSQL Adventures"
-        });
-    
+
+    //        db.books.insert({
+    //            title: 'MongoDB in the Wild',
+    //            description: "Tales of NoSQL Adventures"
+    //        });
+
 
     /*  ================================================================  */
     /*  App server functions (main app logic here).                       */
@@ -140,13 +140,13 @@ var SampleApp = function () {
         };
         self.routes['/getBook'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
-            var library = [];
-            db.books.find({}).forEach(function (err, doc) {
+            // the client db connection scope is wrapped in a callback:
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 if (err) throw err;
-                if (doc) {
-                    library.push(doc);
-                }
-            res.send(JSON.stringify(library, null, 3));
+                var collection = db.collection('books').find().limit(10).toArray(function (err, docs) {
+                    res.send(JSON.stringify(docs, null, 3));
+                    db.close();
+                });
             });
         };
 
