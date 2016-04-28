@@ -1,7 +1,64 @@
-hr {
-    margin: 1px;
+a {
+    cursor: pointer;
 }
+
+hr {
+    margin: 0;
+}
+
 .searchForm {
     margin-bottom: 10px;
     margin-top: 60px;
+}
+
+.result {
+    cursor: pointer;
+}
+
+.result:hover {
+    background-color: #eee;
+}
+
+.result h3 {
+    padding: 1em;
+    margin: 0;
+}
+
+.pageNum {
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #CACACA;
+}
+
+.navbar-default {
+    background-color: #000000;
+    border-color: #7B0000;
+}
+
+.navbar-default .navbar-nav>.active>a {
+    color: #F7F7F7;
+    background-color: #353535;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #CACACA;
+}
+
+#details {
+    margin-top: 60px;
+}
+
+#goBack {
+    font-size: 25px;
 }
