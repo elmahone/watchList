@@ -4,6 +4,7 @@
 <head>
     <title>oMDB API test</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="main.css">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
     <script src="bower_components/jquery/dist/jquery.min.js"></script>
     <script src="main.js"></script>
@@ -12,8 +13,21 @@
 
 
 <body>
+
+
     <div class="container">
-        <form>
+        <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <a class="navbar-brand" href="#">Watchlist</a>
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Home</a>
+                </li>
+                <li>
+                    <a href="#">Link</a>
+                </li>
+            </ul>
+        </nav>
+        <form class="searchForm">
             <h3>Search for a Movie OR a Series!</h3>
             <div class="row">
                 <div class="col-sm-8">
@@ -40,6 +54,8 @@
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
+        <hr>
+        <div id="searchResults"></div>
 
         <div id="content">
             <h2><span class="title"></span>(<span class="year"></span>)</h2>
@@ -54,7 +70,6 @@
                 <h2 class="message"></h2>
             </div>
         </div>
-    </div>
 
 
     </div>
