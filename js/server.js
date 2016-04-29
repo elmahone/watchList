@@ -207,8 +207,6 @@ var SampleApp = function () {
 
 }; /*  Sample Application.  */
 
-
-
 /**
  *  main():  Main code.
  */
