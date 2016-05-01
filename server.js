@@ -11,13 +11,10 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
+var port = process.env.OPENSHIFT_NODEJS_PORT    || 8080;
 var configDB = require('./config/database.js');
 console.log(ipaddress);
-
-// configuration ===============================================================
-mongoose.createConnection(configDB.url); // connect to our database
 
 // configuration ===============================================================
 mongoose.createConnection(configDB.url); // connect to our database
