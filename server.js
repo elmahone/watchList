@@ -3,7 +3,6 @@
 var express = require('express');
 var express = require('express');
 var app = express();
-var port = process.env.PORT || 8080;
 var flash = require('connect-flash');
 var fs = require('fs');
 var morgan = require('morgan');
@@ -12,8 +11,10 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 var configDB = require('./config/database.js');
+console.log(ipaddress);
 
 // configuration ===============================================================
 mongoose.createConnection(configDB.url); // connect to our database
@@ -42,9 +43,18 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
+var setupVariables = function () {
+    //  Set the environment variables we need.
+    ipaddress = process.env.OPENSHIFT_NODEJS_IP;
+    port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
 
-var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
-var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+    if (typeof ipaddress === "undefined") {
+        //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
+        //  allows us to run/test the app locally.
+        console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1');
+        ipaddress = "127.0.0.1";
+    }
+};
 
 var start = function () {
     //  Start the app on the specific interface (and port).
@@ -53,6 +63,7 @@ var start = function () {
             Date(Date.now()), ipaddress, port);
     });
 };
+setupVariables();
 start();
 console.log('The magic happens on port ' + port);
 //
