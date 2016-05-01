@@ -1,11 +1,12 @@
 #!/bin/env node
+
 var express = require('express');
 var express = require('express');
-var app     = express();
-var port    = process.env.PORT || 8080;
-var flash   = require('connect-flash');
-var fs      = require('fs');
-var morgan  = require('morgan');
+var app = express();
+var port = process.env.PORT || 8080;
+var flash = require('connect-flash');
+var fs = require('fs');
+var morgan = require('morgan');
 var session = require('express-session');
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -30,7 +31,9 @@ app.use(bodyParser()); // get information from html forms
 app.set('view engine', 'ejs'); // set up ejs for templating
 
 // required for passport
-app.use(session({ secret: 'ilovescotchscotchyscotchscotch' })); // session secret
+app.use(session({
+    secret: 'ilovescotchscotchyscotchscotch'
+})); // session secret
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 app.use(flash()); // use connect-flash for flash messages stored in session
@@ -39,7 +42,18 @@ app.use(flash()); // use connect-flash for flash messages stored in session
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
 // launch ======================================================================
-app.listen(port);
+
+var ipaddress = process.env.OPENSHIFT_NODEJS_IP;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
+var start = function () {
+    //  Start the app on the specific interface (and port).
+    app.listen(port, ipaddress, function () {
+        console.log('%s: Node server started on %s:%d ...',
+            Date(Date.now()), ipaddress, port);
+    });
+};
+start();
 console.log('The magic happens on port ' + port);
 //
 ///**
