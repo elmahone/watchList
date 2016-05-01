@@ -2,6 +2,7 @@
  //  OpenShift sample Node application
 var express = require('express');
 var fs = require('fs');
+var mongoClient = require('mongodb').MongoClient;
 
 
 /**
@@ -91,7 +92,19 @@ var SampleApp = function () {
             });
         });
     };
-    
+    // default to a 'localhost' configuration:
+    var connection_string = '127.0.0.1:27017/YOUR_APP_NAME';
+    // if OPENSHIFT env variables are present, use the available connection info:
+    if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
+        connection_string = process.env.OPENSHIFT_MONGODB_DB_USERNAME + ":" +
+            process.env.OPENSHIFT_MONGODB_DB_PASSWORD + "@" +
+            process.env.OPENSHIFT_MONGODB_DB_HOST + ':' +
+            process.env.OPENSHIFT_MONGODB_DB_PORT + '/' +
+            process.env.OPENSHIFT_APP_NAME;
+    }
+
+    //load the Client interface
+    var MongoClient = require('mongodb').MongoClient;
 
     /*  ================================================================  */
     /*  App server functions (main app logic here).                       */
@@ -158,19 +171,8 @@ var SampleApp = function () {
      *  the handlers.
      */
     self.initializeServer = function () {
-
         self.createRoutes();
         self.app = express.createServer();
-
-        self.app.configure(function () {
-            //self.app.use(express.cookieParser());
-            //self.app.use.(express.session({secret:"secret",key:"express.sid"}));
-                ['css', 'img', 'js', 'plugin', 'lib'].forEach(function (dir) {
-                self.app.use('/' + dir, express.static(__dirname + '/' + dir));
-            });
-            self.app.set('views', __dirname + '/views');
-            self.app.set('view engine', 'ejs');
-        });
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
