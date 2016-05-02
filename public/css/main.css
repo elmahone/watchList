@@ -6,7 +6,9 @@ hr {
     margin: 0;
 }
 
-.searchForm, .loginForm, .signupForm {
+.searchForm,
+.loginForm,
+.signupForm {
     margin-bottom: 10px;
     margin-top: 60px;
 }
@@ -20,8 +22,7 @@ hr {
 }
 
 .result h3 {
-    padding: 1em 0.3em 1em 0em; 
-    
+    padding: 1em 0.3em 1em 0em;
     margin: 0;
     display: inline-block;
 }
@@ -68,11 +69,12 @@ hr {
     color: #CACACA;
 }
 
-.navbar-form{
+.navbar-form {
     border: 0 !important;
 }
 
 .footer {
+    text-align: center;
     position: absolute;
     bottom: 0;
     width: 100%;
@@ -81,7 +83,7 @@ hr {
 }
 
 .footer-icon {
-    font-size:25px;
+    font-size: 4em;
 }
 
 #details {
