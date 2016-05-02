@@ -1,0 +1,77 @@
+a {
+    cursor: pointer;
+}
+
+hr {
+    margin: 0;
+}
+
+.searchForm {
+    margin-bottom: 10px;
+    margin-top: 60px;
+}
+
+.result {
+    cursor: pointer;
+}
+
+.result:hover {
+    background-color: #eee;
+}
+
+.result h3 {
+    padding: 1em 0.3em 1em 0em; 
+    
+    margin: 0;
+    display: inline-block;
+}
+
+.icon {
+    padding-left: 5px !important;
+    display: inline-block;
+    float: left;
+    width: 40px;
+}
+
+.container {
+    max-width: 70em;
+}
+
+.pageNum {
+    cursor: pointer;
+    font-size: 17px;
+}
+
+.navbar-default .navbar-brand {
+    color: white;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #CACACA;
+}
+
+.navbar-default {
+    background-color: #000000;
+    border-color: #7B0000;
+}
+
+.navbar-default .navbar-nav>.active>a {
+    color: #F7F7F7;
+    background-color: #353535;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: white;
+}
+
+.navbar-default .navbar-nav>li>a:hover {
+    color: #CACACA;
+}
+
+#details {
+    margin-top: 60px;
+}
+
+#goBack {
+    font-size: 25px;
+}

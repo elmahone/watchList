@@ -1,6 +1,7 @@
 #!/bin/env node
  //  OpenShift sample Node application
 var express = require('express');
+var app = express();
 var fs = require('fs');
 var mongoClient = require('mongodb').MongoClient;
 
@@ -46,7 +47,9 @@ var SampleApp = function () {
         }
 
         //  Local cache for static content.
-        self.zcache['index.html'] = fs.readFileSync('./index.html');
+        self.zcache['public/index.html'] = fs.readFileSync('./index.html');
+        self.zcache['public/css/main.css'] = fs.readFileSync('./main.css');
+        self.zcache['public/js/main.js'] = fs.readFileSync('./main.js');
     };
 
 
@@ -152,12 +155,7 @@ var SampleApp = function () {
                 });
             });
             res.send("<html><body><p>Added A Book!</p></body></html>");
-        };
-
-        self.routes['/asciimo'] = function (req, res) {
-            var link = "http://i.imgur.com/kmbjB.png";
-            res.send("<html><body><img src='" + link + "'></body></html>");
-        };
+        };       
 
         self.routes['/'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
@@ -172,7 +170,7 @@ var SampleApp = function () {
      */
     self.initializeServer = function () {
         self.createRoutes();
-        self.app = express.createServer();
+        self.app = app.createServer();
 
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
