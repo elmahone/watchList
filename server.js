@@ -4,6 +4,8 @@ var express = require('express');
 var app = express();
 var fs = require('fs');
 var mongoClient = require('mongodb').MongoClient;
+app.use(express.static(__dirname + '/public'));
+        
 
 
 /**
@@ -48,8 +50,6 @@ var SampleApp = function () {
 
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./public/index.html');
-        self.zcache['main.css'] = fs.readFileSync('./public/css/main.css');
-        self.zcache['main.js'] = fs.readFileSync('./public/js/main.js');
     };
 
 
@@ -171,7 +171,6 @@ var SampleApp = function () {
     self.initializeServer = function () {
         self.createRoutes();
         self.app = express.createServer();
-        self.app.use(express.static(__dirname + '/public'));
         
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
