@@ -43,12 +43,17 @@ var SampleApp = function () {
     self.populateCache = function () {
         if (typeof self.zcache === "undefined") {
             self.zcache = {
-                'index.html': ''
+                'index.html': '',
+                'signup.html': '',
+                'login.html':'',
+                
             };
         }
 
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./public/index.html');
+        self.zcache['signup.html'] = fs.readFileSync('./public/views/signup.html');
+        self.zcache['login.html'] = fs.readFileSync('./public/views/login.html');
     };
 
 
@@ -159,6 +164,14 @@ var SampleApp = function () {
         self.routes['/'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html'));
+        };
+        self.routes['/signup'] = function (req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('signup.html'));
+        };
+        self.routes['/login'] = function (req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('login.html'));
         };
     };
 
