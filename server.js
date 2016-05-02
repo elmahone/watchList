@@ -4,8 +4,7 @@ var express = require('express');
 var app = express();
 var fs = require('fs');
 var mongoClient = require('mongodb').MongoClient;
-app.use(express.static(__dirname + '/public'));
-        
+
 
 
 /**
@@ -155,7 +154,7 @@ var SampleApp = function () {
                 });
             });
             res.send("<html><body><p>Added A Book!</p></body></html>");
-        };       
+        };
 
         self.routes['/'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
@@ -170,8 +169,9 @@ var SampleApp = function () {
      */
     self.initializeServer = function () {
         self.createRoutes();
-        self.app = express.createServer();
-        
+        self.app = app;
+        self.app.use(express.static(__dirname + '/public'));
+
         //  Add handlers for the app (from the routes).
         for (var r in self.routes) {
             self.app.get(r, self.routes[r]);
