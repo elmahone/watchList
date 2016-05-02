@@ -83,7 +83,7 @@ hr {
 }
 
 .footer-icon {
-    font-size: 4em;
+    font-size: 4em !important;
 }
 
 #details {
