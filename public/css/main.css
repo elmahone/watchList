@@ -68,6 +68,10 @@ hr {
     color: #CACACA;
 }
 
+.navbar-form{
+    border: 0 !important;
+}
+
 #details {
     margin-top: 60px;
 }
