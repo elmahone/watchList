@@ -1,7 +1,6 @@
 #!/bin/env node
 
 var express = require('express');
-var express = require('express');
 var app = express();
 var flash = require('connect-flash');
 var fs = require('fs');
@@ -12,30 +11,31 @@ var passport = require('passport');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var port = process.env.OPENSHIFT_NODEJS_PORT    || 8080;
+var port = process.env.OPENSHIFT_NODEJS_PORT || 8080;
+
 var configDB = require('./config/database.js');
-console.log(ipaddress);
 
 // configuration ===============================================================
 mongoose.createConnection(configDB.url); // connect to our database
 
 require('./config/passport')(passport); // pass passport for configuration
 
-// set up our express application
-app.use(morgan('dev')); // log every request to the console
-app.use(cookieParser()); // read cookies (needed for auth)
-app.use(bodyParser()); // get information from html forms
+app.configure(function () {
+    // set up our express application
+    app.use(morgan('dev')); // log every request to the console
+    app.use(cookieParser()); // read cookies (needed for auth)
+    app.use(bodyParser()); // get information from html forms
 
-app.set('view engine', 'ejs'); // set up ejs for templating
+    app.set('view engine', 'ejs'); // set up ejs for templating
 
-// required for passport
-app.use(session({
-    secret: 'ilovescotchscotchyscotchscotch'
-})); // session secret
-app.use(passport.initialize());
-app.use(passport.session()); // persistent login sessions
-app.use(flash()); // use connect-flash for flash messages stored in session
-
+    // required for passport
+    app.use(session({
+        secret: 'ilovescotchscotchyscotchscotch'
+    })); // session secret
+    app.use(passport.initialize());
+    app.use(passport.session()); // persistent login sessions
+    app.use(flash()); // use connect-flash for flash messages stored in session
+});
 // routes ======================================================================
 require('./app/routes.js')(app, passport); // load our routes and pass in our app and fully configured passport
 
