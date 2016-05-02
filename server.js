@@ -52,8 +52,8 @@ var SampleApp = function () {
 
         //  Local cache for static content.
         self.zcache['index.html'] = fs.readFileSync('./public/index.html');
-        self.zcache['signup.html'] = fs.readFileSync('./public/views/signup.html');
-        self.zcache['login.html'] = fs.readFileSync('./public/views/login.html');
+        self.zcache['signup.html'] = fs.readFileSync('./public/signup.html');
+        self.zcache['login.html'] = fs.readFileSync('./public/login.html');
     };
 
 
