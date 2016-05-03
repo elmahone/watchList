@@ -38,7 +38,6 @@ $(function () {
             $('#error').show();
         }
     }
-
     // Counts and displays pagenumbers
     function countPages(totalResults) {
         var totalPages = Math.ceil(totalResults / 10);
@@ -57,7 +56,6 @@ $(function () {
         }
         initListeners();
     }
-
     //Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
@@ -84,11 +82,35 @@ $(function () {
         }
     }
 
+    function displayMyList(data) {
+        var myList = [];
+        myList = data;
+        for (var i = 0; i < myList; i++) {
+            if (myList[i].type == "movie") {
+                $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3>' + myList[i].title + '</h3></div>');
+                $('#moviesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3>' + myList[i].title + '</h3></div>');
+
+            } else if (myList[i].type == "series") {
+                $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3>' + myList[i].title + '</h3></div>');
+                $('#seriesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3>' + myList[i].title + '</h3></div>');
+
+            } else if (myList[i].type == "game") {
+                $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-gamepad"></i></h3><h3>' + myList[i].title + '</h3></div>');
+
+            } else {
+                $('#allTab').append('<div id="' + myList[i].id + '"><h3>' + myList[i].title + '</h3></div>');
+
+            }
+        }
+
+
+    }
+
 
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
         $.get(url, function (response) {
-            console.log(response);
+            displayMyList(response);
         });
     }
 
