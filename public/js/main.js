@@ -2,10 +2,10 @@ $(function () {
     'use strict';
 
     var currentUser = "miika";
-    
-    
-    
-    
+
+
+
+
     //Displays all the results gotten from the api call
     function displaySearchResults(results) {
         var searchArr = [];
@@ -84,9 +84,19 @@ $(function () {
         }
     }
 
+    function getMyList(username) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
+        $.get(url, function (response) {
+            console.log(response);
+        });
+    }
+    getMyList(currentUser);
+
     function getUser(username, password) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
-        $.get(url);
+        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username + '&password=' + password;
+        $.get(url, function (response) {
+            console.log(response);
+        });
     }
 
     function addToList(username, id, title, type) {

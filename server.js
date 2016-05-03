@@ -157,7 +157,7 @@ var SampleApp = function () {
                 db.collection('user').find({
                     username: req.query.username
                 }).toArray(function (err, docs) {
-                    res.send(docs[1].list);
+                    res.send(docs[0].list);
                     db.close();
                 });
             });
@@ -193,9 +193,10 @@ var SampleApp = function () {
         self.routes['/getUser'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').find({
-                    username: req.query.username
+                    username: req.query.username,
+                    password: req.query.password
                 }).toArray(function (err, docs) {
-                    res.send(docs[0].list);
+                    res.send(docs);
                     db.close();
                 });
             });
