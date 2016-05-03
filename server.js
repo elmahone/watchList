@@ -45,8 +45,8 @@ var SampleApp = function () {
             self.zcache = {
                 'index.html': '',
                 'signup.html': '',
-                'login.html':'',
-                
+                'login.html': ''
+
             };
         }
 
@@ -151,14 +151,14 @@ var SampleApp = function () {
             });
         };
 
-        self.routes['/addBook'] = function (req, res) {
+        self.routes['/addUser'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('books').insert({
-                    title: 'Added Book',
-                    description: "Tales of added book"
+                db.collection('user').insert({
+                    username: req.query.username,
+                    password: req.query.password
                 });
             });
-            res.send("<html><body><p>Added A Book!</p></body></html>");
+            res.redirect(self.cache_get('index.html'));
         };
 
         self.routes['/'] = function (req, res) {
@@ -217,8 +217,6 @@ var SampleApp = function () {
     };
 
 }; /*  Sample Application.  */
-
-
 
 /**
  *  main():  Main code.

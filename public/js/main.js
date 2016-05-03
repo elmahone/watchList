@@ -76,6 +76,11 @@ $(function () {
     }
 
     // makes a search api call with title, type, year and page parameters
+    function createUser(username, password) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/createUser?username=' + username + '&password=' + password;
+        $.get(url);
+    }
+
     function apiCallSearch(title, type, year, page) {
         var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full&page=' + page;
         $.get(url, function (response) {
@@ -100,6 +105,12 @@ $(function () {
             var year = $('form').find('#year').val();
             apiCallSearch(title, type, year, page);
         });
+        $('.signupForm').on('submit', function (event) {
+            event.preventDefault();
+            var username = $('form').find('#username').val();
+            var password = $('form').find('#password').val();
+            createUser(username, password);
+        });
 
         $('.result').on('click', function () {
             var id = $(this).attr("id");
@@ -119,6 +130,7 @@ $(function () {
             $('#details').hide();
             $('#searchResults').show();
         });
+        
     }
 
     //Starts the app
