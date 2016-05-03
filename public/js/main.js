@@ -157,12 +157,11 @@ $(function () {
             $('#searchResults').show();
         });
         $('#addToList').on('click', function () {
-            var id = $('#imdbID').attr("val");
-            var title = $('#title').attr("val");
-            var type = $('#type').attr("val");
+            var id = $('#imdbID').attr("value");
+            var title = $('#title').attr("value");
+            var type = $('#type').attr("value");
             addToList(currentUser, id, title, type);
         });
-
     }
 
     //Starts the app
