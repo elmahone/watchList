@@ -157,8 +157,10 @@ var SampleApp = function () {
                     username: req.query.username
                 }, {
                     $push: {
-                        title: req.query.title,
-                        id: req.query.id                        
+                        list: {
+                            title: req.query.title,
+                            id: req.query.id
+                        }
                     }
                 });
                 db.close();
