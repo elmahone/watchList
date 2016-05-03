@@ -56,7 +56,10 @@ $(function () {
 
     //Displays data of a single result gotten from the api call
     function displayData(data) {
-        addToList("miika", data);
+        var item = JSON.stringify(data);
+        console.log(data);
+        console.log(item);
+        addToList("miika", item);
         if (data.Response == "True") {
             $('#error').hide();
             $('#searchResults').hide();
