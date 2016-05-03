@@ -79,7 +79,7 @@ $(function () {
     function addUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
         console.log(username, password);
-        $.post(url);
+        $.get(url);
     }
 
     function apiCallSearch(title, type, year, page) {

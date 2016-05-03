@@ -158,7 +158,7 @@ var SampleApp = function () {
                     password: req.query.password
                 });
             });
-            res.redirect(self.cache_get('index.html'));
+            res.redirect('/');
         };
 
         self.routes['/'] = function (req, res) {
