@@ -158,8 +158,9 @@ var SampleApp = function () {
                 }, {
                     $push: {
                         list: {
+                            id: req.query.id,
                             title: req.query.title,
-                            id: req.query.id
+                            type: req.query.type
                         }
                     }
                 });

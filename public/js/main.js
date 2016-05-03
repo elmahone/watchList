@@ -57,7 +57,7 @@ $(function () {
     //Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
-        addToList("miika", data.imdbID, data.Title);
+        addToList("miika", data.imdbID, data.Title, data.Type);
         if (data.Response == "True") {
             $('#error').hide();
             $('#searchResults').hide();
@@ -82,8 +82,8 @@ $(function () {
         $.get(url);
     }
 
-    function addToList(username, id, name) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&name=' + name;
+    function addToList(username, id, title, type) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
         $.get(url);
     }
 
