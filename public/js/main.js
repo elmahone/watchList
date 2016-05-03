@@ -83,9 +83,10 @@ $(function () {
     }
 
     function displayMyList(data) {
-        console.log("data " + data);
+        console.log(data);
         var myList = [];
         myList = data;
+        console.log(myList);
         if (myList.length > 0) {
             $('#allTab').empty();
             for (var i = 0; i < myList; i++) {
