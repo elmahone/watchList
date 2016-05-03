@@ -76,8 +76,8 @@ $(function () {
     }
 
     // makes a search api call with title, type, year and page parameters
-    function createUser(username, password) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/createUser?username=' + username + '&password=' + password;
+    function addeUser(username, password) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
         console.log(username, password);
         $.get(url);
     }
@@ -111,7 +111,7 @@ $(function () {
             var username = $('form').find('#username').val();
             var password = $('form').find('#password').val();
             console.log("signupform");
-            createUser(username, password);
+            addUser(username, password);
         });
 
         $('.result').on('click', function () {
