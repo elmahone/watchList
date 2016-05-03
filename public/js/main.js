@@ -80,6 +80,7 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
         console.log(username, password);
         $.get(url);
+        window.location = '../index.html';
     }
 
     function apiCallSearch(title, type, year, page) {

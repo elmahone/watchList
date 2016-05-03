@@ -158,7 +158,6 @@ var SampleApp = function () {
                     password: req.query.password
                 });
             });
-            res.redirect('/');
         };
 
         self.routes['/'] = function (req, res) {
