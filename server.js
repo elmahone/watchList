@@ -157,10 +157,10 @@ var SampleApp = function () {
                     username: req.query.username
                 }, {
                     $push: {
-                        list: req.query.item
+                        title: req.query.title,
+                        id: req.query.id                        
                     }
                 });
-                res.send("HELLOS");
                 db.close();
             });
         };
