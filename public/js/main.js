@@ -56,7 +56,7 @@ $(function () {
 
     //Displays data of a single result gotten from the api call
     function displayData(data) {
-        addToMyList("miika", data);
+        addToList("miika", data);
         if (data.Response == "True") {
             $('#error').hide();
             $('#searchResults').hide();
@@ -81,8 +81,8 @@ $(function () {
         $.get(url);
     }
     
-    function addToMyList(username, object) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/addToMyList?username=' + username + '&item=' + object;
+    function addToList(username, object) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&item=' + object;
         $.get(url);
     }
     
