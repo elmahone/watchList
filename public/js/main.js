@@ -74,15 +74,20 @@ $(function () {
             $('#error').show();
         }
     }
-
-    // makes a search api call with title, type, year and page parameters
+    
+    function getUser(username, password) {
+        
+    }
+    
+    
+    // Sends username and password to the database (NOT HASHED)
     function addUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
-        console.log(username, password);
         $.get(url);
         window.location = '../index.html';
     }
 
+    // makes a search api call with title, type, year and page parameters
     function apiCallSearch(title, type, year, page) {
         var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full&page=' + page;
         $.get(url, function (response) {

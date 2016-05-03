@@ -154,8 +154,10 @@ var SampleApp = function () {
         self.routes['/addUser'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').insert({
-                    username: req.query.username,
-                    password: req.query.password
+                    req.query.username: {
+                        username: req.query.username,
+                        password: req.query.password
+                    }
                 });
             });
         };
