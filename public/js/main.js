@@ -76,7 +76,7 @@ $(function () {
     }
 
     // makes a search api call with title, type, year and page parameters
-    function addeUser(username, password) {
+    function addUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
         console.log(username, password);
         $.get(url);
