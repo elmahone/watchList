@@ -86,7 +86,8 @@ $(function () {
         console.log(data);
         var myList = [];
         myList = data;
-        console.log(myList);
+        console.log(myList[0].title);
+        console.log(myList[0]);
         if (myList.length > 0) {
             $('#allTab').empty();
             for (var i = 0; i < myList; i++) {
