@@ -6,10 +6,8 @@ hr {
     margin: 0;
 }
 
-.searchForm,
-.loginForm,
-.signupForm {
-    margin-bottom: 10px;
+.content {
+    margin-bottom: 60px;
     margin-top: 60px;
 }
 
@@ -72,6 +70,7 @@ hr {
 .navbar-form {
     border: 0 !important;
 }
+.nav-tabs
 
 .footer {
     text-align: center;
