@@ -151,16 +151,18 @@ var SampleApp = function () {
                 });
             });
         };
-        
+
         self.routes['/getMyList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('user').find({username: req.query.username}).toArray(function (err, docs) {
+                db.collection('user').find({
+                    username: req.query.username
+                }).toArray(function (err, docs) {
                     res.send(docs.list);
                     db.close();
                 });
             });
         };
-        
+
 
         self.routes['/addToList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -190,15 +192,17 @@ var SampleApp = function () {
         };
         self.routes['/getUser'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('user').find({username: req.query.username}).toArray(function (err, docs) {
-                    res.send(req.query.username);
+                db.collection('user').find({
+                    username: req.query.username
+                }).toArray(function (err, docs) {
+                    res.send(docs);
                     db.close();
                 });
             });
         };
         self.routes['/getUsers'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('user').find({}).toArray(function (err, docs) {
+                db.collection('user').find({username: "hahah"}).toArray(function (err, docs) {
                     res.send(docs);
                     db.close();
                 });
