@@ -1,11 +1,9 @@
 $(function () {
     'use strict';
-
+    
+    //because authentication does not work currently everything goes to user in currentUser
     var currentUser = "miika";
-
-
-
-
+    
     //Displays all the results gotten from the api call
     function displaySearchResults(results) {
         var searchArr = [];
@@ -38,6 +36,7 @@ $(function () {
             $('#error').show();
         }
     }
+    
     // Counts and displays pagenumbers
     function countPages(totalResults) {
         var totalPages = Math.ceil(totalResults / 10);
@@ -56,6 +55,7 @@ $(function () {
         }
         initListeners();
     }
+    
     //Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
@@ -81,13 +81,12 @@ $(function () {
             $('#error').show();
         }
     }
-
+    
+    //Displays own list into tabs
     function displayMyList(data) {
         console.log(data);
         var myList = [];
         myList = data;
-        console.log(myList[0].title);
-        console.log(myList[0]);
         if (myList.length > 0) {
             $('#allTab').empty();
             //this for loop empties the "nothing here" text from tabs
@@ -100,7 +99,6 @@ $(function () {
             }
             //this loop fills tabs with movies from personal list
             for (var i = 0; i < myList.length; i++) {
-                console.log(myList[i]);
                 if (myList[i].type == "movie") {
                     $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3></div>');
                     $('#moviesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3></div>');
@@ -115,21 +113,19 @@ $(function () {
                 } else {
                     $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3></div>');
                 }
-
             }
         }
-
-
     }
-
-
+    
+    //api call for my list with username as a parameter
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
         $.get(url, function (response) {
             displayMyList(response);
         });
     }
-
+    
+    //gets user info with username and password as parameters
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
         $.get(url, function (response) {
@@ -141,11 +137,11 @@ $(function () {
         });
     }
 
+    //adds an item to users personal list
     function addToList(username, id, title, type) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
         $.get(url);
     }
-
 
     // Sends username and password to the database (NOT HASHED)
     function addUser(username, password) {
@@ -161,6 +157,7 @@ $(function () {
             displaySearchResults(response);
         });
     }
+    
     // makes a search api call with id
     function apiCallDetails(id) {
         var url = 'http://www.omdbapi.com/?i=' + id + '&tomatoes=true&plot=full';
@@ -218,6 +215,9 @@ $(function () {
             addToList(currentUser, id, title, type);
         });
     }
+    
+    // if a page has a class .mylist-tabs this calls a function 
+    // to fill the tabs with own list
     if ($('.mylist-tabs').length > 0) {
         getMyList(currentUser);
     }
