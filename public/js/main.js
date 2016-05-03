@@ -90,7 +90,7 @@ $(function () {
         console.log(myList[0]);
         if (myList.length > 0) {
             $('#allTab').empty();
-            for (var i = 0; i < myList; i++) {
+            for (var i = 0; i < myList.length; i++) {
                 console.log(myList[i]);
                 if (myList[i].type == "movie") {
                     $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3>' + myList[i].title + '</h3></div>');
