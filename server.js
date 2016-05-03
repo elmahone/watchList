@@ -196,7 +196,7 @@ var SampleApp = function () {
                     username: req.query.username,
                     password: req.query.password
                 }).toArray(function (err, docs) {
-                    res.send(docs);
+                    res.send(docs[0]);
                     db.close();
                 });
             });
