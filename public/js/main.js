@@ -160,6 +160,7 @@ $(function () {
             var id = $('#imdbID').attr("value");
             var title = $('#title').attr("value");
             var type = $('#type').attr("value");
+            console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
     }
