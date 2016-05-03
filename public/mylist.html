@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Watchlist</title>
+    <!-- jQuery -->
+    <script src="js/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Bootstrap JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- My CSS -->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0">
+</head>
+
+<body>
+    <div class="container">
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#navbar-main" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">Watchlist</a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbar-main">
+                    <ul class="nav navbar-nav">
+                        <li>
+                            <a href="/">Search</a>
+                        </li>
+                        <li class="active">
+                            <a href="/mylist">My List</a>
+                        </li>
+                    </ul>
+                    <div class="navbar-form navbar-right" role="search">
+                        <a href="login.html" type="submit" class="btn btn-default" name="login">Log In</a>
+                        <a href="signup.html" type="submit" class="btn btn-default" name="sign-up">Sign Up</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <form class="searchForm">
+            <h3>Search for a Movie OR a Series!</h3>
+            <div class="row">
+                <div class="col-xs-12 col-sm-8">
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" name="title" id="title" placeholder="Search Title" required>
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-2">
+                    <div class="form-group">
+                        <label for="year">Year</label>
+                        <input type="text" class="form-control" name="year" id="year" placeholder="Title Year">
+                    </div>
+                </div>
+                <div class="col-xs-6 col-sm-2">
+                    <label for="type">Type</label>
+                    <select name="type" id="type" class="form-control">
+                        <option value=null>Select type</option>
+                        <option value="movie">Movie</option>
+                        <option value="series">Series</option>
+                    </select>
+                </div>
+                <hr>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <hr>
+        <div id="searchResults"></div>
+        <div id="details"></div>
+        <div id="error">
+            <div class="alert">
+                <h2 class="message"></h2>
+            </div>
+        </div>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <a href="https://github.com/elmahone/watchList-openshift" class="text-muted">
+                <i class="fa fa-github footer-icon" aria-hidden="true"></i>
+            </a>
+        </div>
+    </footer>
+
+    <!-- My JS -->
+    <script src="js/main.js"></script>
+</body>
+
+</html>

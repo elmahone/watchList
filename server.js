@@ -54,6 +54,7 @@ var SampleApp = function () {
         self.zcache['index.html'] = fs.readFileSync('./public/index.html');
         self.zcache['signup.html'] = fs.readFileSync('./public/signup.html');
         self.zcache['login.html'] = fs.readFileSync('./public/login.html');
+        self.zcache['mylist.html'] = fs.readFileSync('./public/mylist.html');
     };
 
 
@@ -189,6 +190,10 @@ var SampleApp = function () {
         self.routes['/'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html'));
+        };
+        self.routes['/mylist'] = function (req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('mylist.html'));
         };
         self.routes['/signup'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
