@@ -56,7 +56,7 @@ $(function () {
 
     //Displays data of a single result gotten from the api call
     function displayData(data) {
-        addToList("miika", data);
+        addToList("miika", data.imdbID);
         if (data.Response == "True") {
             $('#error').hide();
             $('#searchResults').hide();

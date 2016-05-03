@@ -157,9 +157,7 @@ var SampleApp = function () {
                     username: req.query.username
                 }, {
                     $push: {
-                        list: {
-                            item: req.query.object
-                        }
+                        list: {item: req.query.item}
                     }
                 });
                 res.send("HELLOS");
