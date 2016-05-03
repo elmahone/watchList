@@ -77,6 +77,7 @@ $(function () {
     
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
+        $.get(url);
     }
     
     
