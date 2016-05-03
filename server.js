@@ -154,11 +154,13 @@ var SampleApp = function () {
         self.routes['/addToList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').update({
-                    username: "miika"
+                    username: req.query.username
                 }, {
-                    list: [req.query.object]
-                }, {
-                    upsert: true
+                    $push: {
+                        list: {
+                            item: req.query.object
+                        }
+                    }
                 });
                 res.send("HELLOS");
                 db.close();
