@@ -56,10 +56,8 @@ $(function () {
 
     //Displays data of a single result gotten from the api call
     function displayData(data) {
-        var item = JSON.stringify(data);
         console.log(data);
-        console.log(item);
-        addToList("miika", item);
+        addToList("miika", data.imdbID, data.Title);
         if (data.Response == "True") {
             $('#error').hide();
             $('#searchResults').hide();
@@ -78,18 +76,18 @@ $(function () {
             $('#error').show();
         }
     }
-    
+
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
         $.get(url);
     }
-    
-    function addToList(username, object) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&item=' + object;
+
+    function addToList(username, id, name) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&name=' + name;
         $.get(url);
     }
-    
-    
+
+
     // Sends username and password to the database (NOT HASHED)
     function addUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
@@ -153,7 +151,7 @@ $(function () {
             $('#details').hide();
             $('#searchResults').show();
         });
-        
+
     }
 
     //Starts the app
