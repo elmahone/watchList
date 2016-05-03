@@ -5,7 +5,6 @@ $(function () {
 
     //Displays all the results gotten from the api call
     function displaySearchResults(results) {
-        console.log(results);
         var searchArr = [];
         if (results.Response == "True") {
             $('#searchResults').empty();
@@ -64,9 +63,9 @@ $(function () {
             $('#error').hide();
             $('#searchResults').hide();
             $('#details').empty();
-            $('#details').append('<input type="hidden" id="imdbID" value="' + data.imdbID + '">');
-            $('#details').append('<input type="hidden" id="title" value="' + data.Title + '">');
-            $('#details').append('<input type="hidden" id="type" value="' + data.Type + '">');
+            $('#details').append('<input type="hidden" id="resultImdbID" value="' + data.imdbID + '">');
+            $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
+            $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack">Go Back</a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p><h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
 
             //show content when data is received
@@ -157,9 +156,9 @@ $(function () {
             $('#searchResults').show();
         });
         $('#addToList').on('click', function () {
-            var id = $('#imdbID').attr("value");
-            var title = $('#title').attr("value");
-            var type = $('#type').attr("value");
+            var id = $('#resultImdbID').attr("value");
+            var title = $('#resultTitle').attr("value");
+            var type = $('#resultType').attr("value");
             console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
