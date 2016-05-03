@@ -1,5 +1,7 @@
 $(function () {
     'use strict';
+    
+    var currentUser = "miika";
 
     //Displays all the results gotten from the api call
     function displaySearchResults(results) {
@@ -57,12 +59,15 @@ $(function () {
     //Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
-        addToList("miika", data.imdbID, data.Title, data.Type);
+        
         if (data.Response == "True") {
             $('#error').hide();
             $('#searchResults').hide();
             $('#details').empty();
-            $('#details').append('<a id="goBack">Go Back</a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p><h2><span class="glyphicon glyphicon-ok-circle" id="add"></span></h2>');
+            $('#details').append('<input type="hidden" class="imdbID" id='+data.imdbID+'>');
+            $('#details').append('<input type="hidden" class="title" id='+data.Title+'>');
+            $('#details').append('<input type="hidden" class="type" id='+data.Type+'>');
+            $('#details').append('<a id="goBack">Go Back</a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p><h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
 
             //show content when data is received
             initListeners();
@@ -150,6 +155,12 @@ $(function () {
             $('.searchForm').show();
             $('#details').hide();
             $('#searchResults').show();
+        });
+        $('#addToList').on('click', function () {
+            var id = $('.imdbID').attr("id");
+            var title = $('.title').attr("id");
+            var type = $('.type').attr("id");
+            addToList(currentUser, id, title, type);
         });
 
     }
