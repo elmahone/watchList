@@ -83,6 +83,9 @@ $(function () {
             $('#error').show();
         }
     }
+    function loadMyList(){
+        getMyList(currentUser);
+    }
 
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
@@ -90,13 +93,15 @@ $(function () {
             console.log(response);
         });
     }
-    getMyList(currentUser);
 
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
         $.get(url, function (response) {
             console.log(response.username);
             console.log(response);
+            if (response.username == username) {
+                window.location = '../index.html';
+            }
         });
     }
 
