@@ -180,7 +180,7 @@ $(function () {
             addToList(currentUser, id, title, type);
         });
     }
-    if (window.location.pathname == "../mylist.html") {
+    if ($('.mylist-tabs').length > 0) {
         getMyList(currentUser);
     }
 
