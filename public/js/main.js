@@ -93,8 +93,9 @@ $(function () {
     getMyList(currentUser);
 
     function getUser(username, password) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username + '&password=' + password;
+        var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
         $.get(url, function (response) {
+            console.log(response.username);
             console.log(response);
         });
     }
