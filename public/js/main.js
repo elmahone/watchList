@@ -76,7 +76,7 @@ $(function () {
     }
     
     function getUser(username, password) {
-        
+        var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
     }
     
     
@@ -116,8 +116,13 @@ $(function () {
             event.preventDefault();
             var username = $('form').find('#username').val();
             var password = $('form').find('#password').val();
-            console.log("signupform");
             addUser(username, password);
+        });
+        $('.loginForm').on('submit', function (event) {
+            event.preventDefault();
+            var username = $('form').find('#username').val();
+            var password = $('form').find('#password').val();
+            getUser(username, password);
         });
 
         $('.result').on('click', function () {
