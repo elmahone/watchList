@@ -151,6 +151,16 @@ var SampleApp = function () {
                 });
             });
         };
+        
+        self.routes['/getMyList'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('user').find({}).toArray(function (err, docs) {
+                    res.send(docs.list);
+                    db.close();
+                });
+            });
+        };
+        
 
         self.routes['/addToList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {

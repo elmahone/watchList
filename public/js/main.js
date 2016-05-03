@@ -2,7 +2,10 @@ $(function () {
     'use strict';
 
     var currentUser = "miika";
-
+    
+    
+    
+    
     //Displays all the results gotten from the api call
     function displaySearchResults(results) {
         var searchArr = [];
