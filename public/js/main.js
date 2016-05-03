@@ -90,13 +90,15 @@ $(function () {
         console.log(myList[0]);
         if (myList.length > 0) {
             $('#allTab').empty();
+            //this for loop empties the "nothing here" text from tabs
             for (var o = 0; 0 < myList.length; o++) {
-                if (myList[i].type == "movie") {
+                if (myList[o].type == "movie") {
                     $('#moviesTab').empty();
-                } else if (myList[i].type == "series") {
+                } else if (myList[o].type == "series") {
                     $('#seriesTab').empty();
                 }
             }
+            //this loop fills tabs with movies from personal list
             for (var i = 0; i < myList.length; i++) {
                 console.log(myList[i]);
                 if (myList[i].type == "movie") {
