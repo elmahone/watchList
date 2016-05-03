@@ -162,7 +162,7 @@ var SampleApp = function () {
             };
             self.routes['/getUser'] = function (req, res) {
                 MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                        db.collection('user').find({username: req.query.username}).toArray(function (err, docs) {
+                        db.collection('user').find({}).toArray(function (err, docs) {
                                 res.send(docs);
                                 db.close();
                             });
