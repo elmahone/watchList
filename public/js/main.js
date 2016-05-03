@@ -91,7 +91,7 @@ $(function () {
         if (myList.length > 0) {
             $('#allTab').empty();
             //this for loop empties the "nothing here" text from tabs
-            for (var o = 0; 0 < myList.length; o++) {
+            for (var o = 0; o < myList.length; o++) {
                 if (myList[o].type == "movie") {
                     $('#moviesTab').empty();
                 } else if (myList[o].type == "series") {
