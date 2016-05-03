@@ -157,7 +157,7 @@ var SampleApp = function () {
                 db.collection('user').find({
                     username: req.query.username
                 }).toArray(function (err, docs) {
-                    res.send(docs[].list);
+                    res.send(docs[1].list);
                     db.close();
                 });
             });
