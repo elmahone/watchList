@@ -83,9 +83,7 @@ $(function () {
             $('#error').show();
         }
     }
-    function loadMyList(){
-        getMyList(currentUser);
-    }
+
 
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
@@ -181,6 +179,9 @@ $(function () {
             console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
+    }
+    if (window.location.pathname == "../mylist.html") {
+        getMyList(currentUser);
     }
 
     //Starts the app
