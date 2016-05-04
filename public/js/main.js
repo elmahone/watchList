@@ -104,7 +104,7 @@ $(function () {
                     $('#moviesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else if (myList[i].type == "series") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="removeFromList" class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
                     $('#seriesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else if (myList[i].type == "game") {
@@ -216,7 +216,7 @@ $(function () {
         $('.removeFromList').on('click', function() {
             console.log("HALLOOOO");
             var id = $(this).parent().attr('#id');
-            console.log($(this));
+            console.log($(this).parent());
             console.log(id);
         });
     }
