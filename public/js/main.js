@@ -168,7 +168,7 @@ $(function () {
         var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full&page=' + page;
         $.get(url, function (response) {
             displaySearchResults(response);
-            if(response != "False"){
+            if(response.Response != "False"){
                 saveSearchTitle(title);
             }
         });
