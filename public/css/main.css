@@ -89,14 +89,14 @@ hr {
     font-size: 4em !important;
 }
 
-#removeFromList {
+.removeFromList {
     float: right;
     font-size: 24px;
     display: inline-block;
     margin-top: 20px;  
     color: darkred;
 }
-#removeFromList:hover {
+.removeFromList:hover {
     color: red;
     cursor: pointer;
 }
