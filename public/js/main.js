@@ -176,7 +176,6 @@ $(function () {
             displaySearchResults(response);
             if (response.Response != "False") {
                 saveSearchTitle(title);
-                saveRecentSearch(currentUser, title);
             }
         });
     }
@@ -198,6 +197,7 @@ $(function () {
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
             apiCallSearch(title, type, year, page);
+            saveRecentSearch(currentUser, title);
         });
         $('.signupForm').on('submit', function (event) {
             event.preventDefault();
