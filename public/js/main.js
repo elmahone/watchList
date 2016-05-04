@@ -144,6 +144,11 @@ $(function () {
         $.get(url);
     }
 
+    function removeFromList(username, id) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/removeFromList?username=' + username + '&id=' + id;
+        $.get(url);
+    }
+
     // Sends username and password to the database (NOT HASHED)
     function addUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
@@ -213,11 +218,11 @@ $(function () {
             console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
-        $('.removeFromList').on('click', function() {
-            console.log("HALLOOOO");
+        $('.removeFromList').on('click', function () {
             var id = $(this).parent().attr('id');
-            console.log($(this).parent());
-            console.log(id);
+            removeFromList(currentUser, id);
+            $(this).parent().empty();
+
         });
     }
 
