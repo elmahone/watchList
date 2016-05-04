@@ -165,7 +165,7 @@ $(function () {
 
     // Saves users recent searches to database
     function saveRecentSearch(username, title) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/saveRecentSearch?username=' + username + 'title=' + title;
+        var url = 'http://watchlist-miikanode.rhcloud.com/saveRecentSearch?username=' + username + '&title=' + title;
         $.get(url);
     }
 
