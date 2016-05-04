@@ -214,10 +214,9 @@ $(function () {
             console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
-        console.log("dadas");
         $('#removeFromList').on('click', function() {
-            var id = $(this).parent().attr('#id');
             console.log("HALLOOOO");
+            var id = $(this).parent().attr('#id');
             console.log($(this));
             console.log(id);
         });
