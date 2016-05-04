@@ -193,7 +193,6 @@ $(function () {
             var id = $(this).attr("id");
             apiCallDetails(id);
         });
-
         $('.pageNum').on('click', function () {
             var page = $(this).attr("id");
             var title = $('form').find('#title').val();
@@ -201,7 +200,6 @@ $(function () {
             var year = $('form').find('#year').val();
             apiCallSearch(title, type, year, page);
         });
-
         $('#goBack').on('click', function () {
             $('.searchForm').show();
             $('#details').hide();
@@ -214,6 +212,7 @@ $(function () {
             console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
+        console.log($('#removeFromList'));
         $('#removeFromList').on('click', function() {
             console.log("HALLOOOO");
             var id = $(this).parent().attr('#id');
