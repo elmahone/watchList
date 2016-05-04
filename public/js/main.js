@@ -221,7 +221,8 @@ $(function () {
         $('.removeFromList').on('click', function () {
             var id = $(this).parent().attr('id');
             removeFromList(currentUser, id);
-            $(this).parent().empty();
+            getMyList(currentUser);
+
 
         });
     }
