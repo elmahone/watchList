@@ -143,7 +143,7 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
         $.get(url);
     }
-    
+
     // removes item from personal list with given id
     function removeFromList(username, id) {
         var url = 'http://watchlist-miikanode.rhcloud.com/removeFromList?username=' + username + '&id=' + id;
@@ -156,12 +156,21 @@ $(function () {
         $.get(url);
         window.location = '../index.html';
     }
+    
+    // Sends the title user searched to database
+    function saveSearchTitle (title) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/saveSearchTitle?title=' + title;
+        $.get(url);
+    }
 
     // makes a search api call with title, type, year and page parameters
     function apiCallSearch(title, type, year, page) {
         var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full&page=' + page;
         $.get(url, function (response) {
             displaySearchResults(response);
+            if(response != "False"){
+                saveSearchTitle(title);
+            }
         });
     }
 
@@ -222,11 +231,9 @@ $(function () {
         $('.removeFromList').on('click', function () {
             var id = $(this).parent().attr('id');
             removeFromList(currentUser, id);
-            $('#allTab').find('#'+id).remove();
-            $('#moviesTab').find('#'+id).remove();
-            $('#seriesTab').find('#'+id).remove();
-
-
+            $('#allTab').find('#' + id).remove();
+            $('#moviesTab').find('#' + id).remove();
+            $('#seriesTab').find('#' + id).remove();
         });
     }
 

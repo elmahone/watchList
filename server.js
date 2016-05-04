@@ -190,6 +190,21 @@ var SampleApp = function () {
                 db.close();
             });
         };
+        self.routes['/saveSearchTitle'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('searches').insert({
+                    title: req.query.title
+                });
+                db.close();
+            });
+        };
+        self.routes['/getTopSearches'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('searches').find().limit(10).toArray(function (err, docs) {
+                    res.send(docs);
+                });
+            });
+        };
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').update({
