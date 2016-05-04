@@ -190,10 +190,16 @@ var SampleApp = function () {
                 db.close();
             });
         };
-        self.routes['/getUser'] = function (req, res) {
+        self.routes['/deleteFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('user').remove({
+                db.collection('user').update({
                     username: req.query.username
+                }, {
+                    $pull: {
+                        list: {
+                            id: req.query.id
+                        }
+                    }
                 });
             });
         };
