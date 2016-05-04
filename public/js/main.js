@@ -215,7 +215,7 @@ $(function () {
         });
         $('.removeFromList').on('click', function() {
             console.log("HALLOOOO");
-            var id = $(this).parent().attr('#id');
+            var id = $(this).parent().attr('id');
             console.log($(this).parent());
             console.log(id);
         });
