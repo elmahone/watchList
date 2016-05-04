@@ -1,10 +1,10 @@
 $(function () {
     'use strict';
-    
-    //because authentication does not work currently everything goes to user in currentUser
+
+    // because authentication does not work currently everything goes to user in currentUser
     var currentUser = "miika";
-    
-    //Displays all the results gotten from the api call
+
+    // Displays all the results gotten from the api call
     function displaySearchResults(results) {
         var searchArr = [];
         if (results.Response == "True") {
@@ -36,7 +36,7 @@ $(function () {
             $('#error').show();
         }
     }
-    
+
     // Counts and displays pagenumbers
     function countPages(totalResults) {
         var totalPages = Math.ceil(totalResults / 10);
@@ -55,8 +55,8 @@ $(function () {
         }
         initListeners();
     }
-    
-    //Displays data of a single result gotten from the api call
+
+    // Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
 
@@ -69,7 +69,7 @@ $(function () {
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack">Go Back</a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p><h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
 
-            //show content when data is received
+            // show content when data is received
             initListeners();
             $('.searchForm').hide();
             $('#details').show();
@@ -81,8 +81,8 @@ $(function () {
             $('#error').show();
         }
     }
-    
-    //Displays own list into tabs
+
+    // Displays own list into tabs
     function displayMyList(data) {
         console.log(data);
         var myList = [];
@@ -97,35 +97,35 @@ $(function () {
                     $('#seriesTab').empty();
                 }
             }
-            //this loop fills tabs with movies from personal list
+            // this loop fills tabs with movies from personal list
             for (var i = 0; i < myList.length; i++) {
                 if (myList[i].type == "movie") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3></div>');
-                    $('#moviesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span id="removeFromList" class="glyphicon glyphicon-remove-sign"></span></div>');
+                    $('#moviesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span id="removeFromList" class="glyphicon glyphicon-remove-sign"></span></div>');
 
                 } else if (myList[i].type == "series") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3></div>');
-                    $('#seriesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span id="removeFromList" class="glyphicon glyphicon-remove-sign"></span></div>');
+                    $('#seriesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span id="removeFromList" class="glyphicon glyphicon-remove-sign"></span></div>');
 
                 } else if (myList[i].type == "game") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-gamepad"></i></h3><h3 class="listResult">' + myList[i].title + '</h3></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-gamepad"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span id="removeFromList" class="glyphicon glyphicon-remove-sign"></span></div>');
 
                 } else {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3><span id="removeFromList" class="glyphicon glyphicon-remove-sign"></span></div>');
                 }
             }
         }
     }
-    
-    //api call for my list with username as a parameter
+
+    // api call for my list with username as a parameter
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
         $.get(url, function (response) {
             displayMyList(response);
         });
     }
-    
-    //gets user info with username and password as parameters
+
+    // gets user info with username and password as parameters
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
         $.get(url, function (response) {
@@ -137,7 +137,7 @@ $(function () {
         });
     }
 
-    //adds an item to users personal list
+    // adds an item to users personal list
     function addToList(username, id, title, type) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
         $.get(url);
@@ -157,7 +157,7 @@ $(function () {
             displaySearchResults(response);
         });
     }
-    
+
     // makes a search api call with id
     function apiCallDetails(id) {
         var url = 'http://www.omdbapi.com/?i=' + id + '&tomatoes=true&plot=full';
@@ -215,14 +215,14 @@ $(function () {
             addToList(currentUser, id, title, type);
         });
     }
-    
+
     // if a page has a class .mylist-tabs this calls a function 
     // to fill the tabs with own list
     if ($('.mylist-tabs').length > 0) {
         getMyList(currentUser);
     }
 
-    //Starts the app
+    // Starts the app
     function start() {
         // hide content on load
         $('#content').hide();
