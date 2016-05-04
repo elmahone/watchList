@@ -143,7 +143,8 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
         $.get(url);
     }
-
+    
+    // removes item from personal list with given id
     function removeFromList(username, id) {
         var url = 'http://watchlist-miikanode.rhcloud.com/removeFromList?username=' + username + '&id=' + id;
         $.get(url);
@@ -220,6 +221,7 @@ $(function () {
         });
         $('.removeFromList').on('click', function () {
             var id = $(this).parent().attr('id');
+            $('.mylist-tabs').find('#'+id).empty();
             removeFromList(currentUser, id);
 
 
