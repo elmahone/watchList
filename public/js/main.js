@@ -115,6 +115,7 @@ $(function () {
                 }
             }
         }
+        initListeners();
     }
 
     // api call for my list with username as a parameter
@@ -225,7 +226,6 @@ $(function () {
     // to fill the tabs with own list
     if ($('.mylist-tabs').length > 0) {
         getMyList(currentUser);
-        initListeners();
     }
 
     // Starts the app
