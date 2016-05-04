@@ -221,8 +221,10 @@ $(function () {
         });
         $('.removeFromList').on('click', function () {
             var id = $(this).parent().attr('id');
-            $('.mylist-tabs').find('#'+id).empty();
             removeFromList(currentUser, id);
+            $('#allTab').find('#'+id).remove();
+            $('#moviesTab').find('#'+id).remove();
+            $('#seriesTab').find('#'+id).remove();
 
 
         });
