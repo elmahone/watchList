@@ -100,18 +100,18 @@ $(function () {
             // this loop fills tabs with movies from personal list
             for (var i = 0; i < myList.length; i++) {
                 if (myList[i].type == "movie") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="removeFromList" class="glyphicon glyphicon-remove-circle"></span></div>');
-                    $('#moviesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="removeFromList" class="glyphicon glyphicon-remove-circle"></span></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#moviesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else if (myList[i].type == "series") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="removeFromList" class="glyphicon glyphicon-remove-circle"></span></div>');
-                    $('#seriesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="removeFromList" class="glyphicon glyphicon-remove-circle"></span></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="removeFromList" class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#seriesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else if (myList[i].type == "game") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-gamepad"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="removeFromList" class="glyphicon glyphicon-remove-circle"></span></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-gamepad"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3><span class="removeFromList" class="glyphicon glyphicon-remove-circle"></span></div>');
+                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
                 }
             }
         }
