@@ -170,13 +170,22 @@ $(function () {
     }
 
     // makes a search api call with title, type, year and page parameters
-    function apiCallSearch(title, type, year, page) {
-        var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full&page=' + page;
+    // and if successful search title is saved to database
+    function apiCallSearch(title, type, year) {
+        var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full';
         $.get(url, function (response) {
             displaySearchResults(response);
             if (response.Response != "False") {
                 saveSearchTitle(title);
+                saveRecentSearch(currentUser, title);
             }
+        });
+    }
+    // makes an api call with given pagen umber
+    function apiCallSearchPage(title, type, year, page) {
+        var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full&page=' + page;
+        $.get(url, function (response) {
+            displaySearchResults(response);
         });
     }
 
@@ -192,12 +201,10 @@ $(function () {
     function initListeners() {
         $('.searchForm').on('submit', function (event) {
             event.preventDefault();
-            var page = 1;
             var title = $('form').find('#title').val();
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
-            apiCallSearch(title, type, year, page);
-            saveRecentSearch(currentUser, title);
+            apiCallSearch(title, type, year);
         });
         $('.signupForm').on('submit', function (event) {
             event.preventDefault();
@@ -221,7 +228,7 @@ $(function () {
             var title = $('form').find('#title').val();
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
-            apiCallSearch(title, type, year, page);
+            apiCallSearchPage(title, type, year, page);
         });
         $('#goBack').on('click', function () {
             $('.searchForm').show();
