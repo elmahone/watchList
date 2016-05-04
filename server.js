@@ -201,6 +201,7 @@ var SampleApp = function () {
                         }
                     }
                 });
+                db.close();
             });
         };
 

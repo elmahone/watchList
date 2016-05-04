@@ -214,12 +214,17 @@ $(function () {
             console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
+        $('#removeFromList').on('click', function() {
+            var id = $(this).parent().attr('#id');
+            console.log(id);
+        });
     }
 
     // if a page has a class .mylist-tabs this calls a function 
     // to fill the tabs with own list
     if ($('.mylist-tabs').length > 0) {
         getMyList(currentUser);
+        initListeners();
     }
 
     // Starts the app
