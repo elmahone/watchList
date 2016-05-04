@@ -156,10 +156,16 @@ $(function () {
         $.get(url);
         window.location = '../index.html';
     }
-    
+
     // Sends the title user searched to database
-    function saveSearchTitle (title) {
+    function saveSearchTitle(title) {
         var url = 'http://watchlist-miikanode.rhcloud.com/saveSearchTitle?title=' + title;
+        $.get(url);
+    }
+
+    // Saves users recent searches to database
+    function saveRecentSearch(username, title) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/saveRecentSearch?username=' + username + 'title=' + title;
         $.get(url);
     }
 
@@ -168,8 +174,9 @@ $(function () {
         var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full&page=' + page;
         $.get(url, function (response) {
             displaySearchResults(response);
-            if(response.Response != "False"){
+            if (response.Response != "False") {
                 saveSearchTitle(title);
+                saveRecentSearch(currentUser, title);
             }
         });
     }
