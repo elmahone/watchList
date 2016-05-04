@@ -89,6 +89,13 @@ hr {
     font-size: 4em !important;
 }
 
+#removeFromList {
+    float: right;
+    font-size: 24px;
+    display: inline-block;
+    margin-top: 20px;    
+}
+
 #details {
     margin-top: 60px;
 }
