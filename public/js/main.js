@@ -130,10 +130,12 @@ $(function () {
             }
         });
         uniqueSearches = uniqueSearches.reverse();
+        var newUniqueSearches = [];
         if (uniqueSearches.length > 10) {
-            uniqueSearches = uniqueSearches.slice(0, 10);
+            newUniqueSearches = uniqueSearches.slice(0, 10);
+            uniqueSearches = [];
         }
-        return uniqueSearches;
+        return newUniqueSearches;
     }
 
     // Displays personal recent seaches
