@@ -13,7 +13,6 @@ $(function () {
             $('#searchResults').append('<div id="totalResults"><h4>Total Results: ' + results.totalResults + '</h4></div>');
             searchArr = results.Search;
             for (var i = 0; i < searchArr.length; i++) {
-                console.log(searchArr[i]);
                 //hide error from previous search
                 $('#error').hide();
                 $('#searchResults').append('<div id="' + searchArr[i].imdbID + '" class="result"><h3>' + searchArr[i].Title + ' (' + searchArr[i].Year + ')</h3></div><hr>');
@@ -161,8 +160,6 @@ $(function () {
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
         $.get(url, function (response) {
-            console.log(response.username);
-            console.log(response);
             if (response.username == username) {
                 window.location = '../index.html';
             }
@@ -220,11 +217,10 @@ $(function () {
             }
         });
     }
-    
+
     // Makes a search call with only title as a parameter
     function apiCallSearchTitle(title) {
         var url = 'http://www.omdbapi.com/?s=' + title;
-        console.log(url);
         $.get(url, function (response) {
             displaySearchResults(response);
         });
@@ -253,14 +249,14 @@ $(function () {
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
             apiCallSearch(title, type, year);
+            getRecentSearches(currentUser);
         });
 
         $('.recentTitle').on('click', function (event) {
             event.preventDefault();
-            var title = $(this).attr('id')
+            var title = $(this).attr('id');
             apiCallSearchTitle(title);
-            console.log(title);
-        })
+        });
         $('.signupForm').on('submit', function (event) {
             event.preventDefault();
             var username = $('form').find('#username').val();
@@ -294,7 +290,6 @@ $(function () {
             var id = $('#resultImdbID').attr('value');
             var title = $('#resultTitle').attr('value');
             var type = $('#resultType').attr('value');
-            console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
         $('.removeFromList').on('click', function () {
