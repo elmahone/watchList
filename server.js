@@ -220,14 +220,7 @@ var SampleApp = function () {
                 });
             });
         };
-        // Returns users recent searches
-        self.routes['/getRecentSearches'] = function (req, res) {
-            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('searches').find().toArray(function (err, docs) {
-                    res.send(docs);
-                });
-            });
-        };
+        
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
