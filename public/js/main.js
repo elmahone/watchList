@@ -143,7 +143,7 @@ $(function () {
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
 
         for (var i = 0; i < recentSearches.length; i++) {
-            $('#recentSearches').append('<a class="recentTitle">' + recentSearches[i] + '</a>');
+            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + ' "</a>');
 
         }
 
@@ -244,6 +244,12 @@ $(function () {
             var year = $('form').find('#year').val();
             apiCallSearch(title, type, year);
         });
+
+        $('.recentTitle').on('click', function (event) {
+            event.preventDefault();
+            var title = $(this).attr('id')
+            apiCallSearch(title);
+        })
         $('.signupForm').on('submit', function (event) {
             event.preventDefault();
             var username = $('form').find('#username').val();
@@ -274,9 +280,9 @@ $(function () {
             $('#searchResults').show();
         });
         $('#addToList').on('click', function () {
-            var id = $('#resultImdbID').attr("value");
-            var title = $('#resultTitle').attr("value");
-            var type = $('#resultType').attr("value");
+            var id = $('#resultImdbID').attr('value');
+            var title = $('#resultTitle').attr('value');
+            var type = $('#resultType').attr('value');
             console.log(id, title, type);
             addToList(currentUser, id, title, type);
         });
@@ -305,7 +311,6 @@ $(function () {
         $('#content').hide();
         $('#error').hide();
         initListeners();
-        getRecentSearches(currentUser);
     }
     start();
 });
