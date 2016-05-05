@@ -181,7 +181,7 @@ var SampleApp = function () {
                 db.collection('user').find({
                     username: req.query.username
                 }).toArray(function (err, docs) {
-                    res.send(docs[0].searches);
+                    res.send(docs);
                 });
                 db.close();
             });
