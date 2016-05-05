@@ -124,21 +124,6 @@ var SampleApp = function () {
     self.createRoutes = function () {
         self.routes = {};
 
-        self.routes['/miika/getMyList'] = function (req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({
-                name: 'getMyList',
-                desc: 'Gets own list of movies and TV Shows by id/username'
-            }, null, 3));
-        };
-
-        self.routes['/getTopSearches'] = function (req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            res.send(JSON.stringify({
-                name: 'getTopSearches',
-                desc: 'Gets top 10 searches currently'
-            }, null, 3));
-        };
 
         self.routes['/getBook'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
@@ -147,23 +132,11 @@ var SampleApp = function () {
                 if (err) throw err;
                 var collection = db.collection('books').find().limit(10).toArray(function (err, docs) {
                     res.send(docs);
-                    db.close();
                 });
+                db.close();
             });
         };
-
-        self.routes['/getMyList'] = function (req, res) {
-            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('user').find({
-                    username: req.query.username
-                }).toArray(function (err, docs) {
-                    res.send(docs[0].list);
-                    db.close();
-                });
-            });
-        };
-
-
+        // Adds item to personal list
         self.routes['/addToList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').update({
@@ -180,7 +153,7 @@ var SampleApp = function () {
                 db.close();
             });
         };
-
+        // Adds a user to the database
         self.routes['/addUser'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').insert({
@@ -190,6 +163,85 @@ var SampleApp = function () {
                 db.close();
             });
         };
+        // Returns users watchlist for username in parameters
+        self.routes['/getMyList'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('user').find({
+                    username: req.query.username
+                }).toArray(function (err, docs) {
+                    res.send(docs[0].list);
+                });
+                db.close();
+            });
+        };
+        
+        // Returns users recent searches for username in parameters
+        self.routes['/getRecentSearches'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('user').find({
+                    username: req.query.username
+                }).toArray(function (err, docs) {
+                    res.send(docs[0].searches);
+                });
+                db.close();
+            });
+        };
+        
+        // Returns most searched items
+        self.routes['/getTopSearches'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('searches').find().toArray(function (err, docs) {
+                    var newArr = [];
+                    for (var i = 0; i < docs.length; i++) {
+                        newArr.push(docs[i].title);
+                    }
+                    newArr.sort();
+
+                    var current = null;
+                    var count = 0;
+                    var response = [];
+                    for (var o = 0; o <= newArr.length; i++) {
+                        if (newArr[o] != current) {
+                            if (count > 0) {
+                                response.push({
+                                    "title": current,
+                                    "count": count
+                                });
+                            }
+                            current = newArr[o];
+                            count = 1;
+                        } else {
+                            count++;
+                        }
+                    }
+
+                });
+            });
+        };
+        // Returns users recent searches
+        self.routes['/getRecentSearches'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('searches').find().toArray(function (err, docs) {
+                    res.send(docs);
+                });
+            });
+        };
+        // Removes an item from personal list
+        self.routes['/removeFromList'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('user').update({
+                    username: req.query.username
+                }, {
+                    $pull: {
+                        list: {
+                            id: req.query.id
+                        }
+                    }
+                });
+                db.close();
+            });
+        };
+        // Saves a searched title to database 
         self.routes['/saveSearchTitle'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('searches').insert({
@@ -198,7 +250,7 @@ var SampleApp = function () {
                 db.close();
             });
         };
-
+        // Saves a searched title into users recent searches
         self.routes['/saveRecentSearch'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').update({
@@ -214,42 +266,27 @@ var SampleApp = function () {
             });
         };
 
+        /*-----------------------------------------------------------------------------*/
 
-
-        self.routes['/getTopSearches'] = function (req, res) {
-            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('searches').find().toArray(function (err, docs) {
-                    res.send(docs);
-                });
-            });
-        };
-        self.routes['/removeFromList'] = function (req, res) {
-            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('user').update({
-                    username: req.query.username
-                }, {
-                    $pull: {
-                        list: {
-                            id: req.query.id
-                        }
-                    }
-                });
-                db.close();
-            });
-        };
-
+        // Index
         self.routes['/'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html'));
         };
+
+        // My List
         self.routes['/mylist'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('mylist.html'));
         };
+
+        // Sign up
         self.routes['/signup'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('signup.html'));
         };
+
+        // Log In
         self.routes['/login'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('login.html'));

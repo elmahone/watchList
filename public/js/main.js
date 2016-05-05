@@ -117,7 +117,13 @@ $(function () {
         }
         initListeners();
     }
-
+    
+    // Displays personal recent seaches
+    function displayRecentSearches(data) {
+        for (var i = 0; i < data.length; i++) {
+            
+        }        
+    }
     // api call for my list with username as a parameter
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
@@ -167,6 +173,14 @@ $(function () {
     function saveRecentSearch(username, title) {
         var url = 'http://watchlist-miikanode.rhcloud.com/saveRecentSearch?username=' + username + '&title=' + title;
         $.get(url);
+    }
+
+    // Gets users recent searches from the database
+    function getRecentSearches(username) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getRecentSearches?username=' + username;
+        $.get(url, function (response) {
+            displayRecentSearches(response);
+        });
     }
 
     // makes a search api call with title, type, year and page parameters
