@@ -93,12 +93,17 @@ hr {
     float: right;
     font-size: 24px;
     display: inline-block;
-    margin-top: 20px;  
+    margin-top: 20px;
     color: darkred;
 }
+
 .removeFromList:hover {
     color: red;
     cursor: pointer;
+}
+
+.btn, .form-control {
+    border-radius: 2px !important;
 }
 
 #details {

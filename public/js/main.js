@@ -118,8 +118,8 @@ $(function () {
         initListeners();
     }
 
-    // Displays personal recent seaches
-    function displayRecentSearches(data) {
+    // Creates a top 10 list of recent searches
+    function recentSearchesList(data) {
         var allSearches = [];
         var uniqueSearches = [];
         for (var i = 0; i < data.length; i++) {
@@ -130,7 +130,23 @@ $(function () {
                 uniqueSearches.push(title);
             }
         });
-        console.log(uniqueSearches);
+        uniqueSearches = uniqueSearches.reverse();
+        if (uniqueSearches.length > 10) {
+            uniqueSearches = uniqueSearches.slice(0, 10);
+        }
+        return uniqueSearches;
+    }
+
+    // Displays personal recent seaches
+    function displayRecentSearches(data) {
+        var recentSearches = recentSearchesList(data);
+        $('#recentSearches').append('<h3>My Recent Searches</h3>');
+
+        for (var i = 0; i < recentSearches.length; i++) {
+            $('#recentSearches').append('<a class="recentTitle">' + recentSearches[i] + '</a>');
+
+        }
+
     }
     // api call for my list with username as a parameter
     function getMyList(username) {
@@ -277,6 +293,10 @@ $(function () {
     // to fill the tabs with own list
     if ($('.mylist-tabs').length > 0) {
         getMyList(currentUser);
+    }
+
+    if ($('#recentSearches').length > 0) {
+        getRecentSearches(currentUser);
     }
 
     // Starts the app
