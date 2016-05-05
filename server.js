@@ -181,7 +181,9 @@ var SampleApp = function () {
                 db.collection('user').find({
                     username: req.query.username
                 }).toArray(function (err, docs) {
-                    res.send(docs[0].searches);
+                    var response = docs[0].searches;
+                    response = response.reverse();
+                    res.send(response);
                 });
                 db.close();
             });

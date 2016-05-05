@@ -117,12 +117,20 @@ $(function () {
         }
         initListeners();
     }
-    
+
     // Displays personal recent seaches
     function displayRecentSearches(data) {
+        var allSearches = [];
+        var uniqueSearches = [];
         for (var i = 0; i < data.length; i++) {
-            
-        }        
+            allSearches.push(data[i].title);
+        }
+        $.each(allSearches, function (o, title) {
+            if ($.inArray(title, uniqueSearches) === -1) {
+                uniqueSearches.push(title);
+            }
+        });
+        console.log(uniqueSearches);
     }
     // api call for my list with username as a parameter
     function getMyList(username) {
@@ -277,6 +285,7 @@ $(function () {
         $('#content').hide();
         $('#error').hide();
         initListeners();
+        getRecentSearches(currentUser);
     }
     start();
 });
