@@ -143,7 +143,7 @@ $(function () {
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
 
         for (var i = 0; i < recentSearches.length; i++) {
-            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + ' "</a>');
+            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
 
         }
 
@@ -249,6 +249,7 @@ $(function () {
             event.preventDefault();
             var title = $(this).attr('id')
             apiCallSearch(title);
+            console.log(title);
         })
         $('.signupForm').on('submit', function (event) {
             event.preventDefault();
