@@ -13,6 +13,7 @@ hr {
 
 .result {
     cursor: pointer;
+    border: 1px solid black;
 }
 
 .result:hover {
@@ -102,7 +103,7 @@ hr {
     cursor: pointer;
 }
 
-.btn, .form-control {
+.btn, .form-control, .result {
     border-radius: 2px !important;
 }
 

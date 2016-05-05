@@ -181,14 +181,11 @@ var SampleApp = function () {
                 db.collection('user').find({
                     username: req.query.username
                 }).toArray(function (err, docs) {
-                    var response = docs[0].searches;
-                    response = response.reverse();
-                    res.send(response);
+                    res.send(docs[0].searches);
                 });
                 db.close();
             });
-        };
-        
+        };        
         // Returns most searched items
         self.routes['/getTopSearches'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -219,8 +216,7 @@ var SampleApp = function () {
 
                 });
             });
-        };
-        
+        };        
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
