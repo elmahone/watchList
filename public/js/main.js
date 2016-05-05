@@ -220,6 +220,15 @@ $(function () {
             }
         });
     }
+    
+    // Makes a search call with only title as a parameter
+    function apiCallSearchTitle(title) {
+        var url = 'http://www.omdbapi.com/?s=' + title;
+        console.log(url);
+        $.get(url, function (response) {
+            displaySearchResults(response);
+        });
+    }
     // makes an api call with given pagen umber
     function apiCallSearchPage(title, type, year, page) {
         var url = 'http://www.omdbapi.com/?s=' + title + '&y=' + year + '&type=' + type + '&tomatoes=true&plot=full&page=' + page;
@@ -249,7 +258,7 @@ $(function () {
         $('.recentTitle').on('click', function (event) {
             event.preventDefault();
             var title = $(this).attr('id')
-            apiCallSearch(title);
+            apiCallSearchTitle(title);
             console.log(title);
         })
         $('.signupForm').on('submit', function (event) {
