@@ -181,11 +181,14 @@ var SampleApp = function () {
                 db.collection('user').find({
                     username: req.query.username
                 }).toArray(function (err, docs) {
-                    res.send(docs);
+                    var response = docs[0].searches;
+                    response = response.reverse();
+                    res.send(response);
                 });
                 db.close();
             });
-        };        
+        };
+        
         // Returns most searched items
         self.routes['/getTopSearches'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -216,7 +219,15 @@ var SampleApp = function () {
 
                 });
             });
-        };        
+        };
+        // Returns users recent searches
+        self.routes['/getRecentSearches'] = function (req, res) {
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                db.collection('searches').find().toArray(function (err, docs) {
+                    res.send(docs);
+                });
+            });
+        };
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
