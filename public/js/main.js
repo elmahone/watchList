@@ -146,6 +146,7 @@ $(function () {
             $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
 
         }
+        initListeners();
 
     }
     // api call for my list with username as a parameter
