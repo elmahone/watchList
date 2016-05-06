@@ -165,6 +165,7 @@ var SampleApp = function () {
         };
         // Returns users watchlist for username in parameters
         self.routes['/getMyList'] = function (req, res) {
+            res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').find({
                     username: req.query.username
@@ -177,6 +178,7 @@ var SampleApp = function () {
 
         // Returns users recent searches for username in parameters
         self.routes['/getRecentSearches'] = function (req, res) {
+            res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('user').find({
                     username: req.query.username
@@ -191,6 +193,7 @@ var SampleApp = function () {
 
         // Returns most searched items
         self.routes['/getTopSearches'] = function (req, res) {
+            res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 db.collection('searches').find().toArray(function (err, docs) {
                     var newArr = [];
@@ -217,14 +220,6 @@ var SampleApp = function () {
                         }
                     }
 
-                });
-            });
-        };
-        // Returns users recent searches
-        self.routes['/getRecentSearches'] = function (req, res) {
-            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                db.collection('searches').find().toArray(function (err, docs) {
-                    res.send(docs);
                 });
             });
         };
