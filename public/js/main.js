@@ -251,7 +251,7 @@ $(function () {
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
             apiCallSearch(title, type, year);
-            getRecentSearches(currentUser);
+//            getRecentSearches(currentUser);
         });
 
         $('.recentTitle').on('click', function (event) {
@@ -308,10 +308,10 @@ $(function () {
     if ($('.mylist-tabs').length > 0) {
         getMyList(currentUser);
     }
-
-    if ($('#recentSearches').length > 0) {
-        getRecentSearches(currentUser);
-    }
+//
+//    if ($('#recentSearches').length > 0) {
+//        getRecentSearches(currentUser);
+//    }
 
     // Starts the app
     function start() {
