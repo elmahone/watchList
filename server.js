@@ -45,7 +45,8 @@ var SampleApp = function () {
             self.zcache = {
                 'index.html': '',
                 'signup.html': '',
-                'login.html': ''
+                'login.html': '',
+                'mylist.html': ''
 
             };
         }
@@ -123,8 +124,7 @@ var SampleApp = function () {
      */
     self.createRoutes = function () {
         self.routes = {};
-
-
+        
         self.routes['/getBook'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             // the client db connection scope is wrapped in a callback:
@@ -174,7 +174,7 @@ var SampleApp = function () {
                 db.close();
             });
         };
-        
+
         // Returns users recent searches for username in parameters
         self.routes['/getRecentSearches'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -188,7 +188,7 @@ var SampleApp = function () {
                 db.close();
             });
         };
-        
+
         // Returns most searched items
         self.routes['/getTopSearches'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -243,7 +243,7 @@ var SampleApp = function () {
                 db.close();
             });
         };
-        
+
         // Saves a searched title to database 
         self.routes['/saveSearchTitle'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -268,8 +268,6 @@ var SampleApp = function () {
                 db.close();
             });
         };
-
-        /*-----------------------------------------------------------------------------*/
 
         // Index
         self.routes['/'] = function (req, res) {
