@@ -243,6 +243,7 @@ var SampleApp = function () {
                 db.close();
             });
         };
+        
         // Saves a searched title to database 
         self.routes['/saveSearchTitle'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
