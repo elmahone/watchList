@@ -124,7 +124,7 @@ var SampleApp = function () {
      */
     self.createRoutes = function () {
         self.routes = {};
-        
+
         self.routes['/getBook'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             // the client db connection scope is wrapped in a callback:
@@ -174,8 +174,8 @@ var SampleApp = function () {
                     username: req.query.username
                 }).toArray(function (err, docs) {
                     res.send(docs[0].list);
+                    db.close();
                 });
-                db.close();
             });
         };
 
@@ -190,12 +190,13 @@ var SampleApp = function () {
                     var response = docs[0].searches;
                     response = response.reverse();
                     res.send(response);
+                    db.close();
                 });
-                db.close();
             });
         };
 
         // Returns most searched items
+        /*
         self.routes['/getTopSearches'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -229,6 +230,7 @@ var SampleApp = function () {
                 });
             });
         };
+        */
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -242,7 +244,7 @@ var SampleApp = function () {
                         }
                     }
                 });
-                db.close();
+                
             });
         };
 
