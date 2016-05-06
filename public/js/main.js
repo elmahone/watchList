@@ -83,7 +83,7 @@ $(function () {
 
     // Displays own list into tabs
     function displayMyList(data) {
-        console.log(data);        
+        console.log(data);
         var myList = [];
         myList = data;
         if (myList.length > 0) {
@@ -115,8 +115,23 @@ $(function () {
             }
             initListeners();
         }
-        
+
     }
+    // function that gets parameter from url
+    function getUrlParameter(sParam) {
+        var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+            sURLVariables = sPageURL.split('&'),
+            sParameterName,
+            i;
+
+        for (i = 0; i < sURLVariables.length; i++) {
+            sParameterName = sURLVariables[i].split('=');
+
+            if (sParameterName[0] === sParam) {
+                return sParameterName[1] === undefined ? true : sParameterName[1];
+            }
+        }
+    };
 
     // Creates a top 10 list of recent searches
     function recentSearchesList(data) {
@@ -276,7 +291,8 @@ $(function () {
 
         $('.result').on('click', function () {
             var id = $(this).attr("id");
-            apiCallDetails(id);
+            window.location = '/details?id=' + id;
+
         });
         $('.pageNum').on('click', function () {
             var page = $(this).attr("id");
@@ -315,6 +331,12 @@ $(function () {
     if ($('#recentSearches').length > 0) {
         getRecentSearches(currentUser);
     }
+
+    if ($('#details').length > 0) {
+        var id = getUrlParameter('id');
+        apiCallDetails(id);
+    }
+
 
     // Starts the app
     function start() {

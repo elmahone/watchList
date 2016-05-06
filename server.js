@@ -46,7 +46,8 @@ var SampleApp = function () {
                 'index.html': '',
                 'signup.html': '',
                 'login.html': '',
-                'mylist.html': ''
+                'mylist.html': '',
+                'details.html': ''
 
             };
         }
@@ -56,6 +57,7 @@ var SampleApp = function () {
         self.zcache['signup.html'] = fs.readFileSync('./public/signup.html');
         self.zcache['login.html'] = fs.readFileSync('./public/login.html');
         self.zcache['mylist.html'] = fs.readFileSync('./public/mylist.html');
+        self.zcache['details.html'] = fs.readFileSync('./public/details.html');
     };
 
 
@@ -297,6 +299,11 @@ var SampleApp = function () {
         self.routes['/login'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('login.html'));
+        };
+        // Details
+        self.routes['/details'] = function (req, res) {
+            res.setHeader('Content-Type', 'text/html');
+            res.send(self.cache_get('details.html'));
         };
     };
 

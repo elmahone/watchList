@@ -98,6 +98,7 @@ hr {
     float: right;
     font-size: 24px;
     display: inline-block;
+    z-index: 10000;
     margin-top: 20px;
     color: darkred;
 }
