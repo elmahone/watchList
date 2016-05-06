@@ -289,6 +289,7 @@ $(function () {
             $('.searchForm').show();
             $('#details').hide();
             $('#searchResults').show();
+            $('.mylist-tabs').show();
         });
         $('#addToList').on('click', function () {
             var id = $('#resultImdbID').attr('value');
