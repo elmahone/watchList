@@ -99,18 +99,18 @@ $(function () {
             // this loop fills tabs with movies from personal list
             for (var i = 0; i < myList.length; i++) {
                 if (myList[i].type == "movie") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
-                    $('#moviesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#moviesTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else if (myList[i].type == "series") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
-                    $('#seriesTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#seriesTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else if (myList[i].type == "game") {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-gamepad"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-gamepad"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else {
-                    $('#allTab').append('<div id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
                 }
             }
         }
@@ -141,6 +141,7 @@ $(function () {
     // Displays personal recent seaches
     function displayRecentSearches(data) {
         var recentSearches = recentSearchesList(data);
+        $('#recentSearches').empty();
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
 
         for (var i = 0; i < recentSearches.length; i++) {
@@ -251,7 +252,7 @@ $(function () {
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
             apiCallSearch(title, type, year);
-//            getRecentSearches(currentUser);
+            getRecentSearches(currentUser);
         });
 
         $('.recentTitle').on('click', function (event) {
@@ -308,10 +309,10 @@ $(function () {
     if ($('.mylist-tabs').length > 0) {
         getMyList(currentUser);
     }
-//
-//    if ($('#recentSearches').length > 0) {
-//        getRecentSearches(currentUser);
-//    }
+
+    if ($('#recentSearches').length > 0) {
+        getRecentSearches(currentUser);
+    }
 
     // Starts the app
     function start() {
