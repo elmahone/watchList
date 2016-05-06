@@ -58,7 +58,6 @@ $(function () {
     // Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
-
         if (data.Response == "True") {
             $('#error').hide();
             $('#searchResults').hide();
@@ -70,6 +69,7 @@ $(function () {
 
             // show content when data is received
             initListeners();
+            $('.mylist-tabs').hide();
             $('.searchForm').hide();
             $('#details').show();
 
@@ -147,7 +147,6 @@ $(function () {
 
         for (var i = 0; i < recentSearches.length; i++) {
             $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
-
         }
         initListeners();
 
@@ -241,6 +240,7 @@ $(function () {
     function apiCallDetails(id) {
         var url = 'http://www.omdbapi.com/?i=' + id + '&tomatoes=true&plot=full';
         $.get(url, function (response) {
+            console.log('api called');
             displayData(response);
         });
     }
