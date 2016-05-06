@@ -302,10 +302,7 @@ $(function () {
             apiCallSearchPage(title, type, year, page);
         });
         $('#goBack').on('click', function () {
-            $('.searchForm').show();
-            $('#details').hide();
-            $('#searchResults').show();
-            $('.mylist-tabs').show();
+            history.back();
         });
         $('#addToList').on('click', function () {
             var id = $('#resultImdbID').attr('value');
