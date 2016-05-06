@@ -130,7 +130,7 @@ var SampleApp = function () {
             // the client db connection scope is wrapped in a callback:
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 if (err) throw err;
-                var collection = db.collection('user').find().toArray(function (err, docs) {
+                var collection = db.collection('user').find({}).toArray(function (err, docs) {
                     res.send(docs);
                 });
                 db.close();
@@ -139,6 +139,7 @@ var SampleApp = function () {
         // Adds item to personal list
         self.routes['/addToList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
                 db.collection('user').update({
                     username: req.query.username
                 }, {
@@ -156,6 +157,7 @@ var SampleApp = function () {
         // Adds a user to the database
         self.routes['/addUser'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
                 db.collection('user').insert({
                     username: req.query.username,
                     password: req.query.password
@@ -167,6 +169,7 @@ var SampleApp = function () {
         self.routes['/getMyList'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
                 db.collection('user').find({
                     username: req.query.username
                 }).toArray(function (err, docs) {
@@ -180,6 +183,7 @@ var SampleApp = function () {
         self.routes['/getRecentSearches'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
                 db.collection('user').find({
                     username: req.query.username
                 }).toArray(function (err, docs) {
@@ -195,6 +199,7 @@ var SampleApp = function () {
         self.routes['/getTopSearches'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
                 db.collection('searches').find().toArray(function (err, docs) {
                     var newArr = [];
                     for (var i = 0; i < docs.length; i++) {
@@ -219,6 +224,7 @@ var SampleApp = function () {
                             count++;
                         }
                     }
+                    res.send(response);
 
                 });
             });
@@ -226,6 +232,7 @@ var SampleApp = function () {
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
                 db.collection('user').update({
                     username: req.query.username
                 }, {
@@ -242,6 +249,7 @@ var SampleApp = function () {
         // Saves a searched title to database 
         self.routes['/saveSearchTitle'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
                 db.collection('searches').insert({
                     title: req.query.title
                 });
@@ -251,6 +259,7 @@ var SampleApp = function () {
         // Saves a searched title into users recent searches
         self.routes['/saveRecentSearch'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
                 db.collection('user').update({
                     username: req.query.username
                 }, {
