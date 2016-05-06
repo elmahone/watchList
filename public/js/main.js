@@ -83,7 +83,7 @@ $(function () {
 
     // Displays own list into tabs
     function displayMyList(data) {
-        console.log(data);
+        console.log(data);        
         var myList = [];
         myList = data;
         if (myList.length > 0) {
@@ -113,8 +113,9 @@ $(function () {
                     $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
                 }
             }
+            initListeners();
         }
-        initListeners();
+        
     }
 
     // Creates a top 10 list of recent searches
