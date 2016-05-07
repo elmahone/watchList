@@ -138,4 +138,7 @@ hr {
     h3 {
         font-size: 20px;
     }
+    .result h3 {
+        padding-left: 5px;
+    }
 }
