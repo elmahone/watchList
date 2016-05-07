@@ -183,6 +183,7 @@ $(function () {
         topSearches.sort(function (a, b) {
             return parseFloat(b.count) - parseFloat(a.count);
         });
+        console.log(topSearches);
         return topSearches;
     }
     // function that gets parameter from url
