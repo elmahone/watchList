@@ -31,6 +31,7 @@ $(function () {
         }
         // displays error message if no results was found
         else{
+            console.log("er or");
             $('#searchResults').hide();
             $('#error').find('.message').text('No results');
             $('#error').show();
