@@ -152,16 +152,16 @@ $(function () {
             newUniqueSearches = uniqueSearches.slice(0, 10);
             uniqueSearches = [];
         }
+        console.log(newUniqueSearches);
         return newUniqueSearches;
     }
 
     // Displays personal recent seaches
     function displayRecentSearches(data) {
-        console.log('data');
         var recentSearches = recentSearchesList(data);
         $('#recentSearches').empty();
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
-
+        console.log(recentSearches);
         for (var i = 0; i < recentSearches.length; i++) {
             $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
         }
