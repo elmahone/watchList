@@ -110,10 +110,20 @@ $(function () {
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
         console.log(recentSearches);
         for (var i = 0; i < recentSearches.length; i++) {
-            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
+            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="searchTitle">"' + recentSearches[i] + '"</a>');
         }
         searchesListener();
 
+    }
+    // Displays top searches
+    function displayTopSearches(data) {
+        var topSearches = topSearchesList(data);
+        $('#topSearches').empty();
+        $('#topSearches').append('<h3>Top Searches</h3>');
+        for (var i = 0; i < topSearches.length; i++) {
+            $('#topSearches').append('<a id="' + topSearches[i] + '" class="searchTitle">"' + topSearches[i] + '"</a>');
+        }
+        searchesListener();
     }
 
 
@@ -329,7 +339,7 @@ $(function () {
     }
     // Listener for popular and recent searches
     function searchesListener() {
-        $('.recentTitle').on('click', function (event) {
+        $('.searchTitle').on('click', function (event) {
             event.preventDefault();
             var title = $(this).attr('id');
             $('form').find('#title').val(title);
