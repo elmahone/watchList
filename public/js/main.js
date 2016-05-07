@@ -52,8 +52,8 @@ $(function () {
                 }
                 $('#pages').append('<p>Only 100 pages can be shown</p>');
             }
+            changePageListener();
         }
-        changePageListener();
     }
 
     // Displays data of a single result gotten from the api call
@@ -297,6 +297,7 @@ $(function () {
         $('.recentTitle').on('click', function (event) {
             event.preventDefault();
             var title = $(this).attr('id');
+            $('form').val(title);
             apiCallSearchTitle(title);
         });
     }
