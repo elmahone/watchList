@@ -147,12 +147,11 @@ $(function () {
             allSearches.push(data[i].title);
         }
         var uniqueSearches = [];
-        var removeThis = uniqueSearches.shift();
         $.each(allSearches, function (o, title) {
             if ($.inArray(title, uniqueSearches) === -1) {
                 uniqueSearches.push(title);
                 if (uniqueSearches.length > 10) {
-                    removeThis.remove();
+                    uniqueSearches.last().remove();
                 }
             }
         });
