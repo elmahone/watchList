@@ -135,26 +135,19 @@ $(function () {
 
     // Creates a top 10 list of recent searches
     function recentSearchesList(data) {
-        console.log(data);
         var allSearches = [];
         for (var i = 0; i < data.length; i++) {
             allSearches.push(data[i].title);
         }
-        console.log(allSearches);
         var uniqueSearches = [];
         $.each(allSearches, function (o, title) {
             if ($.inArray(title, uniqueSearches) === -1) {
                 uniqueSearches.push(title);
             }
         });
-        
+
         uniqueSearches = uniqueSearches.reverse();
-        console.log(uniqueSearches);
-        var newUniqueSearches = [];
-        if (uniqueSearches.length > 10) {
-            newUniqueSearches = uniqueSearches.slice(0, 10);
-        }
-        console.log(newUniqueSearches);
+        var newUniqueSearches = uniqueSearches.slice(0, 10);
         return newUniqueSearches;
     }
 
