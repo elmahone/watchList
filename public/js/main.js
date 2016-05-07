@@ -121,7 +121,7 @@ $(function () {
         $('#topSearches').empty();
         $('#topSearches').append('<h3>Top Searches</h3>');
         for (var i = 0; i < topSearches.length; i++) {
-            $('#topSearches').append('<a id="' + topSearches[i] + '" class="searchTitle">"' + topSearches[i] + '"</a>');
+            $('#topSearches').append('<a id="' + topSearches[i].title + '" class="searchTitle">"' + topSearches[i].title + '"</a>');
         }
         searchesListener();
     }
