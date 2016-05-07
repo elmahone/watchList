@@ -152,3 +152,9 @@ hr {
         border-right: 0 !important;
     }
 }
+.searchForm {
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    padding: 0 10px;
+}
