@@ -135,6 +135,7 @@ $(function () {
 
     // Creates a top 10 list of recent searches
     function recentSearchesList(data) {
+        console.log(data);
         var allSearches = [];
         var uniqueSearches = [];
         for (var i = 0; i < data.length; i++) {
@@ -156,6 +157,7 @@ $(function () {
 
     // Displays personal recent seaches
     function displayRecentSearches(data) {
+        console.log('data');
         var recentSearches = recentSearchesList(data);
         $('#recentSearches').empty();
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
