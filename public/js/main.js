@@ -159,7 +159,6 @@ $(function () {
             newArr.push(data[i].title);
         }
         newArr.sort();
-
         var current = null;
         var count = 0;
         var response = [];
