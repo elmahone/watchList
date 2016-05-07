@@ -161,24 +161,24 @@ $(function () {
         }
         newArr.sort();
         console.log(newArr);
-//        var current = null;
-//        var count = 0;
-//        var response = [];
-//        for (var o = 0; o <= newArr.length; i++) {
-//            if (newArr[o] != current) {
-//                if (count > 0) {
-//                    response.push({
-//                        "title": current,
-//                        "count": count
-//                    });
-//                }
-//                current = newArr[o];
-//                count = 1;
-//            } else {
-//                count++;
-//            }
-//        }
-        console.log(data);
+        var current = null;
+        var count = 0;
+        var response = [];
+        for (var o = 0; o <= newArr.length; o++) {
+            if (newArr[o] != current) {
+                if (count > 0) {
+                    response.push({
+                        "title": current,
+                        "count": count
+                    });
+                }
+                current = newArr[o];
+                count = 1;
+            } else {
+                count++;
+            }
+        }
+        console.log(response);
     }
     // function that gets parameter from url
     function getUrlParameter(sParam) {
