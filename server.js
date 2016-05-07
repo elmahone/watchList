@@ -192,6 +192,7 @@ var SampleApp = function () {
                     var response = docs[0].searches;
                     response = response.reverse();
                     res.send(response);
+                    db.close();
                 });
             });
         };
