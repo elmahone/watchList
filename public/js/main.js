@@ -297,7 +297,7 @@ $(function () {
         $('.recentTitle').on('click', function (event) {
             event.preventDefault();
             var title = $(this).attr('id');
-            $('form').val(title);
+            $('input:text').val(title);
             apiCallSearchTitle(title);
         });
     }
@@ -312,7 +312,7 @@ $(function () {
     function changePageListener() {
         $('.pageNum').on('click', function () {
             var page = $(this).attr("id");
-            var title = $('form').find('#title').val();
+            var title = $('input:text').find('#title').val();
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
             apiCallSearchPage(title, type, year, page);
