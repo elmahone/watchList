@@ -131,7 +131,7 @@ $(function () {
                 return sParameterName[1] === undefined ? true : sParameterName[1];
             }
         }
-    };
+    }
 
     // Creates a top 10 list of recent searches
     function recentSearchesList(data) {
@@ -150,7 +150,6 @@ $(function () {
         var newUniqueSearches = [];
         if (uniqueSearches.length > 10) {
             newUniqueSearches = uniqueSearches.slice(0, 10);
-            uniqueSearches = [];
         }
         console.log(newUniqueSearches);
         return newUniqueSearches;
