@@ -176,8 +176,8 @@ var SampleApp = function () {
                     username: req.query.username
                 }).toArray(function (err, docs) {
                     res.send(docs[0].list);
-                    db.close();
                 });
+                db.close();
             });
         };
 
@@ -192,8 +192,8 @@ var SampleApp = function () {
                     var response = docs[0].searches;
                     response = response.reverse();
                     res.send(response);
-                    db.close();
                 });
+                db.close();
             });
         };
 
@@ -204,8 +204,8 @@ var SampleApp = function () {
                 if (err) throw err;
                 db.collection('searches').find().toArray(function (err, docs) {
                     res.send(docs);
-                    db.close();
                 });
+                db.close();
             });
         };
         // Removes an item from personal list
@@ -221,7 +221,7 @@ var SampleApp = function () {
                         }
                     }
                 });
-                
+
             });
         };
 
