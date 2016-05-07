@@ -270,7 +270,6 @@ $(function () {
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
             apiCallSearch(title, type, year);
-            getRecentSearches(currentUser);
         });
 
         $('.recentTitle').on('click', function (event) {
