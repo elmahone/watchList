@@ -128,14 +128,25 @@ var SampleApp = function () {
         self.routes = {};
 
         self.routes['/getBook'] = function (req, res) {
-            res.setHeader('Content-Type', 'application/json');
+            //            res.setHeader('Content-Type', 'application/json');
             // the client db connection scope is wrapped in a callback:
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 if (err) throw err;
-                var collection = db.collection('searches').find().toArray(function (err, docs) {
+                var collection = db.collection('searches').find({}).toArray(function (err, docs) {
                     res.send(docs);
                 });
                 db.close();
+            });
+        };
+        // Returns all searches
+        self.routes['/getSearches'] = function (req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
+                db.collection('searches').find({}).toArray(function (err, docs) {
+                    res.send(docs);
+                    db.close();
+                });
             });
         };
         // Adds item to personal list
@@ -246,7 +257,7 @@ var SampleApp = function () {
                         }
                     }
                 });
-                
+
             });
         };
 
