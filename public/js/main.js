@@ -115,7 +115,7 @@ $(function () {
         searchesListener();
 
     }
-    
+
 
     // Counts and displays pagenumbers
     function countPages(totalResults) {
@@ -153,30 +153,30 @@ $(function () {
         return uniqueSearches;
     }
     // defines the top searches
-    function topSearchesList(data){
-        var newArr = [];
-        for (var i = 0; i < data.length; i++) {
-            newArr.push(data[i].title);
-        }
-        newArr.sort();
-        var current = null;
-        var count = 0;
-        var response = [];
-        for (var o = 0; o <= newArr.length; i++) {
-            if (newArr[o] != current) {
-                if (count > 0) {
-                    response.push({
-                        "title": current,
-                        "count": count
-                    });
-                }
-                current = newArr[o];
-                count = 1;
-            } else {
-                count++;
-            }
-        }
-        console.log(response);
+    function topSearchesList(data) {
+//        var newArr = [];
+//        for (var i = 0; i < data.length; i++) {
+//            newArr.push(data[i].title);
+//        }
+//        newArr.sort();
+//        var current = null;
+//        var count = 0;
+//        var response = [];
+//        for (var o = 0; o <= newArr.length; i++) {
+//            if (newArr[o] != current) {
+//                if (count > 0) {
+//                    response.push({
+//                        "title": current,
+//                        "count": count
+//                    });
+//                }
+//                current = newArr[o];
+//                count = 1;
+//            } else {
+//                count++;
+//            }
+//        }
+        console.log(data);
     }
     // function that gets parameter from url
     function getUrlParameter(sParam) {
