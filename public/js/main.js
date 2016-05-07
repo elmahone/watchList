@@ -151,7 +151,7 @@ $(function () {
             if ($.inArray(title, uniqueSearches) === -1) {
                 uniqueSearches.push(title);
                 if (uniqueSearches.length > 10) {
-                    uniqueSearches.last().remove();
+                    uniqueSearches.splice(-1,1);
                 }
             }
         });
