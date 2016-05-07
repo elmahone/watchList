@@ -110,6 +110,7 @@ hr {
 }
 
 .searchForm {
+    display: inline-block;
     float: none;
     text-align: center;
     box-sizing: border-box;
