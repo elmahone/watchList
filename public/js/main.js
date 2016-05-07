@@ -154,11 +154,13 @@ $(function () {
     }
     // defines the top searches
     function topSearchesList(data) {
-//        var newArr = [];
-//        for (var i = 0; i < data.length; i++) {
-//            newArr.push(data[i].title);
-//        }
-//        newArr.sort();
+        console.log(data);
+        var newArr = [];
+        for (var i = 0; i < data.length; i++) {
+            newArr.push(data[i].title);
+        }
+        newArr.sort();
+        console.log(newArr);
 //        var current = null;
 //        var count = 0;
 //        var response = [];
@@ -371,6 +373,7 @@ $(function () {
     if ($('#recentSearches').length > 0) {
         getRecentSearches(currentUser);
     }
+    
     if ($('#topSearches').length > 0) {
         getAllSearches();
     }
