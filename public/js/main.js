@@ -240,7 +240,7 @@ $(function () {
     function getAllSearches() {
         var url = 'http://watchlist-miikanode.rhcloud.com/getSearches';
         $.get(url, function (response) {
-            topSearchesList(response);
+            displayTopSearches(response);
         });
     }
 
