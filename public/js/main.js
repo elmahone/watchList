@@ -318,7 +318,7 @@ $(function () {
             var title = $('form').find('#title').val();
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
-            ('#error').hide();
+            $('#error').hide();
             $('.waiting').show();
             apiCallSearch(title, type, year);
         });
