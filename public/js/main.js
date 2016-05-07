@@ -17,11 +17,11 @@ $(function () {
                 $('#error').hide();
                 $('#searchResults').append('<div id="' + searchArr[i].imdbID + '" class="result"><h3>' + searchArr[i].Title + ' (' + searchArr[i].Year + ')</h3></div><hr>');
                 if (searchArr[i].Type == "movie") {
-                    $('#' + searchArr[i].imdbID).append('<h3 class="icon"><i class="fa fa-film"></i></h3>');
+                    $('#' + searchArr[i].imdbID).append('<h3 class="icon no-mobile"><i class="fa fa-film"></i></h3>');
                 } else if (searchArr[i].Type == "series") {
-                    $('#' + searchArr[i].imdbID).append('<h3 class="icon"><i class="fa fa-television"></i></h3>');
+                    $('#' + searchArr[i].imdbID).append('<h3 class="icon no-mobile"><i class="fa fa-television"></i></h3>');
                 } else if (searchArr[i].Type == "game") {
-                    $('#' + searchArr[i].imdbID).append('<h3 class="icon"><i class="fa fa-gamepad"></i></h3>');
+                    $('#' + searchArr[i].imdbID).append('<h3 class="icon no-mobile"><i class="fa fa-gamepad"></i></h3>');
                 }
             }
 
@@ -84,15 +84,15 @@ $(function () {
             // this loop fills tabs with movies from personal list
             for (var i = 0; i < myList.length; i++) {
                 if (myList[i].type == "movie") {
-                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
-                    $('#moviesTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon no-mobile"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#moviesTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon no-mobile"><i class="fa fa-film"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else if (myList[i].type == "series") {
-                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
-                    $('#seriesTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon no-mobile"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#seriesTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon no-mobile"><i class="fa fa-television"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else if (myList[i].type == "game") {
-                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon"><i class="fa fa-gamepad"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
+                    $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="icon no-mobile"><i class="fa fa-gamepad"></i></h3><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
 
                 } else {
                     $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
@@ -110,7 +110,7 @@ $(function () {
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
         console.log(recentSearches);
         for (var i = 0; i < recentSearches.length; i++) {
-            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="searchTitle">"' + recentSearches[i] + '"</a>');
+            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="searchTitle">"' + recentSearches[i] + '"</a><br>');
         }
         searchesListener();
 
@@ -121,7 +121,7 @@ $(function () {
         $('#topSearches').empty();
         $('#topSearches').append('<h3>Top Searches</h3>');
         for (var i = 0; i < topSearches.length; i++) {
-            $('#topSearches').append('<a id="' + topSearches[i].title + '" class="searchTitle">"' + topSearches[i].title + '"</a>');
+            $('#topSearches').append('<a id="' + topSearches[i].title + '" class="searchTitle">"' + topSearches[i].title + '"</a><br>');
         }
         searchesListener();
     }
