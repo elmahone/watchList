@@ -24,7 +24,7 @@ $(function () {
                     $('#' + searchArr[i].imdbID).append('<h3 class="icon"><i class="fa fa-gamepad"></i></h3>');
                 }
             }
-//            initListeners();
+            //            initListeners();
             $('#searchResults').show();
         }
         // displays error message if no results was found
@@ -52,7 +52,7 @@ $(function () {
                 $('#pages').append('<p>Only 100 pages can be shown</p>');
             }
         }
-//        initListeners();
+        //        initListeners();
     }
 
     // Displays data of a single result gotten from the api call
@@ -69,7 +69,7 @@ $(function () {
             $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p><h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
 
             // show content when data is received
-//            initListeners();
+            //            initListeners();
             $('.mylist-tabs').hide();
             $('.searchForm').hide();
             $('#details').show();
@@ -114,7 +114,7 @@ $(function () {
                     $('#allTab').append('<div class="result" id="' + myList[i].id + '"><h3 class="listResult">' + myList[i].title + '</h3><span class="glyphicon glyphicon-remove-circle removeFromList"></span></div>');
                 }
             }
-//            initListeners();
+            //            initListeners();
         }
 
     }
@@ -165,7 +165,7 @@ $(function () {
         for (var i = 0; i < recentSearches.length; i++) {
             $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
         }
-//        initListeners();
+        //        initListeners();
 
     }
     // api call for my list with username as a parameter
@@ -263,62 +263,62 @@ $(function () {
     }
 
     // initiates listeners when called
-    function initListeners() {
-        $('.searchForm').on('submit', function (event) {
-            event.preventDefault();
-            var title = $('form').find('#title').val();
-            var type = $('form').find('select').val();
-            var year = $('form').find('#year').val();
-            apiCallSearch(title, type, year);
-        });
+    //    function initListeners() {
+    $('.searchForm').on('submit', function (event) {
+        event.preventDefault();
+        var title = $('form').find('#title').val();
+        var type = $('form').find('select').val();
+        var year = $('form').find('#year').val();
+        apiCallSearch(title, type, year);
+    });
 
-        $('.recentTitle').on('click', function (event) {
-            event.preventDefault();
-            var title = $(this).attr('id');
-            apiCallSearchTitle(title);
-        });
-        $('.signupForm').on('submit', function (event) {
-            event.preventDefault();
-            var username = $('form').find('#username').val();
-            var password = $('form').find('#password').val();
-            addUser(username, password);
-        });
-        $('.loginForm').on('submit', function (event) {
-            event.preventDefault();
-            var username = $('form').find('#username').val();
-            var password = $('form').find('#password').val();
-            getUser(username, password);
-        });
+    $('.recentTitle').on('click', function (event) {
+        event.preventDefault();
+        var title = $(this).attr('id');
+        apiCallSearchTitle(title);
+    });
+    $('.signupForm').on('submit', function (event) {
+        event.preventDefault();
+        var username = $('form').find('#username').val();
+        var password = $('form').find('#password').val();
+        addUser(username, password);
+    });
+    $('.loginForm').on('submit', function (event) {
+        event.preventDefault();
+        var username = $('form').find('#username').val();
+        var password = $('form').find('#password').val();
+        getUser(username, password);
+    });
 
-        $('.result').on('click', function () {
-            var id = $(this).attr("id");
-            window.location = '/details?id=' + id;
+    $('.result').on('click', function () {
+        var id = $(this).attr("id");
+        window.location = '/details?id=' + id;
 
-        });
-        $('.pageNum').on('click', function () {
-            var page = $(this).attr("id");
-            var title = $('form').find('#title').val();
-            var type = $('form').find('select').val();
-            var year = $('form').find('#year').val();
-            apiCallSearchPage(title, type, year, page);
-        });
-        $('#goBack').on('click', function () {
-            history.back();
-        });
-        $('#addToList').on('click', function () {
-            var id = $('#resultImdbID').attr('value');
-            var title = $('#resultTitle').attr('value');
-            var type = $('#resultType').attr('value');
-            addToList(currentUser, id, title, type);
-        });
-        $('.removeFromList').on('click', function () {
-            var id = $(this).parent().attr('id');
-            removeFromList(currentUser, id);
-            $('#allTab').find('#' + id).remove();
-            $('#moviesTab').find('#' + id).remove();
-            $('#seriesTab').find('#' + id).remove();
-        });
-    }
+    });
+    $('.pageNum').on('click', function () {
+        var page = $(this).attr("id");
+        var title = $('form').find('#title').val();
+        var type = $('form').find('select').val();
+        var year = $('form').find('#year').val();
+        apiCallSearchPage(title, type, year, page);
+    });
+    $('#goBack').on('click', function () {
+        history.back();
+    });
+    $('#addToList').on('click', function () {
+        var id = $('#resultImdbID').attr('value');
+        var title = $('#resultTitle').attr('value');
+        var type = $('#resultType').attr('value');
+        addToList(currentUser, id, title, type);
+    });
+    $('.removeFromList').on('click', function () {
+        var id = $(this).parent().attr('id');
+        removeFromList(currentUser, id);
+        $('#allTab').find('#' + id).remove();
+        $('#moviesTab').find('#' + id).remove();
+        $('#seriesTab').find('#' + id).remove();
+    });
+    //    }
 
     // if a page has a class .mylist-tabs this calls a function 
     // to fill the tabs with own list
@@ -341,7 +341,7 @@ $(function () {
         // hide content on load
         $('#content').hide();
         $('#error').hide();
-        initListeners();
+        //        initListeners();
     }
     start();
 });
