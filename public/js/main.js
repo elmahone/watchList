@@ -178,6 +178,9 @@ $(function () {
                 count++;
             }
         }
+        response.sort(function(a, b) {
+            return parseFloat(a.count) - parseFloat(b.count);
+        });
         console.log(response);
     }
     // function that gets parameter from url
