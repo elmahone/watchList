@@ -150,13 +150,19 @@ $(function () {
         $.each(allSearches, function (o, title) {
             if ($.inArray(title, uniqueSearches) === -1) {
                 uniqueSearches.push(title);
+                if (uniqueSearches.length > 10) {
+                    var removeThis = uniqueSearches.shift();
+                    removeThis.remove();
+                }
             }
         });
-        var count = uniqueSearches.length;
         uniqueSearches = uniqueSearches.reverse();
-        if (count == 10) {
-            uniqueSearches.last().remove();
-        }
+        //        var newUniqueSearches = uniqueSearches.slice(0, 10);
+        //        $.each(uniqueSearches, function (o, title) {
+        //            if ($.inArray(title, newUniqueSearches) === -1) {
+        //                newUniqueSearches.push(title);
+        //            }
+        //        });
         return uniqueSearches;
     }
 
