@@ -152,14 +152,12 @@ $(function () {
                 uniqueSearches.push(title);
             }
         });
+        var count = uniqueSearches.length;
         uniqueSearches = uniqueSearches.reverse();
-        var newUniqueSearches = uniqueSearches.slice(0, 10);
-        $.each(uniqueSearches, function (o, title) {
-            if ($.inArray(title, newUniqueSearches) === -1) {
-                newUniqueSearches.push(title);
-            }
-        });
-        return newUniqueSearches;
+        if (count == 10) {
+            uniqueSearches.last().remove();
+        }
+        return uniqueSearches;
     }
 
     // Displays personal recent seaches
