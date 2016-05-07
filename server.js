@@ -203,30 +203,7 @@ var SampleApp = function () {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 if (err) throw err;
                 db.collection('searches').find().toArray(function (err, docs) {
-                    var newArr = [];
-                    for (var i = 0; i < docs.length; i++) {
-                        newArr.push(docs[i].title);
-                    }
-                    newArr.sort();
-
-                    var current = null;
-                    var count = 0;
-                    var response = [];
-                    for (var o = 0; o <= newArr.length; i++) {
-                        if (newArr[o] != current) {
-                            if (count > 0) {
-                                response.push({
-                                    "title": current,
-                                    "count": count
-                                });
-                            }
-                            current = newArr[o];
-                            count = 1;
-                        } else {
-                            count++;
-                        }
-                    }
-                    res.send(response);
+                    res.send(docs);
                     db.close();
                 });
             });

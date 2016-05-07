@@ -101,21 +101,21 @@ $(function () {
             addRemoveListener();
             resultListener();
         }
-        // Displays personal recent seaches
-        function displayRecentSearches(data) {
-            var recentSearches = recentSearchesList(data);
-            $('#recentSearches').empty();
-            $('#recentSearches').append('<h3>My Recent Searches</h3>');
-            console.log(recentSearches);
-            for (var i = 0; i < recentSearches.length; i++) {
-                $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
-            }
-            searchesListener();
-
-        }
 
     }
+    // Displays personal recent seaches
+    function displayRecentSearches(data) {
+        var recentSearches = recentSearchesList(data);
+        $('#recentSearches').empty();
+        $('#recentSearches').append('<h3>My Recent Searches</h3>');
+        console.log(recentSearches);
+        for (var i = 0; i < recentSearches.length; i++) {
+            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
+        }
+        searchesListener();
 
+    }
+    
 
     // Counts and displays pagenumbers
     function countPages(totalResults) {
@@ -152,6 +152,33 @@ $(function () {
         });
         return uniqueSearches;
     }
+    // defines the top searches
+    function topSearchesList(data){
+
+        var newArr = [];
+        for (var i = 0; i < data.length; i++) {
+            newArr.push(data[i].title);
+        }
+        newArr.sort();
+
+        var current = null;
+        var count = 0;
+        var response = [];
+        for (var o = 0; o <= newArr.length; i++) {
+            if (newArr[o] != current) {
+                if (count > 0) {
+                    response.push({
+                        "title": current,
+                        "count": count
+                    });
+                }
+                current = newArr[o];
+                count = 1;
+            } else {
+                count++;
+            }
+        }
+    }
     // function that gets parameter from url
     function getUrlParameter(sParam) {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -167,7 +194,7 @@ $(function () {
             }
         }
     }
-    
+
 
     // Gets users recent searches from the database
     function getRecentSearches(username) {
@@ -192,7 +219,15 @@ $(function () {
             }
         });
     }
-    
+    // gets all searches from database
+    function getAllSearches() {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getSearches';
+        $.get(url, function (response) {
+            console.log(response);
+
+        });
+    }
+
 
     // adds an item to users personal list
     function addToList(username, id, title, type) {
@@ -215,7 +250,7 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/saveRecentSearch?username=' + username + '&title=' + title;
         $.get(url);
     }
-    
+
 
     // removes item from personal list with given id
     function removeFromList(username, id) {
