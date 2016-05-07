@@ -154,13 +154,11 @@ $(function () {
     }
     // defines the top searches
     function topSearchesList(data) {
-        console.log(data);
         var newArr = [];
         for (var i = 0; i < data.length; i++) {
             newArr.push(data[i].title);
         }
         newArr.sort();
-        console.log(newArr);
         var current = null;
         var count = 0;
         var response = [];
@@ -179,7 +177,7 @@ $(function () {
             }
         }
         response.sort(function(a, b) {
-            return parseFloat(a.count) - parseFloat(b.count);
+            return parseFloat(b.count) - parseFloat(a.count);
         });
         console.log(response);
     }
