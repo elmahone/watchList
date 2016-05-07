@@ -58,6 +58,7 @@ $(function () {
     // Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
+        $('#details').empty();
         if (data.Response == "True") {
             $('#error').hide();
             $('#searchResults').hide();

@@ -110,7 +110,8 @@ hr {
 
 .btn,
 .form-control,
-.result {
+.result,
+.nav-tabs>li>a {
     border-radius: 2px !important;
 }
 
