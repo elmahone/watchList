@@ -6,6 +6,7 @@ $(function () {
 
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
+        console.log(results);
         var searchArr = [];
         if (results.Response == "True") {
             $('#searchResults').empty();
@@ -58,13 +59,7 @@ $(function () {
                 history.back();
             });
             addRemoveListener();
-
-            // displays error message if no show/movie was found
-        } else {
-            $('#details').hide();
-            $('#error').find('.message').text(data.Error);
-            $('#error').show();
-        }
+        } 
     }
     // Displays own list into tabs
     function displayMyList(data) {
