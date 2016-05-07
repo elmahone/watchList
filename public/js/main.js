@@ -36,26 +36,6 @@ $(function () {
             $('#error').show();
         }
     }
-
-    // Counts and displays pagenumbers
-    function countPages(totalResults) {
-        var totalPages = Math.ceil(totalResults / 10);
-        $('#searchResults').append('<div id="pages"></div>');
-        if (totalPages > 1) {
-            if (totalPages <= 100) {
-                for (var i = 1; i <= totalPages; i++) {
-                    $('#pages').append('<a id="' + i + '" class="pageNum"> ' + i + ' </a>');
-                }
-            } else {
-                for (var o = 1; o <= 100; o++) {
-                    $('#pages').append('<a id="' + o + '" class="pageNum"> ' + o + ' </a>');
-                }
-                $('#pages').append('<p>Only 100 pages can be shown</p>');
-            }
-            changePageListener();
-        }
-    }
-
     // Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
@@ -86,7 +66,6 @@ $(function () {
             $('#error').show();
         }
     }
-
     // Displays own list into tabs
     function displayMyList(data) {
         console.log(data);
@@ -122,7 +101,56 @@ $(function () {
             addRemoveListener();
             resultListener();
         }
+        // Displays personal recent seaches
+        function displayRecentSearches(data) {
+            var recentSearches = recentSearchesList(data);
+            $('#recentSearches').empty();
+            $('#recentSearches').append('<h3>My Recent Searches</h3>');
+            console.log(recentSearches);
+            for (var i = 0; i < recentSearches.length; i++) {
+                $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
+            }
+            searchesListener();
 
+        }
+
+    }
+
+
+    // Counts and displays pagenumbers
+    function countPages(totalResults) {
+        var totalPages = Math.ceil(totalResults / 10);
+        $('#searchResults').append('<div id="pages"></div>');
+        if (totalPages > 1) {
+            if (totalPages <= 100) {
+                for (var i = 1; i <= totalPages; i++) {
+                    $('#pages').append('<a id="' + i + '" class="pageNum"> ' + i + ' </a>');
+                }
+            } else {
+                for (var o = 1; o <= 100; o++) {
+                    $('#pages').append('<a id="' + o + '" class="pageNum"> ' + o + ' </a>');
+                }
+                $('#pages').append('<p>Only 100 pages can be shown</p>');
+            }
+            changePageListener();
+        }
+    }
+    // Creates a top 10 list of recent searches
+    function recentSearchesList(data) {
+        var allSearches = [];
+        for (var i = 0; i < data.length; i++) {
+            allSearches.push(data[i].title);
+        }
+        var uniqueSearches = [];
+        $.each(allSearches, function (o, title) {
+            if ($.inArray(title, uniqueSearches) === -1) {
+                uniqueSearches.push(title);
+                if (uniqueSearches.length > 10) {
+                    uniqueSearches.splice(-1, 1);
+                }
+            }
+        });
+        return uniqueSearches;
     }
     // function that gets parameter from url
     function getUrlParameter(sParam) {
@@ -139,37 +167,14 @@ $(function () {
             }
         }
     }
+    
 
-    // Creates a top 10 list of recent searches
-    function recentSearchesList(data) {
-        var allSearches = [];
-        for (var i = 0; i < data.length; i++) {
-            allSearches.push(data[i].title);
-        }
-        var uniqueSearches = [];
-        $.each(allSearches, function (o, title) {
-            if ($.inArray(title, uniqueSearches) === -1) {
-                uniqueSearches.push(title);
-                if (uniqueSearches.length > 10) {
-                    uniqueSearches.splice(-1,1);
-                }
-            }
+    // Gets users recent searches from the database
+    function getRecentSearches(username) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getRecentSearches?username=' + username;
+        $.get(url, function (response) {
+            displayRecentSearches(response);
         });
-        
-        return uniqueSearches;
-    }
-
-    // Displays personal recent seaches
-    function displayRecentSearches(data) {
-        var recentSearches = recentSearchesList(data);
-        $('#recentSearches').empty();
-        $('#recentSearches').append('<h3>My Recent Searches</h3>');
-        console.log(recentSearches);
-        for (var i = 0; i < recentSearches.length; i++) {
-            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="recentTitle">"' + recentSearches[i] + '" </a>');
-        }
-        searchesListener();
-
     }
     // api call for my list with username as a parameter
     function getMyList(username) {
@@ -178,7 +183,6 @@ $(function () {
             displayMyList(response);
         });
     }
-
     // gets user info with username and password as parameters
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
@@ -188,12 +192,30 @@ $(function () {
             }
         });
     }
+    
 
     // adds an item to users personal list
     function addToList(username, id, title, type) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
         $.get(url);
     }
+    // Sends username and password to the database (NOT HASHED)
+    function addUser(username, password) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
+        $.get(url);
+        window.location = '../index.html';
+    }
+    // Sends the title user searched to database
+    function saveSearchTitle(title) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/saveSearchTitle?title=' + title;
+        $.get(url);
+    }
+    // Saves users recent searches to database
+    function saveRecentSearch(username, title) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/saveRecentSearch?username=' + username + '&title=' + title;
+        $.get(url);
+    }
+    
 
     // removes item from personal list with given id
     function removeFromList(username, id) {
@@ -201,32 +223,8 @@ $(function () {
         $.get(url);
     }
 
-    // Sends username and password to the database (NOT HASHED)
-    function addUser(username, password) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
-        $.get(url);
-        window.location = '../index.html';
-    }
 
-    // Sends the title user searched to database
-    function saveSearchTitle(title) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/saveSearchTitle?title=' + title;
-        $.get(url);
-    }
-
-    // Saves users recent searches to database
-    function saveRecentSearch(username, title) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/saveRecentSearch?username=' + username + '&title=' + title;
-        $.get(url);
-    }
-
-    // Gets users recent searches from the database
-    function getRecentSearches(username) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/getRecentSearches?username=' + username;
-        $.get(url, function (response) {
-            displayRecentSearches(response);
-        });
-    }
+    // API CALLS
 
     // makes a search api call with title, type, year and page parameters
     // and if successful search title is saved to database
@@ -240,7 +238,6 @@ $(function () {
             }
         });
     }
-
     // Makes a search call with only title as a parameter
     function apiCallSearchTitle(title) {
         var url = 'http://www.omdbapi.com/?s=' + title;
@@ -255,7 +252,6 @@ $(function () {
             displaySearchResults(response);
         });
     }
-
     // makes a search api call with id
     function apiCallDetails(id) {
         var url = 'http://www.omdbapi.com/?i=' + id + '&tomatoes=true&plot=full';
@@ -264,6 +260,7 @@ $(function () {
             displayData(response);
         });
     }
+
 
     // LISTENER FUNCTIONS
 

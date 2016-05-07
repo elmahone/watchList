@@ -192,13 +192,11 @@ var SampleApp = function () {
                     var response = docs[0].searches;
                     response = response.reverse();
                     res.send(response);
-                    db.close();
                 });
             });
         };
 
         // Returns most searched items
-        /*
         self.routes['/getTopSearches'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -228,11 +226,10 @@ var SampleApp = function () {
                         }
                     }
                     res.send(response);
-
+                    db.close();
                 });
             });
         };
-        */
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
