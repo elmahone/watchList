@@ -154,7 +154,6 @@ $(function () {
     }
     // defines the top searches
     function topSearchesList(data){
-
         var newArr = [];
         for (var i = 0; i < data.length; i++) {
             newArr.push(data[i].title);
@@ -178,6 +177,7 @@ $(function () {
                 count++;
             }
         }
+        console.log(response);
     }
     // function that gets parameter from url
     function getUrlParameter(sParam) {
@@ -223,8 +223,7 @@ $(function () {
     function getAllSearches() {
         var url = 'http://watchlist-miikanode.rhcloud.com/getSearches';
         $.get(url, function (response) {
-            console.log(response);
-
+            topSearchesList(response);
         });
     }
 
@@ -372,6 +371,9 @@ $(function () {
 
     if ($('#recentSearches').length > 0) {
         getRecentSearches(currentUser);
+    }
+    if ($('#topSearches').length > 0) {
+        getAllSearches();
     }
 
     if ($('#details').length > 0) {

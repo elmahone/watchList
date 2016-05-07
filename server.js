@@ -127,28 +127,7 @@ var SampleApp = function () {
     self.createRoutes = function () {
         self.routes = {};
 
-        self.routes['/getBook'] = function (req, res) {
-            //            res.setHeader('Content-Type', 'application/json');
-            // the client db connection scope is wrapped in a callback:
-            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                if (err) throw err;
-                var collection = db.collection('searches').find({}).toArray(function (err, docs) {
-                    res.send(docs);
-                });
-                db.close();
-            });
-        };
-        // Returns all searches
-        self.routes['/getSearches'] = function (req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                if (err) throw err;
-                db.collection('searches').find({}).toArray(function (err, docs) {
-                    res.send(docs);
-                    db.close();
-                });
-            });
-        };
+        
         // Adds item to personal list
         self.routes['/addToList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -207,43 +186,18 @@ var SampleApp = function () {
                 });
             });
         };
-
-        // Returns most searched items
-        /*
-        self.routes['/getTopSearches'] = function (req, res) {
+        // Returns all searches
+        self.routes['/getSearches'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 if (err) throw err;
-                db.collection('searches').find().toArray(function (err, docs) {
-                    var newArr = [];
-                    for (var i = 0; i < docs.length; i++) {
-                        newArr.push(docs[i].title);
-                    }
-                    newArr.sort();
-
-                    var current = null;
-                    var count = 0;
-                    var response = [];
-                    for (var o = 0; o <= newArr.length; i++) {
-                        if (newArr[o] != current) {
-                            if (count > 0) {
-                                response.push({
-                                    "title": current,
-                                    "count": count
-                                });
-                            }
-                            current = newArr[o];
-                            count = 1;
-                        } else {
-                            count++;
-                        }
-                    }
-                    res.send(response);
-
+                db.collection('searches').find({}).toArray(function (err, docs) {
+                    res.send(docs);
+                    db.close();
                 });
             });
         };
-        */
+        
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
