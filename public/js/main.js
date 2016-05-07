@@ -400,6 +400,7 @@ $(function () {
     // Starts the app
     function start() {
         // hide content on load
+        $('#loading').hide();
         $('#content').hide();
         $('#error').hide();
         formListeners();
