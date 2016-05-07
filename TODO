@@ -1,0 +1,27 @@
+TODO
+
+1.  Login (Sessiolla?)
+        - currentUser = sessionstorage user tms.....
+    
+2.  Listasta poisto details sivulla
+        - tarkista omasta listasta käyä inArray tjs jQuery funktiolla
+    
+3.  Loading indexissä kun painaa submit
+        - ehkä joku loading div mikä tyhjenee samaan aikaan kun data esitetään
+    
+
+5.  Top searches
+        - suosituin nimi isolla ?
+        - ehkä jos  yli 50 hakua x fontti
+        -           yli 30 hakua y fontti
+        -           jne...
+    
+6.  Omiin ja suosituimpiin hakuihin jonkinlainen erottajaviiva
+
+7.  MyList poistoruksi on pienellä näytöllä paskasti
+
+8.  Katso http://www.myapifilms.com/index.do (poster tai trailer)
+
+
+DONED-----------------------------------
+4.  index näyttää nyt oudolle -> fixaa

@@ -2,10 +2,6 @@ a {
     cursor: pointer;
 }
 
-hr {
-    margin: 0;
-}
-
 .content {
     margin-top: 60px;
 }
@@ -94,15 +90,11 @@ hr {
     width: 100%;
     margin-top: 100px;
 }
+
 .loading .fa {
     font-size: 7em;
     color: silver;
-    
 }
-.searchform{
-    padding-bottom: 1em;
-}
-
 
 .removeFromList {
     float: right;
@@ -111,6 +103,14 @@ hr {
     z-index: 10000;
     margin-top: 20px;
     color: darkred;
+}
+
+.searchForm {
+    float: none;
+    text-align: center;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    padding: 0 10px 1em 10px;
 }
 
 .removeFromList:hover {
@@ -124,15 +124,22 @@ hr {
 .nav-tabs>li>a {
     border-radius: 2px !important;
 }
+
 .footer-margin {
     margin-bottom: 60px;
 }
-
 
 #goBack {
     font-size: 25px;
 }
 
+#recentSearches h3,
+#topSearches h3 {
+    height: 55px;
+}
+#searchResults {
+    padding: 0 5px;
+}
 
 @media (max-width: 600px) {
     .no-mobile {
@@ -147,10 +154,8 @@ hr {
     #recentSearches {
         border-right: 0 !important;
     }
-}
-.searchForm {
-    text-align: center;
-    box-sizing: border-box;
-    border: 1px solid #eee;
-    padding: 0 10px;
+    #recentSearches h3,
+    #topSearches h3 {
+        height: 45px;
+    }
 }
