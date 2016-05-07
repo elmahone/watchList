@@ -154,32 +154,36 @@ $(function () {
     }
     // defines the top searches
     function topSearchesList(data) {
-        var newArr = [];
+        var allSearches = [];
         for (var i = 0; i < data.length; i++) {
-            newArr.push(data[i].title);
+            allSearches.push(data[i].title);
         }
-        newArr.sort();
+        allSearches.sort();
         var current = null;
         var count = 0;
-        var response = [];
-        for (var o = 0; o <= newArr.length; o++) {
-            if (newArr[o] != current) {
+        var topSearches = [];
+        for (var o = 0; o <= allSearches.length; o++) {
+            if (allSearches[o] != current) {
                 if (count > 0) {
-                    response.push({
+                    topSearches.push({
                         "title": current,
                         "count": count
                     });
                 }
-                current = newArr[o];
+                current = allSearches[o];
                 count = 1;
             } else {
                 count++;
             }
+            if (topSearches.length > 10) {
+                topSearches.splice(-1, 1);
+            }
+
         }
-        response.sort(function(a, b) {
+        topSearches.sort(function (a, b) {
             return parseFloat(b.count) - parseFloat(a.count);
         });
-        console.log(response);
+        return topSearches;
     }
     // function that gets parameter from url
     function getUrlParameter(sParam) {
@@ -374,7 +378,7 @@ $(function () {
     if ($('#recentSearches').length > 0) {
         getRecentSearches(currentUser);
     }
-    
+
     if ($('#topSearches').length > 0) {
         getAllSearches();
     }
