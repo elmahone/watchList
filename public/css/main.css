@@ -94,6 +94,17 @@ hr {
     font-size: 4em !important;
 }
 
+.loading {
+    text-align: center;
+    width: 100%;
+    margin-top: 100px;
+}
+.loading .fa {
+    font-size: 7em;
+    color: silver;
+    
+}
+
 .removeFromList {
     float: right;
     font-size: 24px;

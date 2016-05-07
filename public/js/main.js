@@ -146,9 +146,13 @@ $(function () {
                 uniqueSearches.push(title);
             }
         });
-
         uniqueSearches = uniqueSearches.reverse();
         var newUniqueSearches = uniqueSearches.slice(0, 10);
+        $.each(uniqueSearches, function (o, title) {
+            if ($.inArray(title, newUniqueSearches) === -1) {
+                newUniqueSearches.push(title);
+            }
+        });
         return newUniqueSearches;
     }
 
