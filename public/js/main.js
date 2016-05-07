@@ -8,7 +8,7 @@ $(function () {
     function displaySearchResults(results) {
         console.log(results);
         var searchArr = [];
-        if (results.Response == "True") {
+        if (results.Response === "True") {
             $('#searchResults').empty();
             countPages(results.totalResults);
             $('#searchResults').append('<div id="totalResults"><h4>Total Results: ' + results.totalResults + '</h4></div>');
@@ -30,9 +30,8 @@ $(function () {
             resultListener();
         }
         // displays error message if no results was found
-        else {
+        else{
             $('#searchResults').hide();
-            $('#content').hide();
             $('#error').find('.message').text('No results');
             $('#error').show();
         }
