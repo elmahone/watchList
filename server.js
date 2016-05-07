@@ -126,13 +126,13 @@ var SampleApp = function () {
      */
     self.createRoutes = function () {
         self.routes = {};
-
-        self.routes['/getBook'] = function (req, res) {
+        // Returns most searched items
+        self.routes['/getTopSearches'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
             // the client db connection scope is wrapped in a callback:
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
                 if (err) throw err;
-                var collection = db.collection('user').find({}).toArray(function (err, docs) {
+                var collection = db.collection('searches').find({}).toArray(function (err, docs) {
                     res.send(docs);
                 });
                 db.close();
@@ -180,7 +180,6 @@ var SampleApp = function () {
                 db.close();
             });
         };
-
         // Returns users recent searches for username in parameters
         self.routes['/getRecentSearches'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');
@@ -196,18 +195,7 @@ var SampleApp = function () {
                 db.close();
             });
         };
-
-        // Returns most searched items
-        self.routes['/getTopSearches'] = function (req, res) {
-            res.setHeader('Content-Type', 'application/json');
-            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
-                if (err) throw err;
-                db.collection('searches').find().toArray(function (err, docs) {
-                    res.send(docs);
-                });
-                db.close();
-            });
-        };
+        
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -224,7 +212,6 @@ var SampleApp = function () {
 
             });
         };
-
         // Saves a searched title to database 
         self.routes['/saveSearchTitle'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
