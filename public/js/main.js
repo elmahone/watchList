@@ -25,7 +25,7 @@ $(function () {
                     $('#' + searchArr[i].imdbID).append('<h3 class="icon no-mobile"><i class="fa fa-gamepad"></i></h3>');
                 }
             }
-
+            $('#loading').hide();
             $('#searchResults').show();
             resultListener();
         }
@@ -34,6 +34,7 @@ $(function () {
             console.log("er or");
             $('#searchResults').hide();
             $('#error').find('.message').text('No results');
+            $('#loading').hide();
             $('#error').show();
         }
     }
@@ -317,6 +318,7 @@ $(function () {
             var title = $('form').find('#title').val();
             var type = $('form').find('select').val();
             var year = $('form').find('#year').val();
+            $('#loading').show();
             apiCallSearch(title, type, year);
         });
         $('.signupForm').on('submit', function (event) {
