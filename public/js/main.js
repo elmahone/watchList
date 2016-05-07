@@ -293,7 +293,7 @@ $(function () {
         });
     }
     // Listener for popular and recent searches
-    function searchesListener {
+    function searchesListener() {
         $('.recentTitle').on('click', function (event) {
             event.preventDefault();
             var title = $(this).attr('id');
