@@ -110,7 +110,7 @@ $(function () {
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
         console.log(recentSearches);
         for (var i = 0; i < recentSearches.length; i++) {
-            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="searchTitle">"' + recentSearches[i] + '"</a><br>');
+            $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="searchTitle">"' + recentSearches[i] + '"</a><hr>');
         }
         searchesListener();
 

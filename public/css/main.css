@@ -2,6 +2,10 @@ a {
     cursor: pointer;
 }
 
+hr {
+    margin: 4px 0;
+}
+
 .content {
     margin-top: 60px;
 }
@@ -150,6 +154,9 @@ a {
     }
     .result h3 {
         padding-left: 5px;
+    }
+    .searchForm {
+        height: 150px;
     }
     #recentSearches {
         border-right: 0 !important;
