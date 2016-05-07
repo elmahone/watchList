@@ -6,6 +6,10 @@ hr {
     margin: 4px 0;
 }
 
+.container-fluid {
+    max-width: 100em;
+}
+
 .content {
     margin-top: 60px;
 }
@@ -142,6 +146,7 @@ hr {
 #topSearches h3 {
     height: 55px;
 }
+
 #searchResults {
     padding: 0 5px;
 }
