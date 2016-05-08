@@ -51,16 +51,15 @@ $(function () {
     }
     // Displays data of a single result gotten from the api call
     function displayData(data) {
-        apiGetPoster(data.imdbID);
-
         $('#details').empty();
+        
         if (data.Response == "True") {
             $('#details').empty();
             $('#details').append('<input type="hidden" id="resultImdbID" value="' + data.imdbID + '">');
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a>');
-
+            apiGetPoster(data.imdbID);
             $('#details').append('<h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
 
             $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
