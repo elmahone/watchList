@@ -170,7 +170,20 @@ var SampleApp = function () {
                 });
             });
         };
-
+        // Returns users watchlist for username in parameters
+        self.routes['/getUser'] = function (req, res) {
+            res.setHeader('Content-Type', 'application/json');
+            MongoClient.connect('mongodb://' + connection_string, function (err, db) {
+                if (err) throw err;
+                db.collection('user').find({
+                    username: req.query.username,
+                    password: req.query.password
+                }).toArray(function (err, docs) {
+                    res.send({response: "OK"});
+                    db.close();
+                });
+            });
+        };
         // Returns users recent searches for username in parameters
         self.routes['/getRecentSearches'] = function (req, res) {
             res.setHeader('Content-Type', 'application/json');

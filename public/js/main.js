@@ -1,5 +1,7 @@
 $(function () {
     'use strict';
+    importScripts('js/crypto/aes.js');
+    importScripts('js/crypto/aes-ctr.js');
 
     // because authentication does not work currently everything goes to user in currentUser
     var currentUser = "miika";
@@ -159,7 +161,7 @@ $(function () {
         });
         return uniqueSearches;
     }
-    // defines the top searches
+    // defines the top searches and returns a top 10 list of searches
     function topSearchesList(data) {
         var allSearches = [];
         for (var i = 0; i < data.length; i++) {
@@ -186,11 +188,13 @@ $(function () {
         topSearches.sort(function (a, b) {
             return parseFloat(b.count) - parseFloat(a.count);
         });
-
-        for (var n = topSearches.length; n > 10; n--) {
-            topSearches.splice(-1, 1);
+        
+        // Turns top searches into a top 10 list
+        if (topSearches.length > 10) {
+            for (var n = topSearches.length; n > 10; n--) {
+                topSearches.splice(-1, 1);
+            }
         }
-
         console.log(topSearches);
         return topSearches;
     }
@@ -325,15 +329,17 @@ $(function () {
             apiCallSearch(title, type, year);
         });
         $('.signupForm').on('submit', function (event) {
-            event.preventDefault();
+            event.preventDefault();            
             var username = $('form').find('#username').val();
             var password = $('form').find('#password').val();
-            addUser(username, password);
+            var cryptPwd = Aes.Ctr.encrypt('HelloWorld!', password, 256);
+            addUser(username, cryptPwd);
         });
         $('.loginForm').on('submit', function (event) {
             event.preventDefault();
             var username = $('form').find('#username').val();
             var password = $('form').find('#password').val();
+            var cryptPwd = Aes.Ctr.encrypt('HelloWorld!', password, 256);
             getUser(username, password);
         });
     }
