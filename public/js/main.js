@@ -29,7 +29,7 @@ $(function () {
             $('#searchResults').show();
             resultListener();
             $('html, body').animate({
-                scrollTop: $("#searchResults").offset().top
+                scrollTop: $("#totalResults").offset().top
             }, 500);
         }
         // displays error message if no results was found
