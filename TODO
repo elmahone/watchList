@@ -1,7 +1,4 @@
 TODO
-
-1.  Login (Sessiolla?)
-        - currentUser = sessionstorage user tms.....
     
 2.  Listasta poisto details sivulla
         - tarkista omasta listasta käyä inArray tjs jQuery funktiolla
@@ -17,13 +14,18 @@ TODO
 
 7.  MyList poistoruksi on pienellä näytöllä paskasti
 
-8.  Katso http://www.myapifilms.com/index.do (poster tai trailer)
 
 
 DONED-----------------------------------
+
+1.  Login (Sessiolla?)
+        - currentUser = sessionstorage user tms.....
 3.  Loading indexissä kun painaa submit
         - ehkä joku loading div mikä tyhjenee samaan aikaan kun data esitetään
     
 4.  index näyttää nyt oudolle -> fixaa
 
 6.  Omiin ja suosituimpiin hakuihin jonkinlainen erottajaviiva
+
+8.  Katso http://www.myapifilms.com/index.do (poster tai trailer)
+git tag -a v0.6.1 -m "Log in fixed"

@@ -127,7 +127,7 @@ var SampleApp = function () {
     self.createRoutes = function () {
         self.routes = {};
 
-        
+
         // Adds item to personal list
         self.routes['/addToList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -181,7 +181,9 @@ var SampleApp = function () {
                     username: req.query.username,
                     password: req.query.password
                 }).toArray(function (err, docs) {
-                    res.send({response: "OK"});
+                    res.send({
+                        response: "OK"
+                    });
                     db.close();
                 });
             });
@@ -212,7 +214,6 @@ var SampleApp = function () {
                 });
             });
         };
-        
         // Removes an item from personal list
         self.routes['/removeFromList'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -229,7 +230,6 @@ var SampleApp = function () {
 
             });
         };
-
         // Saves a searched title to database 
         self.routes['/saveSearchTitle'] = function (req, res) {
             MongoClient.connect('mongodb://' + connection_string, function (err, db) {
@@ -262,19 +262,16 @@ var SampleApp = function () {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('index.html'));
         };
-
         // My List
         self.routes['/mylist'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('mylist.html'));
         };
-
         // Sign up
         self.routes['/signup'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
             res.send(self.cache_get('signup.html'));
         };
-
         // Log In
         self.routes['/login'] = function (req, res) {
             res.setHeader('Content-Type', 'text/html');
@@ -286,7 +283,6 @@ var SampleApp = function () {
             res.send(self.cache_get('details.html'));
         };
     };
-
 
     /**
      *  Initialize the server (express) and create the routes and register
@@ -303,7 +299,6 @@ var SampleApp = function () {
         }
     };
 
-
     /**
      *  Initializes the sample application.
      */
@@ -315,7 +310,6 @@ var SampleApp = function () {
         // Create the express server and routes.
         self.initializeServer();
     };
-
 
     /**
      *  Start the server (starts up the sample application).
