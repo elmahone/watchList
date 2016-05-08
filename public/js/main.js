@@ -1,7 +1,6 @@
 $(function () {
     'use strict';
     var currentUser = null;
-
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
         var searchArr = [];
@@ -57,18 +56,6 @@ $(function () {
             }
             addRemoveListener();
         }
-    }
-    // creates a list of id's of items in watchlist
-    function myIdList() {
-        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + currentUser;
-        var idList = [];
-        $.get(url, function (response) {
-            for (var i = 0; i < response.length; i++) {
-                idList.push(response[i].id);
-            }
-            addRemoveButton(idList);
-
-        });
     }
     // Displays data of a single result gotten from the api call
     function displayData(data) {
@@ -144,6 +131,18 @@ $(function () {
             $('#topSearches').append('<a id="' + topSearches[i].title + '" class="searchTitle">"' + topSearches[i].title + '"</a><span class="badge pull-right">' + topSearches[i].count + '</span><hr>');
         }
         searchesListener();
+    }
+    // creates a list of id's of items in watchlist
+    function myIdList() {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + currentUser;
+        var idList = [];
+        $.get(url, function (response) {
+            for (var i = 0; i < response.length; i++) {
+                idList.push(response[i].id);
+            }
+            addRemoveButton(idList);
+
+        });
     }
     // Counts and displays pagenumbers
     function countPages(totalResults) {
@@ -255,7 +254,6 @@ $(function () {
             }
         }
     }
-
     // Gets users recent searches from the database
     function getRecentSearches(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getRecentSearches?username=' + username;
@@ -443,16 +441,13 @@ $(function () {
             }
         });
     }
-
-
-
     // Starts the app
     function start() {
         // hide content on load
         $('.waiting').hide();
         $('#content').hide();
         $('#error').hide();
-        
+
         if ($('#topSearches').length > 0) {
             getAllSearches();
         }
