@@ -49,6 +49,31 @@ $(function () {
             $('#poster').append('<img class="poster" src="http://image.tmdb.org/t/p/w300' + data.movie_results[0].poster_path + '">');
         }
     }
+
+    function myIdList() {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + currentUser;
+        var idList = [];
+        $.get(url, function (response) {
+            for (var i = 0; i < response.length; i++) {
+                idList.push(response[i].id);
+            }
+        });
+        return idList;
+    }
+
+    function addRemoveButton() {
+        var idList = myIdList();
+        var id = getUrlParameter('id');
+        if (isLoggedIn()) {
+            if ($.inArray(id, idList) !== 1) {
+                $('#details').append('<h2><a id="removeFromList"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
+            } else {
+                $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
+            }
+        }
+
+    }
+
     // Displays data of a single result gotten from the api call
     function displayData(data) {
         $('#details').empty();
@@ -60,9 +85,7 @@ $(function () {
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
-            if (isLoggedIn()) {
-                $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
-            }
+            addRemoveButton();
 
             // show content when data is received
             $('.mylist-tabs').hide();
