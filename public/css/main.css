@@ -79,7 +79,9 @@ hr {
 .navbar-form {
     border: 0 !important;
 }
-
+.badge {
+    background-color: #323232;
+}
 .footer {
     text-align: center;
     position: fixed;
