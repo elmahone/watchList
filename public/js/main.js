@@ -61,6 +61,7 @@ $(function () {
             } else {
                 $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
             }
+            addRemoveListener();
         }
     }
 
@@ -99,7 +100,6 @@ $(function () {
             $('#goBack').on('click', function () {
                 history.back();
             });
-            addRemoveListener();
         }
     }
     // Displays own list into tabs
