@@ -272,7 +272,6 @@ $(function () {
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
         $.get(url, function (response) {
-            myIdList(response);
             displayMyList(response);
         });
     }
