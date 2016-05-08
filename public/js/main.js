@@ -188,7 +188,7 @@ $(function () {
         });
 
         for (var n = 0; n < topSearches.length; n++) {
-            if (topSearches.length > 10) {
+            if (topSearches.length == 10) {
                 topSearches.splice(-1, 1);
             }
         }
