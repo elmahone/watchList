@@ -380,6 +380,13 @@ $(function () {
             window.location = '/details?id=' + id;
         });
     }
+    
+    // Listener for log out button
+    function logoutListener(){
+        $('#logout').on('click', function(event){
+            logOut();
+        });
+    }
     // Listener for page number clicks
     function changePageListener() {
         $('.pageNum').on('click', function () {
@@ -425,9 +432,10 @@ $(function () {
     if (isLoggedIn()) {
         currentUser = sessionStorage.username;
         console.log(currentUser);
-        $('.navbar-right').empty();
-        $('.navbar-right').append('<a type="submit" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
-        
+        $('#login').hide();
+        $('#signup').hide();        
+        $('.navbar-right').append('<a type="submit" id="logout" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
+        logoutListener();
         if ($('.mylist-tabs').length > 0) {
             getMyList(currentUser);
         }

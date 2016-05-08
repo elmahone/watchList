@@ -142,7 +142,9 @@ hr {
 #goBack {
     font-size: 25px;
 }
-
+#recentSearches {
+    min-height: 125px;
+}
 #recentSearches h3,
 #topSearches h3 {
     height: 55px;
