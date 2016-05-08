@@ -73,7 +73,8 @@ $(function () {
         }
     }
     // Displays own list into tabs
-    function displayMyList(data) {
+    function displayMyList(username) {
+        var data = getMyList(username);
         console.log(data);
         var myList = [];
         myList = data;
@@ -133,7 +134,8 @@ $(function () {
     }
 
     // makes a list of imdb id's in personal list and returns it
-    function myIdList(data) {
+    function myIdList(username) {
+        var data = getMyList(username);
         var idList = [];
         for (var i = 0; i < data.length; i++) {
             idList.push(data[i].id);
@@ -265,8 +267,7 @@ $(function () {
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
         $.get(url, function (response) {
-            myIdList(response);
-            displayMyList(response);
+            return response;
         });
     }
     // gets user info with username and password as parameters
@@ -461,7 +462,7 @@ $(function () {
         // if a page has a class .mylist-tabs this calls a function 
         // to fill the tabs with own list
         if ($('.mylist-tabs').length > 0) {
-            getMyList(currentUser);
+            displayMyList(currentUser);
         }
 
         if ($('#recentSearches').length > 0) {
