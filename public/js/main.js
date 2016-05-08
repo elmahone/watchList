@@ -1,11 +1,7 @@
 $(function () {
     'use strict';
     var currentUser = null;
-    if (isLoggedIn()) {
-        currentUser = sessionStorage.username;
-        $('.navbar-right').empty();
-        $('.navbar-right').append('<a type="submit" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
-    }
+    console.log(currentUser);
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
         console.log(results);
@@ -413,13 +409,9 @@ $(function () {
 
     // if a page has a class .mylist-tabs this calls a function 
     // to fill the tabs with own list
-    if ($('.mylist-tabs').length > 0) {
-        getMyList(currentUser);
-    }
 
-    if ($('#recentSearches').length > 0) {
-        getRecentSearches(currentUser);
-    }
+
+
 
     if ($('#topSearches').length > 0) {
         getAllSearches();
@@ -430,6 +422,21 @@ $(function () {
         apiCallDetails(id);
     }
 
+    if (isLoggedIn()) {
+        currentUser = sessionStorage.username;
+        console.log(currentUser);
+        $('.navbar-right').empty();
+        $('.navbar-right').append('<a type="submit" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
+        
+        if ($('.mylist-tabs').length > 0) {
+            getMyList(currentUser);
+        }
+        
+        if ($('#recentSearches').length > 0) {
+            getRecentSearches(currentUser);
+        }
+
+    }
 
     // Starts the app
     function start() {
