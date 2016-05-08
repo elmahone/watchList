@@ -351,7 +351,7 @@ $(function () {
     }
     // api call for posters with id
     function apiGetPoster(id) {
-        var token = '6b6236d93d623771bdf2fdc4399e0a92';
+        var token = [YOUR TMDB API KEY]
         var url = 'https://api.themoviedb.org/3/find/' + id + '?api_key=' + token + '&external_source=imdb_id';
         $.get(url, function (response) {
             displayPoster(response);
