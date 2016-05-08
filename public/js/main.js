@@ -46,10 +46,13 @@ $(function () {
         console.log(data);
         $('#details').empty();
         if (data.Response == "True") {
+            var posterUrl = apiGetPoster(data.imdbID);
             $('#error').hide();
             $('#searchResults').hide();
             $('#details').empty();
+            
             $('#details').append('<input type="hidden" id="resultImdbID" value="' + data.imdbID + '">');
+            $('#details').append('<img id="poster" src="http://www.myapifilms.com/imdb/image/poster/'+posterUrl+'">');
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
@@ -338,7 +341,15 @@ $(function () {
             displayData(response);
         });
     }
-
+    // api call for posters with id
+    function apiGetPoster(id) {
+        var token = '8f96c905-cb1a-4533-9d66-46d9d0d0f236';
+        var url = 'http://www.myapifilms.com/imdb/image/' + id + '?token=' + token;
+        $.get(url, function (response) {
+            console.log(response);
+            return response.link;
+        });
+    }
 
     // LISTENER FUNCTIONS
 
