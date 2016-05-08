@@ -1,15 +1,6 @@
 $(function () {
     'use strict';
     var currentUser = null;
-    
-    // call to database for my list with username as a parameter
-    function getMyList(username) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
-        $.get(url, function (response) {
-            console.log(response);
-            return response;
-        });
-    }
 
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
@@ -82,8 +73,7 @@ $(function () {
         }
     }
     // Displays own list into tabs
-    function displayMyList(username) {
-        var data = getMyList(username);
+    function displayMyList(data) {
         console.log(data);
         var myList = [];
         myList = data;
@@ -143,8 +133,7 @@ $(function () {
     }
 
     // makes a list of imdb id's in personal list and returns it
-    function myIdList(username) {
-        var data = getMyList(username);
+    function myIdList(data) {
         var idList = [];
         for (var i = 0; i < data.length; i++) {
             idList.push(data[i].id);
@@ -272,7 +261,14 @@ $(function () {
             displayRecentSearches(response);
         });
     }
-    
+    // api call for my list with username as a parameter
+    function getMyList(username) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
+        $.get(url, function (response) {
+            myIdList(response);
+            displayMyList(response);
+        });
+    }
     // gets user info with username and password as parameters
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
@@ -465,7 +461,7 @@ $(function () {
         // if a page has a class .mylist-tabs this calls a function 
         // to fill the tabs with own list
         if ($('.mylist-tabs').length > 0) {
-            displayMyList(currentUser);
+            getMyList(currentUser);
         }
 
         if ($('#recentSearches').length > 0) {
