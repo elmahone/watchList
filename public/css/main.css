@@ -154,10 +154,14 @@ hr {
     padding: 0 5px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
     .no-mobile {
         display: none !important;
-    }    
+    }     
+}
+
+@media (max-width: 600px) {
+       
     h3 {
         font-size: 20px !important;
     }

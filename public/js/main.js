@@ -8,7 +8,7 @@ $(function () {
         var searchArr = [];
         if (results.Response === "True") {
             $('#searchResults').empty();
-            countPages(results.totalResults);
+            
             $('#searchResults').append('<div id="totalResults"><h4>Total Results: ' + results.totalResults + '</h4></div>');
             searchArr = results.Search;
             for (var i = 0; i < searchArr.length; i++) {
@@ -23,6 +23,8 @@ $(function () {
                     $('#' + searchArr[i].imdbID).append('<h3 class="icon no-mobile"><i class="fa fa-gamepad"></i></h3>');
                 }
             }
+            countPages(results.totalResults);
+            
             $('.waiting').hide();
             $('#searchResults').show();
             resultListener();
@@ -127,7 +129,7 @@ $(function () {
     // Counts and displays pagenumbers
     function countPages(totalResults) {
         var totalPages = Math.ceil(totalResults / 10);
-        $('#searchResults').append('<div id="pages"></div>');
+        $('#searchResults').append('<div id="pages" class="text-center"></div>');
         if (totalPages > 1) {
             if (totalPages <= 100) {
                 for (var i = 1; i <= totalPages; i++) {
@@ -137,7 +139,7 @@ $(function () {
                 for (var o = 1; o <= 100; o++) {
                     $('#pages').append('<a id="' + o + '" class="pageNum"> ' + o + ' </a>');
                 }
-                $('#pages').append('<p>Only 100 pages can be shown</p>');
+                $('#pages').append('<p>Only 100 pages can be shown try searching something more specific</p>');
             }
             changePageListener();
         }
