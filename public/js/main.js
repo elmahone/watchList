@@ -1,14 +1,14 @@
 $(function () {
     'use strict';
     var currentUser = null;
-    
+
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
         console.log(results);
         var searchArr = [];
         if (results.Response === "True") {
             $('#searchResults').empty();
-            
+
             $('#searchResults').append('<div id="totalResults"><h4>Total Results: ' + results.totalResults + '</h4></div>');
             searchArr = results.Search;
             for (var i = 0; i < searchArr.length; i++) {
@@ -24,7 +24,7 @@ $(function () {
                 }
             }
             countPages(results.totalResults);
-            
+
             $('.waiting').hide();
             $('#searchResults').show();
             resultListener();
@@ -53,7 +53,7 @@ $(function () {
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
-            
+
             $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
 
             // show content when data is received
@@ -217,7 +217,7 @@ $(function () {
     }
     // checks if user is already logged in
     function isLoggedIn() {
-        if (sessionStorage.getItem('username') === null ) {
+        if (sessionStorage.getItem('username') === null) {
             return false;
         } else {
             return true;
@@ -271,7 +271,7 @@ $(function () {
             displayTopSearches(response);
         });
     }
-    
+
     // adds an item to users personal list
     function addToList(username, id, title, type) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
@@ -320,7 +320,7 @@ $(function () {
         var url = 'http://www.omdbapi.com/?s=' + title;
         $.get(url, function (response) {
             displaySearchResults(response);
-            
+
         });
     }
     // makes an api call with given pagen umber
@@ -384,12 +384,12 @@ $(function () {
             var id = $(this).attr("id");
             window.location = '/details?id=' + id;
         });
-    }    
+    }
     // Listener for log out button
-    function logoutListener(){
-        $('#logout').on('click', function(event){
+    function logoutListener() {
+        $('#logout').on('click', function (event) {
             logOut();
-            
+
         });
     }
     // Listener for page number clicks
@@ -409,12 +409,16 @@ $(function () {
             var title = $('#resultTitle').attr('value');
             var type = $('#resultType').attr('value');
             addToList(currentUser, id, title, type);
+            $('addToList').fadeOut();
         });
         $('.removeFromList').on('click', function () {
             var id = $(this).parent().attr('id');
             removeFromList(currentUser, id);
+            $('#allTab').find('#' + id).fadeOut();
             $('#allTab').find('#' + id).remove();
+            $('#moviesTab').find('#' + id).fadeOut();
             $('#moviesTab').find('#' + id).remove();
+            $('#seriesTab').find('#' + id).fadeOut();
             $('#seriesTab').find('#' + id).remove();
         });
     }
@@ -428,13 +432,13 @@ $(function () {
         var id = getUrlParameter('id');
         apiCallDetails(id);
     }
-    
+
     // Features for logged in users
     if (isLoggedIn()) {
         currentUser = sessionStorage.username;
         console.log(currentUser);
         $('#login').hide();
-        $('#signup').hide();        
+        $('#signup').hide();
         $('.navbar-right').append('<a type="submit" id="logout" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
         logoutListener();
         // if a page has a class .mylist-tabs this calls a function 
@@ -442,17 +446,17 @@ $(function () {
         if ($('.mylist-tabs').length > 0) {
             getMyList(currentUser);
         }
-        
+
         if ($('#recentSearches').length > 0) {
             getRecentSearches(currentUser);
         }
     }
-    if (isLoggedIn() === false){
+    if (isLoggedIn() === false) {
         $('#recentSearches').hide();
         $('#login').show();
         $('#signup').show();
-        $('#logout').hide();  
-        
+        $('#logout').hide();
+
         $('#topSearches').removeClass('col-xs-6');
         $('#topSearches').addClass('col-xs-12');
         $('#searchResults').addClass('col-sm-offset-2');
