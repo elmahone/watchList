@@ -210,7 +210,7 @@ $(function () {
     }
     // checks if user is already logged in
     function isLoggedIn() {
-        if (currentUser === null) {
+        if (sessionStorage.getItem('username') === null ) {
             return false;
         } else {
             return true;
