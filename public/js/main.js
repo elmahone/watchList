@@ -258,8 +258,8 @@ $(function () {
     // gets user info with username and password as parameters
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
-        $.get(url, function (response) {
-            if (response.username == username) {
+        $.get(url, function (res) {
+            if (response.res == "OK") {
                 logIn(username);
                 window.location = '../index.html';
             }
@@ -369,6 +369,7 @@ $(function () {
             var username = $('form').find('#username').val();
             var password = $('form').find('#password').val();
             var cryptPwd = Aes.Ctr.encrypt('HelloWorld!', password, 256);
+            console.log('hahahaloo');
             getUser(username, cryptPwd);
         });
     }
