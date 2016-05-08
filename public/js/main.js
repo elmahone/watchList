@@ -65,13 +65,12 @@ $(function () {
         var idList = myIdList();
         var id = getUrlParameter('id');
         if (isLoggedIn()) {
-            if ($.inArray(id, idList) !== 1) {
+            if ($.inArray(id, idList) !== -1) {
                 $('#details').append('<h2><a id="removeFromList"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
             } else {
                 $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
             }
         }
-
     }
 
     // Displays data of a single result gotten from the api call

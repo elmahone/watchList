@@ -107,7 +107,6 @@ hr {
     font-size: 7em;
     color: silver;
 }
-
 .removeFromList {
     float: right;
     font-size: 24px;
@@ -115,6 +114,11 @@ hr {
     z-index: 100;
     margin-top: 20px;
     color: darkred;
+}
+#details .removeFromList {
+    float: left !important;
+    z-index: 0 !important;
+    margin-top: 0 !important;
 }
 
 .searchForm {
