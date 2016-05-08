@@ -26,6 +26,9 @@ $(function () {
             $('.waiting').hide();
             $('#searchResults').show();
             resultListener();
+            $('html, body').animate({
+                scrollTop: $("#searchResults").offset().top
+            }, 2000);
         }
         // displays error message if no results was found
         else {
@@ -318,6 +321,7 @@ $(function () {
         var url = 'http://www.omdbapi.com/?s=' + title;
         $.get(url, function (response) {
             displaySearchResults(response);
+            
         });
     }
     // makes an api call with given pagen umber
@@ -446,7 +450,7 @@ $(function () {
             getRecentSearches(currentUser);
         }
     }
-    if (isLoggedIn() == false){
+    if (isLoggedIn() === false){
         $('#recentSearches').hide();
         $('#login').show();
         $('#signup').show();
