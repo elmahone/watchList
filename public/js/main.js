@@ -49,7 +49,7 @@ $(function () {
             $('#poster').append('<img class="poster" src="http://image.tmdb.org/t/p/w300' + data.movie_results[0].poster_path + '">');
         }
     }
-    
+
     function addRemoveButton(idList) {
         var id = getUrlParameter('id');
         console.log(id);
@@ -57,7 +57,7 @@ $(function () {
         console.log();
         if (isLoggedIn()) {
             if ($.inArray(id, idList) !== -1) {
-                $('#details').append('<h2><a id="removeFromList"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
+                $('#details').append('<h2><a id="' + id + '"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
             } else {
                 $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
             }
@@ -72,11 +72,11 @@ $(function () {
                 idList.push(response[i].id);
             }
             addRemoveButton(idList);
-            
+
         });
     }
 
-    
+
 
     // Displays data of a single result gotten from the api call
     function displayData(data) {
