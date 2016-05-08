@@ -1,7 +1,7 @@
 $(function () {
     'use strict';
     var currentUser = null;
-    if (isLoggedIn) {
+    if (isLoggedIn()) {
         currentUser = sessionStorage.username;
         $('.navbar-right').empty();
         $('.navbar-right').append('<a type="submit" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
@@ -200,14 +200,14 @@ $(function () {
     }
     // logs user in
     function logIn(username) {
-        if (!isLoggedIn) {
+        if (!isLoggedIn()) {
             sessionStorage.username = username;
             currentUser = sessionStorage.username;
         }
     }
     // logs user out
     function logOut() {
-        if (isLoggedIn) {
+        if (isLoggedIn()) {
             sessionStorage.removeItem('username');
             currentUser = null;
         }
