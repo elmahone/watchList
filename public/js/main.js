@@ -2,6 +2,23 @@ $(function () {
     'use strict';
     var currentUser = null;
 
+    
+    // makes a list of imdb id's in personal list and returns it
+    function getMyIdList(username) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
+        $.get(url, function (response) {
+            var idList = [];
+            console.log(response);
+            console.log(response.length);
+            for (var i = 0; i < response.length; i++) {
+                console.log(response[i].id);
+                idList.push(response[i].id);
+            }
+            console.log(idList);
+            return idList;
+        });
+    }
+    
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
         console.log(results);
@@ -259,21 +276,7 @@ $(function () {
         });
     }
 
-    // makes a list of imdb id's in personal list and returns it
-    function getMyIdList(username) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
-        $.get(url, function (response) {
-            var idList = [];
-            console.log(response);
-            console.log(response.length);
-            for (var i = 0; i < response.length; i++) {
-                console.log(response[i].id);
-                idList.push(response[i].id);
-            }
-            console.log(idList);
-            return idList;
-        });
-    }
+    
     // api call for my list with username as a parameter
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
