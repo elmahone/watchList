@@ -41,6 +41,8 @@ $(function () {
             $('#error').show();
         }
     }
+
+
     // Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
@@ -54,7 +56,7 @@ $(function () {
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
 
-            var myList = myIdList();
+            var myList = getMyIdList(currentUser);
             if ($.inArray(data.imdbID, myList) === -1) {
                 $('#details').append('<h2><a id="' + data.imdbID + '"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
 
@@ -132,14 +134,7 @@ $(function () {
         searchesListener();
     }
 
-    // makes a list of imdb id's in personal list and returns it
-    function myIdList(data) {
-        var idList = [];
-        for (var i = 0; i < data.length; i++) {
-            idList.push(data[i].id);
-        }
-        return idList;
-    }
+
 
     // Counts and displays pagenumbers
     function countPages(totalResults) {
@@ -259,6 +254,18 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/getRecentSearches?username=' + username;
         $.get(url, function (response) {
             displayRecentSearches(response);
+        });
+    }
+
+    // makes a list of imdb id's in personal list and returns it
+    function getMyIdList(username) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
+        $.get(url, function (response) {
+            var idList = [];
+            for (var i = 0; i < response.length; i++) {
+                idList.push(response[i].id);
+            }
+            return idList;
         });
     }
     // api call for my list with username as a parameter
