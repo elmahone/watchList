@@ -409,22 +409,14 @@ $(function () {
             var title = $('#resultTitle').attr('value');
             var type = $('#resultType').attr('value');
             addToList(currentUser, id, title, type);
-            $('addToList').fadeOut('fast', function(){
-                $('addToList').hide();
-            });
+            $('#addToList').hide();
         });
         $('.removeFromList').on('click', function () {
             var id = $(this).parent().attr('id');
             removeFromList(currentUser, id);
-            $('#allTab').find('#' + id).fadeOut('fast', function () {
-                $('#allTab').find('#' + id).remove();
-            });
-            $('#moviesTab').find('#' + id).fadeOut('fast', function () {
-                $('#moviesTab').find('#' + id).remove();
-            });
-            $('#seriesTab').find('#' + id).fadeOut('fast', function () {
-                $('#seriesTab').find('#' + id).remove();
-            });
+            $('#allTab').find('#' + id).remove();
+            $('#moviesTab').find('#' + id).remove();
+            $('#seriesTab').find('#' + id).remove();
         });
     }
 
