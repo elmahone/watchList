@@ -1,7 +1,7 @@
 $(function () {
     'use strict';
-    require('js/crypto/aes.js');
-    require('js/crypto/aes-ctr.js');
+    $.getScript('js/crypto/aes.js');
+    $.getScript('js/crypto/aes-ctr.js');
 
     // because authentication does not work currently everything goes to user in currentUser
     var currentUser = "miika";
