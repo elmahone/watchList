@@ -454,7 +454,9 @@ $(function () {
         
         $('#topSearches').removeClass('col-xs-6');
         $('#topSearches').addClass('col-xs-12');
-        $('#searchResults').addClass('col-offset-sm-2');
+        $('#searchResults').addClass('col-sm-offset-2');
+        $('#searchForm').addClass('col-sm-offset-2');
+
     }
 
     // Starts the app
