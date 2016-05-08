@@ -1,6 +1,14 @@
 $(function () {
     'use strict';
     var currentUser = null;
+    
+    // call to database for my list with username as a parameter
+    function getMyList(username) {
+        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
+        $.get(url, function (response) {
+            return response;
+        });
+    }
 
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
@@ -263,13 +271,7 @@ $(function () {
             displayRecentSearches(response);
         });
     }
-    // api call for my list with username as a parameter
-    function getMyList(username) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
-        $.get(url, function (response) {
-            return response;
-        });
-    }
+    
     // gets user info with username and password as parameters
     function getUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
