@@ -43,16 +43,12 @@ $(function () {
     }
     // Displays data of a single result gotten from the api call
     function displayData(data) {
-        console.log(data);
+        var posterUrl = apiGetPoster(data.imdbID);
+        console.log(posterUrl);
         $('#details').empty();
         if (data.Response == "True") {
-            var posterUrl = apiGetPoster(data.imdbID);
-            $('#error').hide();
-            $('#searchResults').hide();
             $('#details').empty();
-
             $('#details').append('<input type="hidden" id="resultImdbID" value="' + data.imdbID + '">');
-
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a>');
