@@ -6,9 +6,6 @@ TODO
 2.  Listasta poisto details sivulla
         - tarkista omasta listasta käyä inArray tjs jQuery funktiolla
     
-3.  Loading indexissä kun painaa submit
-        - ehkä joku loading div mikä tyhjenee samaan aikaan kun data esitetään
-    
 
 5.  Top searches
         - suosituin nimi isolla ?
@@ -23,6 +20,9 @@ TODO
 
 
 DONED-----------------------------------
+3.  Loading indexissä kun painaa submit
+        - ehkä joku loading div mikä tyhjenee samaan aikaan kun data esitetään
+    
 4.  index näyttää nyt oudolle -> fixaa
 
 6.  Omiin ja suosituimpiin hakuihin jonkinlainen erottajaviiva

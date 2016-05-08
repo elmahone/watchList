@@ -59,13 +59,13 @@ hr {
 }
 
 .navbar-default {
-    background-color: #000000;
+    background-color: #323232;
     border-color: #7B0000;
 }
 
 .navbar-default .navbar-nav>.active>a {
     color: #F7F7F7;
-    background-color: #353535;
+    background-color: #5F5F5F;
 }
 
 .navbar-default .navbar-nav>li>a {

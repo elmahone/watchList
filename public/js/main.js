@@ -150,6 +150,7 @@ $(function () {
         var uniqueSearches = [];
         $.each(allSearches, function (o, title) {
             if ($.inArray(title, uniqueSearches) === -1) {
+                title = title.toLowerCase();
                 uniqueSearches.push(title);
                 if (uniqueSearches.length > 10) {
                     uniqueSearches.splice(-1, 1);
