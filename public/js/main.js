@@ -264,9 +264,13 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
         $.get(url, function (response) {
             var idList = [];
+            console.log(response);
+            console.log(response.length);
             for (var i = 0; i < response.length; i++) {
+                console.log(response[i].id);
                 idList.push(response[i].id);
             }
+            console.log(idList);
             return idList;
         });
     }
