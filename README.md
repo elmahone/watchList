@@ -36,11 +36,10 @@ $ git push (to openshift)
 
 Examples
 
-Get all searches:
+#####Get all searches:
 > [/getSearches](http://watchlist-miikanode.rhcloud.com/getSearches)
 
-#####Get users Watchlist:
-Get users recent searches:
+#####Get users recent searches:
 > [/getRecentSearches?username=[username]](http://watchlist-miikanode.rhcloud.com/getRecentSearches?username=test)
 
 #####Get users Watchlist:
