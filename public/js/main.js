@@ -2,7 +2,7 @@ $(function () {
     'use strict';
     var currentUser = null;
 
-    
+
     // makes a list of imdb id's in personal list and returns it
     function getMyIdList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
@@ -18,7 +18,7 @@ $(function () {
             return idList;
         });
     }
-    
+
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
         console.log(results);
@@ -72,26 +72,14 @@ $(function () {
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
-            
-            console.log(currentUser);
-            var myList = getMyIdList(currentUser);
-            console.log(myList);
-            console.log(data.imdbID);
-            if ($.inArray(data.imdbID, myList) === -1) {
-                $('#details').append('<h2><a id="' + data.imdbID + '"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
 
-            } else {
-                $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
-            }
+
             // show content when data is received
-            $('.mylist-tabs').hide();
-            $('.searchForm').hide();
             $('#details').show();
 
             $('#goBack').on('click', function () {
                 history.back();
             });
-            addRemoveListener();
         }
     }
     // Displays own list into tabs
@@ -277,7 +265,7 @@ $(function () {
         });
     }
 
-    
+
     // api call for my list with username as a parameter
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
@@ -482,6 +470,18 @@ $(function () {
 
         if ($('#recentSearches').length > 0) {
             getRecentSearches(currentUser);
+        }
+        if ($('#resultImdbID').length > 0) {
+            var myList = getMyIdList(currentUser);
+            console.log(myList);
+            var imdbID = $('#resultImdbID').attr('value');
+            if ($.inArray(imdbID, myList) === -1) {
+                $('#details').append('<h2><a id="' + imdbID + '"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
+
+            } else {
+                $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
+            }
+            addRemoveListener();
         }
     }
     if (isLoggedIn() === false) {
