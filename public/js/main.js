@@ -471,6 +471,7 @@ $(function () {
         if ($('#recentSearches').length > 0) {
             getRecentSearches(currentUser);
         }
+        console.log($('#resultImdbID').length);
         if ($('#resultImdbID').length > 0) {
             var myList = getMyIdList(currentUser);
             console.log(myList);
