@@ -1,31 +1,14 @@
 $(function () {
     'use strict';
     var currentUser = null;
-
-
-    // makes a list of imdb id's in personal list and returns it
-    function getMyIdList(username) {
-        var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
-        $.get(url, function (response) {
-            var idList = [];
-            console.log(response);
-            console.log(response.length);
-            for (var i = 0; i < response.length; i++) {
-                console.log(response[i].id);
-                idList.push(response[i].id);
-            }
-            console.log(idList);
-            return idList;
-        });
-    }
-
+    
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
         console.log(results);
         var searchArr = [];
         if (results.Response === "True") {
             $('#searchResults').empty();
-
+            
             $('#searchResults').append('<div id="totalResults"><h4>Total Results: ' + results.totalResults + '</h4></div>');
             searchArr = results.Search;
             for (var i = 0; i < searchArr.length; i++) {
@@ -41,7 +24,7 @@ $(function () {
                 }
             }
             countPages(results.totalResults);
-
+            
             $('.waiting').hide();
             $('#searchResults').show();
             resultListener();
@@ -58,8 +41,6 @@ $(function () {
             $('#error').show();
         }
     }
-
-
     // Displays data of a single result gotten from the api call
     function displayData(data) {
         console.log(data);
@@ -72,14 +53,18 @@ $(function () {
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
-
+            
+            $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
 
             // show content when data is received
+            $('.mylist-tabs').hide();
+            $('.searchForm').hide();
             $('#details').show();
 
             $('#goBack').on('click', function () {
                 history.back();
             });
+            addRemoveListener();
         }
     }
     // Displays own list into tabs
@@ -141,8 +126,6 @@ $(function () {
         }
         searchesListener();
     }
-
-
 
     // Counts and displays pagenumbers
     function countPages(totalResults) {
@@ -234,7 +217,7 @@ $(function () {
     }
     // checks if user is already logged in
     function isLoggedIn() {
-        if (sessionStorage.getItem('username') === null) {
+        if (sessionStorage.getItem('username') === null ) {
             return false;
         } else {
             return true;
@@ -264,8 +247,6 @@ $(function () {
             displayRecentSearches(response);
         });
     }
-
-
     // api call for my list with username as a parameter
     function getMyList(username) {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + username;
@@ -290,7 +271,7 @@ $(function () {
             displayTopSearches(response);
         });
     }
-
+    
     // adds an item to users personal list
     function addToList(username, id, title, type) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
@@ -339,7 +320,7 @@ $(function () {
         var url = 'http://www.omdbapi.com/?s=' + title;
         $.get(url, function (response) {
             displaySearchResults(response);
-
+            
         });
     }
     // makes an api call with given pagen umber
@@ -403,12 +384,12 @@ $(function () {
             var id = $(this).attr("id");
             window.location = '/details?id=' + id;
         });
-    }
+    }    
     // Listener for log out button
-    function logoutListener() {
-        $('#logout').on('click', function (event) {
+    function logoutListener(){
+        $('#logout').on('click', function(event){
             logOut();
-
+            
         });
     }
     // Listener for page number clicks
@@ -428,8 +409,6 @@ $(function () {
             var title = $('#resultTitle').attr('value');
             var type = $('#resultType').attr('value');
             addToList(currentUser, id, title, type);
-            location.reload();
-
         });
         $('.removeFromList').on('click', function () {
             var id = $(this).parent().attr('id');
@@ -437,10 +416,6 @@ $(function () {
             $('#allTab').find('#' + id).remove();
             $('#moviesTab').find('#' + id).remove();
             $('#seriesTab').find('#' + id).remove();
-
-            if ($('#details').length > 0) {
-                location.reload();
-            }
         });
     }
 
@@ -448,14 +423,18 @@ $(function () {
     if ($('#topSearches').length > 0) {
         getAllSearches();
     }
-    var id = getUrlParameter('id');
+
+    if ($('#details').length > 0) {
+        var id = getUrlParameter('id');
+        apiCallDetails(id);
+    }
     
     // Features for logged in users
     if (isLoggedIn()) {
         currentUser = sessionStorage.username;
         console.log(currentUser);
         $('#login').hide();
-        $('#signup').hide();
+        $('#signup').hide();        
         $('.navbar-right').append('<a type="submit" id="logout" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
         logoutListener();
         // if a page has a class .mylist-tabs this calls a function 
@@ -463,37 +442,17 @@ $(function () {
         if ($('.mylist-tabs').length > 0) {
             getMyList(currentUser);
         }
-
+        
         if ($('#recentSearches').length > 0) {
             getRecentSearches(currentUser);
         }
-        if ($('#details').length > 0) {
-            apiCallDetails(id);
-
-            console.log($('#resultImdbID').length);
-            if ($('#resultImdbID').length > 0) {
-                var myList = getMyIdList(currentUser);
-                console.log(myList);
-                var imdbID = $('#resultImdbID').attr('value');
-                if ($.inArray(imdbID, myList) === -1) {
-                    $('#details').append('<h2><a id="' + imdbID + '"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
-
-                } else {
-                    $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
-                }
-                addRemoveListener();
-            }
-        }
     }
-    if (isLoggedIn() === false) {
-        if ($('#details').length > 0) {            
-            apiCallDetails(id);
-        }
+    if (isLoggedIn() === false){
         $('#recentSearches').hide();
         $('#login').show();
         $('#signup').show();
-        $('#logout').hide();
-
+        $('#logout').hide();  
+        
         $('#topSearches').removeClass('col-xs-6');
         $('#topSearches').addClass('col-xs-12');
         $('#searchResults').addClass('col-sm-offset-2');
