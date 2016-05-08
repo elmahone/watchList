@@ -22,8 +22,6 @@ hr {
 
 .result:hover {
     background-color: #eee;
-    -webkit-box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.56);
-    -moz-box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.56);
     box-shadow: 10px 10px 5px -8px rgba(0, 0, 0, 0.56);
 }
 
@@ -76,8 +74,13 @@ hr {
     color: #CACACA;
 }
 
+.navbar-default .navbar-collapse, .navbar-default .navbar-form {
+    border-color: #e7e7e7;
+    z-index: 10000;
+}
 .navbar-form {
     border: 0 !important;
+    box-shadow: 0 !important;
 }
 .badge {
     background-color: #323232;
@@ -109,7 +112,7 @@ hr {
     float: right;
     font-size: 24px;
     display: inline-block;
-    z-index: 10000;
+    z-index: 100;
     margin-top: 20px;
     color: darkred;
 }
