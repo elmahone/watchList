@@ -43,9 +43,9 @@ $(function () {
     }
 
     function displayPoster(data) {
-        if (data.Type == "series") {
+        if ($('#resultType').attr('value') == "series") {
             $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/original"' + data.tv_results[0].poster_path + '">');
-        } else if (data.Type == "movie") {
+        } else if ($('#resultType').attr('value') == "movie") {
             $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/original"' + data.movie_results[0].poster_path + '">');
         }
     }
