@@ -152,7 +152,9 @@ var SampleApp = function () {
                 if (err) throw err;
                 db.collection('user').insert({
                     username: req.query.username,
-                    password: req.query.password
+                    password: req.query.password,
+                    list: [],
+                    searches: []
                 });
                 db.close();
             });
