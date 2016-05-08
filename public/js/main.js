@@ -447,6 +447,7 @@ $(function () {
             var title = $('#resultTitle').attr('value');
             var type = $('#resultType').attr('value');
             addToList(currentUser, id, title, type);
+            location.reload();
             $('#addToList').hide();
         });
         $('.removeFromList').on('click', function () {
@@ -455,6 +456,10 @@ $(function () {
             $('#allTab').find('#' + id).remove();
             $('#moviesTab').find('#' + id).remove();
             $('#seriesTab').find('#' + id).remove();
+
+            if ($('#details').length > 0) {
+                location.reload();
+            }
         });
     }
 
