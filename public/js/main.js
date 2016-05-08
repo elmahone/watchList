@@ -52,10 +52,16 @@ $(function () {
             $('#details').empty();
 
             $('#details').append('<input type="hidden" id="resultImdbID" value="' + data.imdbID + '">');
-            $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/original"' + posterUrl + '">');
+
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
-            $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a><h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
+            $('#details').append('<a id="goBack"><i class="fa fa-long-arrow-left"></i></a>');
+            if (data.Type == "series") {
+                $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/original"' + posterUrl.tv_results[0].poster_path + '">');
+            } else if (data.Type == "movie") {
+                $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/original"' + posterUrl.movie_results[0].poster_path + '">');
+            }
+            $('#details').append('<h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
 
             $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
 
@@ -347,7 +353,7 @@ $(function () {
         var url = 'https://api.themoviedb.org/3/find/' + id + '?api_key=' + token + '&external_source=imdb_id';
         $.get(url, function (response) {
             console.log(response);
-            return response.poster_path;
+            return response;
         });
     }
 
