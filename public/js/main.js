@@ -187,10 +187,8 @@ $(function () {
             return parseFloat(b.count) - parseFloat(a.count);
         });
 
-        for (var n = 1; n <= topSearches.length; n++) {
-            if (topSearches.length > 10) {
-                topSearches.splice(-1, 1);
-            }
+        for (var n = topSearches.length; n > 10; n--) {
+            topSearches.splice(-1, 1);
         }
 
         console.log(topSearches);
