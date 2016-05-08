@@ -64,6 +64,9 @@ $(function () {
     function addRemoveButton() {
         var idList = myIdList();
         var id = getUrlParameter('id');
+        console.log(id);
+        console.log(idList);
+        console.log();
         if (isLoggedIn()) {
             if ($.inArray(id, idList) !== -1) {
                 $('#details').append('<h2><a id="removeFromList"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
