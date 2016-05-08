@@ -30,7 +30,7 @@ $(function () {
             resultListener();
         }
         // displays error message if no results was found
-        else{
+        else {
             console.log("er or");
             $('#searchResults').hide();
             $('#error').find('.message').text('No results');
@@ -60,7 +60,7 @@ $(function () {
                 history.back();
             });
             addRemoveListener();
-        } 
+        }
     }
     // Displays own list into tabs
     function displayMyList(data) {
@@ -182,14 +182,17 @@ $(function () {
             } else {
                 count++;
             }
-            if (topSearches.length > 10) {
-                topSearches.splice(-1, 1);
-            }
-
         }
         topSearches.sort(function (a, b) {
             return parseFloat(b.count) - parseFloat(a.count);
         });
+
+        for (var n = 0; n < topSearches.length; n++) {
+            if (topSearches.length > 10) {
+                topSearches.splice(-1, 1);
+            }
+        }
+
         console.log(topSearches);
         return topSearches;
     }
