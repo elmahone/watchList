@@ -187,8 +187,8 @@ $(function () {
             return parseFloat(b.count) - parseFloat(a.count);
         });
 
-        for (var n = 0; n < topSearches.length; n++) {
-            if (topSearches.length == 10) {
+        for (var n = 0; n <= topSearches.length; n++) {
+            if (topSearches.length > 10) {
                 topSearches.splice(-1, 1);
             }
         }
