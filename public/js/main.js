@@ -260,6 +260,7 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/getUser?username=' + username + '&password=' + password;
         $.get(url, function (response) {
             if (response.username == username) {
+                logIn(username);
                 window.location = '../index.html';
             }
         });
@@ -368,7 +369,7 @@ $(function () {
             var username = $('form').find('#username').val();
             var password = $('form').find('#password').val();
             var cryptPwd = Aes.Ctr.encrypt('HelloWorld!', password, 256);
-            getUser(username, password);
+            getUser(username, cryptPwd);
         });
     }
     // Listener for popular and recent searches
