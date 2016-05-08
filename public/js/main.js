@@ -4,7 +4,6 @@ $(function () {
 
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
-        console.log(results);
         var searchArr = [];
         if (results.Response === "True") {
             $('#searchResults').empty();
@@ -24,7 +23,6 @@ $(function () {
                 }
             }
             countPages(results.totalResults);
-
             $('.waiting').hide();
             $('#searchResults').show();
             resultListener();
@@ -34,14 +32,13 @@ $(function () {
         }
         // displays error message if no results was found
         else {
-            console.log("er or");
             $('#searchResults').hide();
             $('#error').find('.message').text('No results');
             $('.waiting').hide();
             $('#error').show();
         }
     }
-
+    // Displays movie/series poster
     function displayPoster(data) {
         if ($('#resultType').attr('value') == "series") {
             $('#poster').append('<img class="poster" src="http://image.tmdb.org/t/p/w300' + data.tv_results[0].poster_path + '">');
@@ -49,12 +46,9 @@ $(function () {
             $('#poster').append('<img class="poster" src="http://image.tmdb.org/t/p/w300' + data.movie_results[0].poster_path + '">');
         }
     }
-
+    // displays add or remove button depending if movie is in the list
     function addRemoveButton(idList) {
         var id = getUrlParameter('id');
-        console.log(id);
-        console.log(idList);
-        console.log();
         if (isLoggedIn()) {
             if ($.inArray(id, idList) !== -1) {
                 $('#details').append('<h2><a id="' + id + '"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
@@ -64,7 +58,7 @@ $(function () {
             addRemoveListener();
         }
     }
-
+    // creates a list of id's of items in watchlist
     function myIdList() {
         var url = 'http://watchlist-miikanode.rhcloud.com/getMyList?username=' + currentUser;
         var idList = [];
@@ -76,27 +70,21 @@ $(function () {
 
         });
     }
-
-
-
     // Displays data of a single result gotten from the api call
     function displayData(data) {
         $('#details').empty();
-
         if (data.Response == "True") {
-            $('#details').empty();
             apiGetPoster(data.imdbID);
             $('#details').append('<input type="hidden" id="resultImdbID" value="' + data.imdbID + '">');
             $('#details').append('<input type="hidden" id="resultTitle" value="' + data.Title + '">');
             $('#details').append('<input type="hidden" id="resultType" value="' + data.Type + '">');
             $('#details').append('<h2><span class="title">' + data.Title + '</span>(<span class="year">' + data.Year + '</span>)</h2><h4>Plot</h4><p class="plot">' + data.Plot + '</p><p>IMDb rating: ' + data.imdbRating + ' <span class="imdb"></span></p><p>Rotten tomatoes rating: ' + data.tomatoRating + ' <span class="rotten"></span></p>');
+            // add / remove buttons
             myIdList();
-
             // show content when data is received
             $('.mylist-tabs').hide();
             $('.searchForm').hide();
             $('#details').show();
-
             $('#goBack').on('click', function () {
                 history.back();
             });
@@ -104,7 +92,6 @@ $(function () {
     }
     // Displays own list into tabs
     function displayMyList(data) {
-        console.log(data);
         var myList = [];
         myList = data;
         if (myList.length > 0) {
@@ -137,19 +124,16 @@ $(function () {
             addRemoveListener();
             resultListener();
         }
-
     }
     // Displays personal recent seaches
     function displayRecentSearches(data) {
         var recentSearches = recentSearchesList(data);
         $('#recentSearches').empty();
         $('#recentSearches').append('<h3>My Recent Searches</h3>');
-        console.log(recentSearches);
         for (var i = 0; i < recentSearches.length; i++) {
             $('#recentSearches').append('<a id="' + recentSearches[i] + '" class="searchTitle">"' + recentSearches[i] + '"</a><hr>');
         }
         searchesListener();
-
     }
     // Displays top searches
     function displayTopSearches(data) {
@@ -161,7 +145,6 @@ $(function () {
         }
         searchesListener();
     }
-
     // Counts and displays pagenumbers
     function countPages(totalResults) {
         var totalPages = Math.ceil(totalResults / 10);
@@ -225,14 +208,12 @@ $(function () {
         topSearches.sort(function (a, b) {
             return parseFloat(b.count) - parseFloat(a.count);
         });
-
         // Turns top searches into a top 10 list
         if (topSearches.length > 10) {
             for (var n = topSearches.length; n > 10; n--) {
                 topSearches.splice(-1, 1);
             }
         }
-        console.log(topSearches);
         return topSearches;
     }
     // logs user in
@@ -306,7 +287,6 @@ $(function () {
             displayTopSearches(response);
         });
     }
-
     // adds an item to users personal list
     function addToList(username, id, title, type) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
@@ -334,7 +314,6 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/removeFromList?username=' + username + '&id=' + id;
         $.get(url);
     }
-
 
     // API CALLS
 
@@ -369,7 +348,6 @@ $(function () {
     function apiCallDetails(id) {
         var url = 'http://www.omdbapi.com/?i=' + id + '&tomatoes=true&plot=full';
         $.get(url, function (response) {
-            console.log('api called');
             displayData(response);
         });
     }
@@ -378,7 +356,6 @@ $(function () {
         var token = '6b6236d93d623771bdf2fdc4399e0a92';
         var url = 'https://api.themoviedb.org/3/find/' + id + '?api_key=' + token + '&external_source=imdb_id';
         $.get(url, function (response) {
-            console.log(response);
             displayPoster(response);
         });
     }
@@ -408,7 +385,6 @@ $(function () {
             var username = $('form').find('#username').val();
             var password = $('form').find('#password').val();
             var cryptPwd = Aes.Ctr.encrypt('HelloWorld!', password, 256);
-            console.log('hahahaloo');
             getUser(username, cryptPwd);
         });
     }
@@ -469,45 +445,6 @@ $(function () {
     }
 
 
-    if ($('#topSearches').length > 0) {
-        getAllSearches();
-    }
-
-    if ($('#details').length > 0) {
-        var id = getUrlParameter('id');
-        apiCallDetails(id);
-    }
-
-    // Features for logged in users
-    if (isLoggedIn()) {
-        currentUser = sessionStorage.username;
-        console.log(currentUser);
-        $('#login').hide();
-        $('#signup').hide();
-        $('.navbar-right').append('<a type="submit" id="logout" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
-        logoutListener();
-        // if a page has a class .mylist-tabs this calls a function 
-        // to fill the tabs with own list
-        if ($('.mylist-tabs').length > 0) {
-            getMyList(currentUser);
-        }
-
-        if ($('#recentSearches').length > 0) {
-            getRecentSearches(currentUser);
-        }
-    }
-    if (isLoggedIn() === false) {
-        $('#recentSearches').hide();
-        $('#login').show();
-        $('#signup').show();
-        $('#logout').hide();
-
-        $('#topSearches').removeClass('col-xs-6');
-        $('#topSearches').addClass('col-xs-12');
-        $('#searchResults').addClass('col-sm-offset-2');
-        $('.searchForm').addClass('col-sm-offset-2');
-
-    }
 
     // Starts the app
     function start() {
@@ -515,6 +452,44 @@ $(function () {
         $('.waiting').hide();
         $('#content').hide();
         $('#error').hide();
+        
+        if ($('#topSearches').length > 0) {
+            getAllSearches();
+        }
+
+        if ($('#details').length > 0) {
+            var id = getUrlParameter('id');
+            apiCallDetails(id);
+        }
+
+        // Features for logged in users
+        if (isLoggedIn()) {
+            currentUser = sessionStorage.username;
+            $('#login').hide();
+            $('#signup').hide();
+            $('.navbar-right').append('<a type="submit" id="logout" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
+            logoutListener();
+            // if a page has a class .mylist-tabs this calls a function 
+            // to fill the tabs with own list
+            if ($('.mylist-tabs').length > 0) {
+                getMyList(currentUser);
+            }
+
+            if ($('#recentSearches').length > 0) {
+                getRecentSearches(currentUser);
+            }
+        }
+        if (isLoggedIn() === false) {
+            $('#recentSearches').hide();
+            $('#login').show();
+            $('#signup').show();
+            $('#logout').hide();
+
+            $('#topSearches').removeClass('col-xs-6');
+            $('#topSearches').addClass('col-xs-12');
+            $('#searchResults').addClass('col-sm-offset-2');
+            $('.searchForm').addClass('col-sm-offset-2');
+        }
         formListeners();
     }
     start();
