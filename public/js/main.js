@@ -28,7 +28,7 @@ $(function () {
             resultListener();
             $('html, body').animate({
                 scrollTop: $("#searchResults").offset().top
-            }, 2000);
+            }, 500);
         }
         // displays error message if no results was found
         else {
