@@ -157,7 +157,7 @@ hr {
 @media (max-width: 600px) {
     .no-mobile {
         display: none !important;
-    }
+    }    
     h3 {
         font-size: 20px !important;
     }

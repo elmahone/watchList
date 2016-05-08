@@ -206,6 +206,7 @@ $(function () {
         if (isLoggedIn()) {
             sessionStorage.removeItem('username');
             currentUser = null;
+            location.reload();
         }
     }
     // checks if user is already logged in
@@ -385,6 +386,7 @@ $(function () {
     function logoutListener(){
         $('#logout').on('click', function(event){
             logOut();
+            
         });
     }
     // Listener for page number clicks
@@ -443,7 +445,16 @@ $(function () {
         if ($('#recentSearches').length > 0) {
             getRecentSearches(currentUser);
         }
-
+    }
+    if (isLoggedIn() == false){
+        $('#recentSearches').hide();
+        $('#login').show();
+        $('#signup').show();
+        $('#logout').hide();  
+        
+        $('#topSearches').removeClass('col-xs-6');
+        $('#topSearches').addClass('col-xs-12');
+        $('#searchResults').addClass('col-offset-sm-2');
     }
 
     // Starts the app
