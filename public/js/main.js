@@ -214,7 +214,7 @@ $(function () {
     }
     // checks if user is already logged in
     function isLoggedIn() {
-        if (sessionStorage.username === null) {
+        if (currentUser === null) {
             return false;
         } else {
             return true;
