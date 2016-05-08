@@ -1,9 +1,11 @@
 $(function () {
     'use strict';
-
-    // because authentication does not work currently everything goes to user in currentUser
-    var currentUser = "miika";
-
+    var currentUser = null;
+    if (isLoggedIn) {
+        currentUser = sessionStorage.username;
+        $('.navbar-right').empty();
+        $('.navbar-right').append('<a type="submit" class="btn btn-default" name="logout">Log out ' + currentUser + '</a>');
+    }
     // Displays all the results gotten from the api call
     function displaySearchResults(results) {
         console.log(results);
@@ -186,7 +188,7 @@ $(function () {
         topSearches.sort(function (a, b) {
             return parseFloat(b.count) - parseFloat(a.count);
         });
-        
+
         // Turns top searches into a top 10 list
         if (topSearches.length > 10) {
             for (var n = topSearches.length; n > 10; n--) {
@@ -196,6 +198,30 @@ $(function () {
         console.log(topSearches);
         return topSearches;
     }
+    // logs user in
+    function logIn(username) {
+        if (!isLoggedIn) {
+            sessionStorage.username = username;
+            currentUser = sessionStorage.username;
+        }
+    }
+    // logs user out
+    function logOut() {
+        if (isLoggedIn) {
+            sessionStorage.removeItem('username');
+            currentUser = null;
+        }
+    }
+    // checks if user is already logged in
+    function isLoggedIn() {
+        if (sessionStorage.username === null) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+
     // function that gets parameter from url
     function getUrlParameter(sParam) {
         var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -250,10 +276,11 @@ $(function () {
         var url = 'http://watchlist-miikanode.rhcloud.com/addToList?username=' + username + '&id=' + id + '&title=' + title + '&type=' + type;
         $.get(url);
     }
-    // Sends username and password to the database (NOT HASHED)
+    // Sends username and password to the database
     function addUser(username, password) {
         var url = 'http://watchlist-miikanode.rhcloud.com/addUser?username=' + username + '&password=' + password;
         $.get(url);
+        logIn(username);
         window.location = '../index.html';
     }
     // Sends the title user searched to database
@@ -327,7 +354,7 @@ $(function () {
             apiCallSearch(title, type, year);
         });
         $('.signupForm').on('submit', function (event) {
-            event.preventDefault();            
+            event.preventDefault();
             var username = $('form').find('#username').val();
             var password = $('form').find('#password').val();
             var cryptPwd = Aes.Ctr.encrypt('HelloWorld!', password, 256);
