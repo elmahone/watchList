@@ -43,7 +43,8 @@ $(function () {
     }
     // Displays data of a single result gotten from the api call
     function displayData(data) {
-        var posterUrl = apiGetPoster(data.imdbID);
+        var posterUrl = {};
+        posterUrl = apiGetPoster(data.imdbID);
         console.log(posterUrl);
         $('#details').empty();
         if (data.Response == "True") {
