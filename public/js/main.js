@@ -448,12 +448,8 @@ $(function () {
     if ($('#topSearches').length > 0) {
         getAllSearches();
     }
-
-    if ($('#details').length > 0) {
-        var id = getUrlParameter('id');
-        apiCallDetails(id);
-    }
-
+    var id = getUrlParameter('id');
+    
     // Features for logged in users
     if (isLoggedIn()) {
         currentUser = sessionStorage.username;
@@ -471,21 +467,28 @@ $(function () {
         if ($('#recentSearches').length > 0) {
             getRecentSearches(currentUser);
         }
-        console.log($('#resultImdbID').length);
-        if ($('#resultImdbID').length > 0) {
-            var myList = getMyIdList(currentUser);
-            console.log(myList);
-            var imdbID = $('#resultImdbID').attr('value');
-            if ($.inArray(imdbID, myList) === -1) {
-                $('#details').append('<h2><a id="' + imdbID + '"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
+        if ($('#details').length > 0) {
+            apiCallDetails(id);
 
-            } else {
-                $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
+            console.log($('#resultImdbID').length);
+            if ($('#resultImdbID').length > 0) {
+                var myList = getMyIdList(currentUser);
+                console.log(myList);
+                var imdbID = $('#resultImdbID').attr('value');
+                if ($.inArray(imdbID, myList) === -1) {
+                    $('#details').append('<h2><a id="' + imdbID + '"><span class="glyphicon glyphicon-remove-circle removeFromList"></span></a></h2>');
+
+                } else {
+                    $('#details').append('<h2><a id="addToList"><span class="glyphicon glyphicon-ok-circle"></span></a></h2>');
+                }
+                addRemoveListener();
             }
-            addRemoveListener();
         }
     }
     if (isLoggedIn() === false) {
+        if ($('#details').length > 0) {            
+            apiCallDetails(id);
+        }
         $('#recentSearches').hide();
         $('#login').show();
         $('#signup').show();
