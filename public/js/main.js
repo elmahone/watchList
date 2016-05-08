@@ -44,9 +44,9 @@ $(function () {
 
     function displayPoster(data) {
         if ($('#resultType').attr('value') == "series") {
-            $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/original' + data.tv_results[0].poster_path + '">');
+            $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/w500' + data.tv_results[0].poster_path + '">');
         } else if ($('#resultType').attr('value') == "movie") {
-            $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/original' + data.movie_results[0].poster_path + '">');
+            $('#details').append('<img id="poster" src="http://image.tmdb.org/t/p/w500' + data.movie_results[0].poster_path + '">');
         }
     }
     // Displays data of a single result gotten from the api call
