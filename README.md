@@ -1,10 +1,10 @@
-###Click [here](http://watchlist-miikanode.rhcloud.com/index.html) to see my Watchlist site
+### Click [here](http://watchlist-miikanode.rhcloud.com/index.html) to see my Watchlist site
 
-##INTRODUCTION
+## INTRODUCTION
 Watchlist is an application using the [OMDB](http://www.omdbapi.com/) & [TMDB](https://www.themoviedb.org/documentation/api) API's.
 Watchlist is built on node.js and mongoDB and is running on openshift
 
-##INSTRUCTIONS
+## INSTRUCTIONS
 ####USING THE APP
 Watchlist is fairly simple to use. You can search for movies and series (and games but its not meant for that). Responses come from the [OMDB API](http://www.omdbapi.com/) API and the posters are from [TMDB](https://www.themoviedb.org/documentation/api).
 
@@ -19,9 +19,9 @@ After you find the movie/series you were looking for, click the result and a det
 Click the watchlist link from the nav bar and you can see your personal watchlist. In the watchlist view you can look at your movies/series and remove them from the list.
 
 
-####INSTALL
+#### INSTALL
 
-#####Before cloning make sure you have created a node.js and mongoDB project in openshift
+##### Before cloning make sure you have created a node.js and mongoDB project in openshift
 
 
 ```
@@ -32,22 +32,22 @@ $ git push (to openshift)
 
 ```
 
-####API
+#### API
 
 Examples
 
-#####Get all searches:
+##### Get all searches:
 > [/getSearches](http://watchlist-miikanode.rhcloud.com/getSearches)
 
-#####Get users recent searches:
+##### Get users recent searches:
 > [/getRecentSearches?username=[username]](http://watchlist-miikanode.rhcloud.com/getRecentSearches?username=test)
 
-#####Get users Watchlist:
+##### Get users Watchlist:
 > [/getMyList?username=[username]](http://watchlist-miikanode.rhcloud.com/getMyList?username=test)
 
 
-##Licence
-####MIT LICENCE (MIT)
+## Licence
+#### MIT LICENCE (MIT)
 
 Copyright (c) 2016 Miika Ahonen
 
