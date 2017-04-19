@@ -5,7 +5,7 @@ Watchlist is an application using the [OMDB](http://www.omdbapi.com/) & [TMDB](h
 Watchlist is built on node.js and mongoDB and is running on openshift
 
 ## INSTRUCTIONS
-####USING THE APP
+#### USING THE APP
 Watchlist is fairly simple to use. You can search for movies and series (and games but its not meant for that). Responses come from the [OMDB API](http://www.omdbapi.com/) API and the posters are from [TMDB](https://www.themoviedb.org/documentation/api).
 
 You need to sign up and login to the site to use some features.
